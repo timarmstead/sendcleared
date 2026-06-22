@@ -747,103 +747,167 @@ footer {
   <div class="section-inner">
     <p class="section-label">See it in action</p>
     <h2 class="section-title">A real QA report, in seconds</h2>
-    <p class="section-sub">This is what you see the moment SendCleared receives your test email. Every issue flagged, scored, and explained — ready to fix or share.</p>
-    <div style="background:var(--off);border-radius:var(--r-lg);padding:1.5rem;border:1px solid var(--border)">
+    <p class="section-sub">This is what you see the moment SendCleared receives your test email. Every issue flagged, scored, and explained — ready to fix or share with your client.</p>
+    <div style="background:#f5f4f0;border-radius:var(--r-lg);padding:1.25rem;border:1px solid var(--border)">
 
-      <!-- Report header -->
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:12px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:10px">
         <div>
-          <p style="font-size:16px;font-weight:600;color:var(--blue);margin-bottom:2px">"Welcome to MoneySpider"</p>
-          <p style="font-size:12px;color:var(--muted)">2 critical · 2 warnings · 3 passed</p>
+          <p style="font-size:16px;font-weight:600;color:#0f1117;margin:0 0 2px;letter-spacing:-0.01em">"Welcome to Bright Spark Energy"</p>
+          <p style="font-size:12px;color:#9a9891;margin:0">2 critical · 1 warning · 7 passed</p>
         </div>
-        <div style="width:60px;height:60px;border-radius:50%;border:3px solid #b06d10;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;flex-shrink:0">
-          <span style="font-size:20px;font-weight:700;color:var(--body);line-height:1">74</span>
-          <span style="font-size:10px;color:var(--muted)">/100</span>
-        </div>
-      </div>
-
-      <!-- Inbox mock -->
-      <div style="background:#f8f8f8;border:1px solid #e0e0e0;border-radius:8px;padding:10px 14px;margin-bottom:12px">
-        <p style="font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Inbox preview</p>
-        <div style="display:flex;align-items:baseline;gap:8px;overflow:hidden">
-          <span style="font-size:12px;font-weight:700;color:#1a1a1a;width:100px;flex-shrink:0">MoneySpider</span>
-          <span style="font-size:12px;font-weight:500;color:#1a1a1a;white-space:nowrap">Welcome to MoneySpider</span>
-          <span style="font-size:12px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1"> · Hi Tim, We're so excited to welcome you...</span>
-          <span style="font-size:11px;color:#888;flex-shrink:0">09:14</span>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:11px;color:#9a9891">Overall score</span>
+          <div style="width:52px;height:52px;border-radius:50%;border:2.5px solid #b06d10;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;background:#fff">
+            <span style="font-size:18px;font-weight:600;color:#0f1117;line-height:1">76</span>
+            <span style="font-size:9px;color:#9a9891">/100</span>
+          </div>
         </div>
       </div>
 
-      <!-- Summary -->
-      <div style="background:#fff;border-left:3px solid #4ade80;border-radius:6px;padding:10px 14px;margin-bottom:12px;font-size:13px;color:var(--body);line-height:1.6">
-        This email is nearly ready to send but has two critical issues that must be fixed first. An unresolved merge tag in the footer will display as raw code to all recipients, and no UTM tracking parameters are present on any links — making the campaign unmeasurable.
+      <div style="background:#fff;border:0.5px solid rgba(0,0,0,0.1);border-radius:8px;padding:1rem 1.25rem;margin-bottom:8px">
+        <p style="font-size:10px;font-weight:600;color:#9a9891;text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px">Inbox preview — before anyone opens</p>
+        <div style="background:#f8f8f8;border:0.5px solid rgba(0,0,0,0.14);border-radius:6px;padding:9px 12px">
+          <div style="display:flex;align-items:baseline;gap:8px;overflow:hidden">
+            <span style="font-size:12px;font-weight:700;color:#1a1a1a;width:110px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Bright Spark ⚡</span>
+            <span style="font-size:12px;font-weight:500;color:#1a1a1a;white-space:nowrap">Welcome to Bright Spark Energy</span>
+            <span style="font-size:12px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1"> · Your account is ready — start saving today</span>
+            <span style="font-size:11px;color:#888;flex-shrink:0">10:22</span>
+          </div>
+        </div>
+        <p style="font-size:11px;color:#9a9891;margin:5px 0 0">Subject line · Preview text · From name — exactly as seen in Gmail</p>
       </div>
 
-      <!-- Check rows -->
-      <div style="display:flex;flex-direction:column;gap:6px">
-        <div style="background:#fff;border-radius:8px;padding:.875rem 1rem">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-            <span style="font-size:13px;font-weight:500;color:var(--body)">Content &amp; copy</span>
-            <span style="font-size:12px;color:var(--muted)">85/100</span>
+      <div style="background:#fff;border-left:3px solid #5a9020;border-radius:0 6px 6px 0;padding:10px 14px;margin-bottom:8px;font-size:13px;color:#0f1117;line-height:1.6">
+        This welcome email is almost ready to send. Two critical issues must be resolved first — an unresolved merge tag in the footer and missing UTM tracking on all links. Everything else looks great including live links, legal compliance, and copy quality.
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:8px">
+
+        <div style="background:#fff;border-radius:8px;padding:.875rem 1rem;border:0.5px solid rgba(0,0,0,0.09)">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <span style="font-size:13px;font-weight:500;color:#0f1117">Content &amp; copy</span>
+            <span style="font-size:12px;color:#9a9891">90/100</span>
           </div>
-          <div style="height:3px;background:var(--off);border-radius:2px;overflow:hidden;margin-bottom:10px">
-            <div style="width:85%;height:100%;background:#5a9020;border-radius:2px"></div>
-          </div>
-          <div style="display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid var(--off);font-size:13px">
-            <span style="background:#fcebeb;color:#791f1f;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:1px">✕ CRITICAL</span>
-            <span style="color:var(--body)">Unresolved merge tag <code style="font-size:11px;background:var(--off);padding:1px 4px;border-radius:3px">${set_user_to_unsubscribed_url}</code> visible in footer — will display as raw code to recipients</span>
-          </div>
-          <div style="display:flex;align-items:flex-start;gap:8px;padding:6px 0;font-size:13px">
+          <div style="height:3px;background:#f0efe9;border-radius:2px;overflow:hidden;margin-bottom:10px"><div style="width:90%;height:100%;background:#5a9020;border-radius:2px"></div></div>
+          <div style="display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:0.5px solid rgba(0,0,0,0.09);font-size:13px;color:#0f1117">
             <span style="background:#eaf3de;color:#27500a;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:1px">✓ PASS</span>
-            <span style="color:var(--body)">Spelling and grammar correct throughout — no errors detected</span>
+            <span>Spelling and grammar correct throughout — no errors detected</span>
           </div>
-        </div>
-
-        <div style="background:#fff;border-radius:8px;padding:.875rem 1rem">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-            <span style="font-size:13px;font-weight:500;color:var(--body)">Links &amp; tracking</span>
-            <span style="font-size:12px;color:var(--muted)">55/100</span>
-          </div>
-          <div style="height:3px;background:var(--off);border-radius:2px;overflow:hidden;margin-bottom:10px">
-            <div style="width:55%;height:100%;background:#d94040;border-radius:2px"></div>
-          </div>
-          <div style="display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid var(--off);font-size:13px">
-            <span style="background:#fcebeb;color:#791f1f;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:1px">✕ CRITICAL</span>
-            <span style="color:var(--body)">No UTM parameters on any of the 9 links — campaign performance will be unmeasurable in analytics</span>
-          </div>
-          <div style="display:flex;align-items:flex-start;gap:8px;padding:6px 0;font-size:13px">
+          <div style="display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:0.5px solid rgba(0,0,0,0.09);font-size:13px;color:#0f1117">
             <span style="background:#eaf3de;color:#27500a;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:1px">✓ PASS</span>
-            <span style="color:var(--body)">All 9 links verified live — no broken or redirecting URLs detected</span>
+            <span>CTA button "Start saving today" is clear, action-oriented, and matches the destination page</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:0.5px solid rgba(0,0,0,0.09);font-size:13px;color:#0f1117">
+            <span style="background:#eaf3de;color:#27500a;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:1px">✓ PASS</span>
+            <span>Subject line is 34 characters — good length for inbox open rates</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:8px;padding:7px 0;font-size:13px;color:#0f1117">
+            <span style="background:#fcebeb;color:#791f1f;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:1px">✕ CRITICAL</span>
+            <span>Unresolved merge tag <code style="font-size:11px;background:#f0efe9;padding:1px 4px;border-radius:3px;border:0.5px solid rgba(0,0,0,0.09)">${set_user_to_unsubscribed_url}</code> in footer — will display as raw code to all recipients</span>
           </div>
         </div>
 
-        <div style="background:#fff;border-radius:8px;padding:.875rem 1rem">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-            <span style="font-size:13px;font-weight:500;color:var(--body)">Accessibility</span>
-            <span style="font-size:12px;color:var(--muted)">70/100</span>
+        <div style="background:#fff;border-radius:8px;padding:.875rem 1rem;border:0.5px solid rgba(0,0,0,0.09)">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <span style="font-size:13px;font-weight:500;color:#0f1117">Links &amp; tracking</span>
+            <span style="font-size:12px;color:#9a9891">60/100</span>
           </div>
-          <div style="height:3px;background:var(--off);border-radius:2px;overflow:hidden;margin-bottom:10px">
-            <div style="width:70%;height:100%;background:#b06d10;border-radius:2px"></div>
+          <div style="height:3px;background:#f0efe9;border-radius:2px;overflow:hidden;margin-bottom:10px"><div style="width:60%;height:100%;background:#d94040;border-radius:2px"></div></div>
+          <div style="display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:0.5px solid rgba(0,0,0,0.09);font-size:13px;color:#0f1117">
+            <span style="background:#eaf3de;color:#27500a;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:1px">✓ PASS</span>
+            <span>All 7 links verified live — no broken or redirecting URLs detected</span>
           </div>
-          <div style="display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid var(--off);font-size:13px">
+          <div style="display:flex;align-items:flex-start;gap:8px;padding:7px 0;font-size:13px;color:#0f1117">
+            <span style="background:#fcebeb;color:#791f1f;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:1px">✕ CRITICAL</span>
+            <span>No UTM parameters on any links — campaign performance will be unmeasurable in analytics</span>
+          </div>
+        </div>
+
+        <div style="background:#fff;border-radius:8px;padding:.875rem 1rem;border:0.5px solid rgba(0,0,0,0.09)">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <span style="font-size:13px;font-weight:500;color:#0f1117">Accessibility</span>
+            <span style="font-size:12px;color:#9a9891">82/100</span>
+          </div>
+          <div style="height:3px;background:#f0efe9;border-radius:2px;overflow:hidden;margin-bottom:10px"><div style="width:82%;height:100%;background:#b06d10;border-radius:2px"></div></div>
+          <div style="display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:0.5px solid rgba(0,0,0,0.09);font-size:13px;color:#0f1117">
+            <span style="background:#eaf3de;color:#27500a;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:1px">✓ PASS</span>
+            <span>All images have descriptive alt text — subscribers with images blocked see meaningful fallback text</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:8px;padding:7px 0;font-size:13px;color:#0f1117">
             <span style="background:#faeeda;color:#5c3308;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:1px">⚠ WARNING</span>
-            <span style="color:var(--body)">Two content images have empty alt text — subscribers with images blocked will see blank spaces</span>
+            <span>Hero image has no background colour fallback — add a background-color to the surrounding table cell</span>
           </div>
-          <div style="display:flex;align-items:flex-start;gap:8px;padding:6px 0;font-size:13px">
-            <span style="background:#faeeda;color:#5c3308;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:1px">⚠ WARNING</span>
-            <span style="color:var(--body)">Subject line "Welcome to MoneySpider" is 26 characters — consider adding a value hook to improve open rate</span>
+        </div>
+
+        <div style="background:#fff;border-radius:8px;padding:.875rem 1rem;border:0.5px solid rgba(0,0,0,0.09)">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <span style="font-size:13px;font-weight:500;color:#0f1117">Spam signals</span>
+            <span style="font-size:12px;color:#9a9891">95/100</span>
+          </div>
+          <div style="height:3px;background:#f0efe9;border-radius:2px;overflow:hidden;margin-bottom:10px"><div style="width:95%;height:100%;background:#5a9020;border-radius:2px"></div></div>
+          <div style="display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:0.5px solid rgba(0,0,0,0.09);font-size:13px;color:#0f1117">
+            <span style="background:#eaf3de;color:#27500a;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:1px">✓ PASS</span>
+            <span>No spam trigger words detected in subject line or body copy</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:8px;padding:7px 0;font-size:13px;color:#0f1117">
+            <span style="background:#eaf3de;color:#27500a;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:1px">✓ PASS</span>
+            <span>Image-to-text ratio is balanced — good deliverability signal</span>
+          </div>
+        </div>
+
+        <div style="background:#fff;border-radius:8px;padding:.875rem 1rem;border:0.5px solid rgba(0,0,0,0.09)">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <span style="font-size:13px;font-weight:500;color:#0f1117">Rendering readiness</span>
+            <span style="font-size:12px;color:#9a9891">88/100</span>
+          </div>
+          <div style="height:3px;background:#f0efe9;border-radius:2px;overflow:hidden;margin-bottom:10px"><div style="width:88%;height:100%;background:#5a9020;border-radius:2px"></div></div>
+          <div style="display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:0.5px solid rgba(0,0,0,0.09);font-size:13px;color:#0f1117">
+            <span style="background:#eaf3de;color:#27500a;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:1px">✓ PASS</span>
+            <span>Unsubscribe link present, working, and clearly visible in footer</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:8px;padding:7px 0;font-size:13px;color:#0f1117">
+            <span style="background:#eaf3de;color:#27500a;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:1px">✓ PASS</span>
+            <span>Physical address present · DKIM authenticated · Plain text version included · From name correct</span>
           </div>
         </div>
 
       </div>
 
-      <!-- Approval CTA -->
-      <div style="background:var(--blue);border-radius:var(--r);padding:1rem 1.25rem;margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
-        <div>
-          <p style="font-size:14px;font-weight:500;color:#fff;margin-bottom:2px">Ready to send for client approval?</p>
-          <p style="font-size:12px;color:rgba(255,255,255,.55)">Generates a passwordless magic link — client approves in one click</p>
-        </div>
-        <div style="background:#4ade80;color:#0f1117;font-size:13px;font-weight:700;padding:10px 18px;border-radius:8px;white-space:nowrap;cursor:pointer">Generate approval link →</div>
+      <div style="background:#fcebeb;border:0.5px solid #d94040;border-radius:6px;padding:10px 14px;font-size:13px;color:#791f1f;margin-bottom:12px">
+        ⚠ 2 critical issues need fixing before this email is ready to send. Review the findings above and contact your agency.
       </div>
+
+      <p style="font-size:12px;color:#9a9891;margin:0 0 10px;line-height:1.5">By clicking "Approve to send" you confirm this email is correct and authorise the agency to deploy it to the selected audience. Your approval will be recorded with a timestamp.</p>
+
+      <div style="display:flex;gap:8px" id="lp-action-btns">
+        <button onclick="lpApprove()" style="flex:1;padding:11px 16px;border-radius:6px;font-size:13px;font-weight:500;background:#eaf3de;color:#27500a;border:0.5px solid #5a9020;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;font-family:inherit">✓ Approve to send</button>
+        <button onclick="lpChanges()" style="flex:1;padding:11px 16px;border-radius:6px;font-size:13px;font-weight:500;background:#fff;color:#0f1117;border:0.5px solid rgba(0,0,0,0.14);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;font-family:inherit">↩ Request changes</button>
+      </div>
+
+      <div id="lp-approved" style="display:none;background:#eaf3de;border:0.5px solid #5a9020;border-radius:10px;padding:1.5rem;text-align:center;margin-top:10px">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" style="margin:0 auto 10px" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="#5a9020"/><path d="M10 20l7 7 13-13" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <p style="font-size:15px;font-weight:600;color:#27500a;margin:0 0 4px">Email approved</p>
+        <p style="font-size:13px;color:#27500a;margin:0">Approved by <strong>Sarah Johnson</strong> · 23 Jun 2026 at 11:04 BST</p>
+        <p style="font-size:12px;color:#27500a;margin:6px 0 0;opacity:.8">The agency has been notified and can now proceed with the send.</p>
+      </div>
+
+      <div id="lp-changes" style="display:none;background:#fff;border:0.5px solid rgba(0,0,0,0.09);border-radius:10px;padding:1rem;margin-top:10px">
+        <p style="font-size:13px;font-weight:500;color:#0f1117;margin-bottom:8px">What needs changing?</p>
+        <textarea placeholder="e.g. Please fix the broken variable in the footer and add UTM parameters to all links..." style="width:100%;height:80px;font-size:13px;padding:8px;border-radius:6px;border:0.5px solid rgba(0,0,0,0.14);background:#f0efe9;color:#0f1117;resize:vertical;font-family:inherit;box-sizing:border-box"></textarea>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button onclick="lpSendChanges()" style="flex:1;padding:9px;font-size:13px;font-weight:500;background:#faeeda;color:#5c3308;border:0.5px solid #b06d10;border-radius:6px;cursor:pointer;font-family:inherit">Send feedback to agency</button>
+          <button onclick="lpCancelChanges()" style="padding:9px 16px;font-size:13px;border-radius:6px;cursor:pointer;font-family:inherit;background:#fff;border:0.5px solid rgba(0,0,0,0.14);color:#0f1117">Cancel</button>
+        </div>
+      </div>
+
+      <div id="lp-feedback-sent" style="display:none;background:#faeeda;border:0.5px solid #b06d10;border-radius:6px;padding:10px 14px;font-size:13px;color:#5c3308;margin-top:10px">
+        ↩ Feedback sent to the agency — they'll resolve the issues and send you an updated version to review.
+      </div>
+
+      <p style="font-size:11px;color:#9a9891;text-align:center;margin-top:14px;display:flex;align-items:center;justify-content:center;gap:5px">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><rect x="1" y="5" width="10" height="7" rx="1.5" stroke="currentColor" stroke-width="1"/><path d="M3.5 5V3.5a2.5 2.5 0 015 0V5" stroke="currentColor" stroke-width="1"/></svg>
+        Secured by SendCleared · Unique link · Expires 23 Jul 2026
+      </p>
 
     </div>
   </div>
@@ -1094,7 +1158,7 @@ footer {
           What's a client inbox address?
           <span class="faq-arrow">▾</span>
         </div>
-        <div class="faq-a">Each of your clients gets a unique email address — something like <strong>moneyspider@yourname.sendcleared.com</strong>. When you add that address to your ESP test list and hit "send test", SendCleared intercepts the email, runs the QA checks, and makes it available in your dashboard. One address per client, set up once, works forever.</div>
+        <div class="faq-a">Each of your clients gets a unique email address — something like <strong>brightspark@yourname.sendcleared.com</strong>. When you add that address to your ESP test list and hit "send test", SendCleared intercepts the email, runs the QA checks, and makes it available in your dashboard. One address per client, set up once, works forever.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
@@ -1149,6 +1213,22 @@ footer {
 </footer>
 
 <script>
+function lpApprove(){
+  document.getElementById('lp-action-btns').style.display='none';
+  document.getElementById('lp-approved').style.display='block';
+}
+function lpChanges(){
+  document.getElementById('lp-changes').style.display='block';
+}
+function lpCancelChanges(){
+  document.getElementById('lp-changes').style.display='none';
+}
+function lpSendChanges(){
+  document.getElementById('lp-changes').style.display='none';
+  document.getElementById('lp-action-btns').style.display='none';
+  document.getElementById('lp-feedback-sent').style.display='block';
+}
+
 function toggleFaq(el) {
   const item = el.parentElement;
   const isOpen = item.classList.contains('open');
