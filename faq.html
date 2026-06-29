@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — SendCleared</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --orange:#f26600;--orange-d:#d45500;
+  --blue:#134e8e;--blue-d:#0d3a6b;
+  --white:#ffffff;--off:#f7f7f5;
+  --body:#1a1a1a;--muted:#5a5a56;
+  --border:rgba(0,0,0,0.09);--r:10px;--r-lg:16px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:var(--body);line-height:1.6;font-size:16px;background:var(--off)}
+nav{background:var(--orange);padding:0 2rem;border-bottom:1px solid rgba(0,0,0,0.12)}
+.nav-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo img{height:41px;width:auto;display:block}
+.nav-back{font-size:13px;color:rgba(255,255,255,0.8);text-decoration:none;font-weight:500}
+.nav-back:hover{color:#fff}
+.page{max-width:760px;margin:0 auto;padding:3rem 2rem}
+.page-label{font-size:11px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem}
+.page-title{font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:800;color:var(--blue);letter-spacing:-0.025em;line-height:1.15;margin-bottom:2rem}
+.faq-item{border-bottom:1px solid var(--border);padding:1.25rem 0}
+.faq-item:first-of-type{border-top:1px solid var(--border)}
+.faq-q{font-size:1rem;font-weight:600;color:var(--blue);cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:1rem;user-select:none}
+.faq-arrow{width:22px;height:22px;background:#e8f0f8;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .2s,background .15s;font-size:12px;color:var(--blue)}
+.faq-item.open .faq-arrow{transform:rotate(180deg);background:var(--orange);color:#fff}
+.faq-a{display:none;font-size:14px;color:var(--muted);line-height:1.7;padding-top:.75rem}
+.faq-item.open .faq-a{display:block}
+.faq-a a{color:var(--orange);text-decoration:none}
+.faq-a a:hover{text-decoration:underline}
+footer{background:var(--blue-d);padding:2rem;margin-top:4rem}
+.footer-inner{max-width:1080px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+.footer-links a{color:rgba(255,255,255,0.55);text-decoration:none;font-size:13px}
+.footer-links a:hover{color:#fff}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.35)}
+.footer-co{font-size:11px;color:rgba(255,255,255,0.4);line-height:1.7;text-align:right}
+.footer-co strong{color:rgba(255,255,255,0.7);font-size:12px;display:block;margin-bottom:4px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><img src="sendcleared-logo.png" alt="SendCleared"></a>
+    <a href="/" class="nav-back">← Back to SendCleared</a>
+  </div>
+</nav>
+
+<div class="page">
+  <p class="page-label">Help</p>
+  <h1 class="page-title">Frequently asked questions</h1>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Does my client need to create an account?<span class="faq-arrow">▾</span></div>
+    <div class="faq-a">No — that's the whole point. The approval link is passwordless. Your client clicks the link, views the email, and taps Approve or Request Changes. Nothing to sign up for, no app to download.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Which ESPs does SendCleared work with?<span class="faq-arrow">▾</span></div>
+    <div class="faq-a">Any ESP that has a "send test email" feature — which is all of them. Klaviyo, Mailchimp, Campaign Monitor, Brevo, HubSpot, ActiveCampaign, Salesforce Marketing Cloud, and more. You add your SendCleared address to the test recipients list once. It works on every campaign from then on.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">What is a client inbox address?<span class="faq-arrow">▾</span></div>
+    <div class="faq-a">Each of your clients gets a unique email address — something like <strong>brightspark@yourname.sendcleared.com</strong>. When you add that address to your ESP test list and hit "send test", SendCleared intercepts the email, runs the QA checks, and makes it available in your dashboard. One address per client, set up once, works forever.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">How is SendCleared different from Litmus or Email on Acid?<span class="faq-arrow">▾</span></div>
+    <div class="faq-a">Litmus and Email on Acid are self-serve platforms built around rendering screenshots across 90+ email clients. They're powerful but expensive ($500+/mo for Litmus after its 2025 price hike) and built for large in-house teams. SendCleared is built for freelancers and small agencies who need a quick, affordable pre-send check and a professional client approval workflow — not a full-time testing platform.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">How is SendCleared different from sendcheck.io?<span class="faq-arrow">▾</span></div>
+    <div class="faq-a">sendcheck.io is a solid QA tool — it catches errors in your email before you send. SendCleared does that too, but adds the full client approval workflow on top: a passwordless magic link, desktop/mobile preview, timestamped sign-off, and a full audit trail. It's the difference between a tool for the sender and a tool for the agency-client relationship.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Is my email content stored?<span class="faq-arrow">▾</span></div>
+    <div class="faq-a">Yes — SendCleared stores the email content and QA report so you have a full history per client and campaign. Approval records are stored for your audit trail. You can delete campaign data at any time from your dashboard. We never share your content with third parties. See our <a href="privacy.html">Privacy Policy</a> for full details.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Can I white-label the approval page?<span class="faq-arrow">▾</span></div>
+    <div class="faq-a">Yes, on the Agency plan and above. You can add your own agency logo to the approval page header so clients see your branding, not SendCleared's. The "Powered by SendCleared" footer is removable on Agency and Studio plans.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">What happens when a client clicks "Request changes"?<span class="faq-arrow">▾</span></div>
+    <div class="faq-a">The client sees a text field where they can describe what needs fixing. That feedback is saved directly to your SendCleared dashboard alongside the campaign — no email chain, no lost messages. You'll also get an email notification. Once you've made the changes, you re-send the test, re-run the QA, and generate a new approval link for the client.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">How long does the approval link stay active?<span class="faq-arrow">▾</span></div>
+    <div class="faq-a">Approval links expire after 30 days by default. If you generate a new version of the campaign (by re-sending the test email), a new link is created. Old links are marked as superseded so clients can't accidentally approve an outdated version.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Can I cancel my subscription at any time?<span class="faq-arrow">▾</span></div>
+    <div class="faq-a">Yes — cancel any time from your account settings. You'll keep access until the end of your current billing period. We don't do lock-in contracts or cancellation fees.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Do you offer a free trial?<span class="faq-arrow">▾</span></div>
+    <div class="faq-a">Yes. The Free tier lets you run 3 approval links per month with no credit card required — use it as long as you like. Paid plans (Freelancer, Agency, Studio) all include a 14-day free trial.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">I have a question not answered here — how do I get in touch?<span class="faq-arrow">▾</span></div>
+    <div class="faq-a">Email us at <a href="mailto:hello@sendcleared.com">hello@sendcleared.com</a> — we aim to respond within one business day.</div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <ul class="footer-links" style="margin-bottom:.75rem">
+        <li><a href="/">Home</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="privacy.html">Privacy policy</a></li>
+        <li><a href="terms.html">Terms</a></li>
+      </ul>
+      <p class="footer-copy">© 2026 SendCleared.com · All rights reserved</p>
+    </div>
+    <div class="footer-co">
+      <strong>Engaging Enterprises Ltd</strong>
+      Monomark House<br>
+      27 Old Gloucester Street<br>
+      London, England, WC1N 3AX<br>
+      Company No: 14111995
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(el){
+  const item=el.parentElement;
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!isOpen)item.classList.add('open');
+}
+</script>
+</body>
+</html>

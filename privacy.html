@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — SendCleared</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --orange:#f26600;--blue:#134e8e;--blue-d:#0d3a6b;
+  --white:#ffffff;--off:#f7f7f5;
+  --body:#1a1a1a;--muted:#5a5a56;
+  --border:rgba(0,0,0,0.09);
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:var(--body);line-height:1.7;font-size:16px;background:var(--off)}
+nav{background:var(--orange);padding:0 2rem;border-bottom:1px solid rgba(0,0,0,0.12)}
+.nav-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo img{height:41px;width:auto;display:block}
+.nav-back{font-size:13px;color:rgba(255,255,255,0.8);text-decoration:none;font-weight:500}
+.nav-back:hover{color:#fff}
+.page{max-width:760px;margin:0 auto;padding:3rem 2rem}
+.page-label{font-size:11px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem}
+.page-title{font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:800;color:var(--blue);letter-spacing:-0.025em;line-height:1.15;margin-bottom:.5rem}
+.page-date{font-size:13px;color:var(--muted);margin-bottom:2.5rem}
+h2{font-size:1.2rem;font-weight:700;color:var(--blue);margin:2rem 0 .75rem}
+h3{font-size:1rem;font-weight:600;color:var(--body);margin:1.25rem 0 .5rem}
+p{font-size:15px;color:var(--muted);margin-bottom:1rem;line-height:1.7}
+ul{margin:.5rem 0 1rem 1.25rem}
+ul li{font-size:15px;color:var(--muted);margin-bottom:.4rem;line-height:1.6}
+a{color:var(--orange);text-decoration:none}
+a:hover{text-decoration:underline}
+.highlight-box{background:#fff;border-left:3px solid var(--orange);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:1.5rem 0;font-size:14px;color:var(--body);line-height:1.6}
+footer{background:var(--blue-d);padding:2rem;margin-top:4rem}
+.footer-inner{max-width:1080px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+.footer-links a{color:rgba(255,255,255,0.55);text-decoration:none;font-size:13px}
+.footer-links a:hover{color:#fff}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.35)}
+.footer-co{font-size:11px;color:rgba(255,255,255,0.4);line-height:1.7;text-align:right}
+.footer-co strong{color:rgba(255,255,255,0.7);font-size:12px;display:block;margin-bottom:4px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><img src="sendcleared-logo.png" alt="SendCleared"></a>
+    <a href="/" class="nav-back">← Back to SendCleared</a>
+  </div>
+</nav>
+
+<div class="page">
+  <p class="page-label">Legal</p>
+  <h1 class="page-title">Privacy policy</h1>
+  <p class="page-date">Last updated: June 2026</p>
+
+  <div class="highlight-box">
+    SendCleared is operated by Engaging Enterprises Ltd (Company No: 14111995), registered in England and Wales. Registered office: Monomark House, 27 Old Gloucester Street, London, England, WC1N 3AX.
+  </div>
+
+  <h2>1. Who we are</h2>
+  <p>SendCleared ("we", "us", "our") is an email QA and client approval service operated by Engaging Enterprises Ltd. When you use SendCleared, Engaging Enterprises Ltd is the data controller responsible for your personal data.</p>
+  <p>If you have questions about this policy or how we handle your data, contact us at <a href="mailto:privacy@sendcleared.com">privacy@sendcleared.com</a>.</p>
+
+  <h2>2. What data we collect</h2>
+  <h3>Account data</h3>
+  <ul>
+    <li>Name and email address when you sign up</li>
+    <li>Billing information (processed by Stripe — we never store card details)</li>
+    <li>Password (stored as a secure hash — we never see your actual password)</li>
+  </ul>
+  <h3>Email campaign data</h3>
+  <ul>
+    <li>Email content sent to your SendCleared inbox addresses (HTML, plain text, subject line, headers)</li>
+    <li>QA report results generated from your emails</li>
+    <li>Approval records including approver name, timestamp, and IP address</li>
+    <li>Change request feedback submitted by your clients</li>
+  </ul>
+  <h3>Usage data</h3>
+  <ul>
+    <li>Log data including pages visited, features used, and timestamps</li>
+    <li>Device and browser information</li>
+    <li>IP addresses</li>
+  </ul>
+
+  <h2>3. How we use your data</h2>
+  <ul>
+    <li>To provide the SendCleared service — receiving emails, running QA checks, generating reports, and serving approval pages</li>
+    <li>To manage your account and subscription</li>
+    <li>To send you transactional emails (QA report ready, approval received, changes requested)</li>
+    <li>To improve the service and fix bugs</li>
+    <li>To comply with legal obligations</li>
+  </ul>
+  <p>We do not sell your data. We do not use your email campaign content to train AI models. We do not share your data with third parties except as described in section 4.</p>
+
+  <h2>4. Third parties we share data with</h2>
+  <ul>
+    <li><strong>Supabase</strong> — database and authentication hosting</li>
+    <li><strong>Vercel</strong> — application hosting</li>
+    <li><strong>CloudMailin</strong> — inbound email processing</li>
+    <li><strong>Anthropic</strong> — AI analysis of email content (processed per request, not stored by Anthropic for training)</li>
+    <li><strong>Stripe</strong> — payment processing</li>
+    <li><strong>Resend</strong> — transactional email delivery</li>
+  </ul>
+  <p>All third parties are bound by their own privacy policies and data processing agreements. We only share the minimum data necessary for each service to function.</p>
+
+  <h2>5. Data retention</h2>
+  <p>We retain your campaign data and QA reports for as long as your account is active. You can delete individual campaigns from your dashboard at any time. If you close your account, we delete all associated data within 30 days.</p>
+  <p>Approval records are retained for 12 months after the campaign send date to support audit trail requirements, then automatically deleted.</p>
+
+  <h2>6. Your rights (GDPR)</h2>
+  <p>If you are based in the UK or European Economic Area, you have the following rights under the UK GDPR and GDPR:</p>
+  <ul>
+    <li><strong>Access</strong> — request a copy of the personal data we hold about you</li>
+    <li><strong>Rectification</strong> — ask us to correct inaccurate data</li>
+    <li><strong>Erasure</strong> — ask us to delete your personal data</li>
+    <li><strong>Portability</strong> — receive your data in a machine-readable format</li>
+    <li><strong>Restriction</strong> — ask us to limit how we process your data</li>
+    <li><strong>Objection</strong> — object to processing based on legitimate interests</li>
+  </ul>
+  <p>To exercise any of these rights, email <a href="mailto:privacy@sendcleared.com">privacy@sendcleared.com</a>. We will respond within 30 days.</p>
+  <p>You also have the right to lodge a complaint with the Information Commissioner's Office (ICO) at <a href="https://ico.org.uk" target="_blank">ico.org.uk</a>.</p>
+
+  <h2>7. Cookies</h2>
+  <p>We use essential cookies only — for authentication (keeping you logged in) and security (CSRF protection). We do not use advertising or tracking cookies. We do not use Google Analytics or similar tracking services.</p>
+
+  <h2>8. Data security</h2>
+  <p>We use industry-standard security measures including encryption in transit (HTTPS/TLS), encrypted storage, and access controls. We conduct regular security reviews. In the event of a data breach that affects your rights, we will notify you within 72 hours as required by law.</p>
+
+  <h2>9. Changes to this policy</h2>
+  <p>We may update this policy from time to time. We'll notify you by email if we make material changes. The date at the top of this page shows when it was last updated.</p>
+
+  <h2>10. Contact us</h2>
+  <p>For privacy-related queries: <a href="mailto:privacy@sendcleared.com">privacy@sendcleared.com</a></p>
+  <p>Engaging Enterprises Ltd<br>Monomark House, 27 Old Gloucester Street<br>London, England, WC1N 3AX<br>Company No: 14111995</p>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <ul class="footer-links" style="margin-bottom:.75rem">
+        <li><a href="/">Home</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="privacy.html">Privacy policy</a></li>
+        <li><a href="terms.html">Terms</a></li>
+      </ul>
+      <p class="footer-copy">© 2026 SendCleared.com · All rights reserved</p>
+    </div>
+    <div class="footer-co">
+      <strong>Engaging Enterprises Ltd</strong>
+      Monomark House<br>
+      27 Old Gloucester Street<br>
+      London, England, WC1N 3AX<br>
+      Company No: 14111995
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
