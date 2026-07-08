@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SendCleared.com — AI-powered email QA and client approval for agencies and freelancers. Catch mistakes before they reach inboxes. Get sign-off in seconds.">
+<title>SendCleared.com — Email QA &amp; Client Approval for Agencies</title>
+<style>
+/* ─── Reset ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+img { max-width: 100%; display: block; }
+body { overflow-x: hidden; }
+
+/* ─── Tokens ─── */
+:root {
+  --orange:   #f26600;
+  --orange-d: #d45500;
+  --blue:     #134e8e;
+  --blue-d:   #0d3a6b;
+  --white:    #ffffff;
+  --off:      #f7f7f5;
+  --blue-tint:#e8f0f8;
+  --body:     #1a1a1a;
+  --muted:    #5a5a56;
+  --border:   rgba(0,0,0,0.09);
+  --r:        10px;
+  --r-lg:     16px;
+  --shadow:   0 2px 12px rgba(0,0,0,0.08);
+}
+
+/* ─── Base ─── */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  color: var(--body);
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+/* ─── Nav ─── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--orange);
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+  padding: 0 2rem;
+}
+.nav-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  gap: 1rem;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.nav-logo-mark {
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-wordmark {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--white);
+}
+.nav-wordmark span { color: rgba(255,255,255,0.75); }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color .15s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  flex-shrink: 0;
+}
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--white);
+  border-radius: 2px;
+  margin: 5px 0;
+  transition: transform .2s, opacity .2s;
+}
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: var(--orange-d);
+  padding: .5rem 1.25rem 1.25rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  color: rgba(255,255,255,0.9);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  padding: .75rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+.mobile-menu a:last-of-type { border-bottom: none; }
+.mobile-menu .btn { margin-top: .75rem; width: 100%; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 20px;
+  border-radius: var(--r);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .15s, transform .08s, box-shadow .15s;
+  border: none;
+  font-family: inherit;
+  white-space: nowrap;
+}
+.btn:active { transform: scale(.98); }
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  border: 1.5px solid rgba(255,255,255,0.5);
+}
+.btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
+.btn-primary {
+  background: var(--orange);
+  color: var(--white);
+}
+.btn-primary:hover { background: var(--orange-d); box-shadow: 0 4px 14px rgba(242,102,0,.35); }
+.btn-blue {
+  background: var(--blue);
+  color: var(--white);
+}
+.btn-blue:hover { background: var(--blue-d); box-shadow: 0 4px 14px rgba(19,78,142,.35); }
+.btn-lg {
+  padding: 14px 28px;
+  font-size: 16px;
+  border-radius: var(--r-lg);
+}
+.btn-white {
+  background: var(--white);
+  color: var(--orange);
+}
+.btn-white:hover { background: #fff3ea; }
+
+/* ─── Hero ─── */
+.hero {
+  background: var(--white);
+  padding: 5rem 2rem 4.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 60% 50%, rgba(242,102,0,0.05) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-inner { max-width: 760px; margin: 0 auto; position: relative; }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff3ea;
+  color: var(--orange);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 20px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(242,102,0,0.2);
+}
+.hero h1 {
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 800;
+  color: var(--blue);
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.25rem;
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--white);
+  background: var(--orange);
+  padding: 0 8px;
+  border-radius: 5px;
+  display: inline-block;
+  line-height: 1.15;
+  margin-bottom: 2px;
+}
+.hero-sub {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--muted);
+  max-width: 560px;
+  margin: 0 auto 2.25rem;
+  line-height: 1.65;
+}
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 1.75rem;
+}
+.hero-note {
+  font-size: 12px;
+  color: var(--muted);
+}
+.hero-note strong { color: var(--body); }
+
+/* ─── Social proof strip ─── */
+.proof-strip {
+  background: var(--blue);
+  padding: 1.25rem 2rem;
+}
+.proof-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+.proof-stat {
+  text-align: center;
+  color: var(--white);
+}
+.proof-stat strong {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--white);
+}
+.proof-stat span {
+  font-size: 12px;
+  color: rgba(255,255,255,0.65);
+  margin-top: 3px;
+}
+.proof-divider {
+  width: 1px;
+  height: 36px;
+  background: rgba(255,255,255,0.2);
+}
+
+/* ─── Section scaffolding ─── */
+.section { padding: 5rem 2rem; }
+.section-alt { background: var(--off); }
+.section-blue { background: var(--blue-tint); }
+.section-inner { max-width: 1080px; margin: 0 auto; }
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--orange);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-bottom: .6rem;
+}
+.section-title {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  color: var(--blue);
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+.section-sub {
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 560px;
+  line-height: 1.65;
+  margin-bottom: 3rem;
+}
+
+/* ─── How it works ─── */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  counter-reset: steps;
+}
+.step {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 1.75rem;
+  position: relative;
+}
+.step-num {
+  width: 36px;
+  height: 36px;
+  background: var(--orange);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 800;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+.step h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: .4rem;
+}
+.step p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+.step-detail {
+  margin-top: .75rem;
+  font-size: 12px;
+  color: var(--orange);
+  font-weight: 600;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+
+/* ─── Features ─── */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+.feature-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 1.75rem;
+  transition: box-shadow .2s, transform .2s;
+}
+.feature-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+.feature-card.highlight {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+.feature-card.highlight h3,
+.feature-card.highlight p { color: var(--white); }
+.feature-card.highlight .feature-icon { background: rgba(255,255,255,0.15); }
+.feature-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--blue-tint);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.feature-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: .4rem;
+}
+.feature-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+.feature-tag {
+  display: inline-block;
+  margin-top: .75rem;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--orange);
+  background: #fff3ea;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.feature-card.highlight .feature-tag {
+  color: var(--blue);
+  background: var(--white);
+}
+
+/* ─── Checklist ─── */
+.checklist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: .6rem;
+}
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: .875rem 1rem;
+  font-size: 14px;
+  color: var(--body);
+}
+.check-item .ck {
+  width: 20px;
+  height: 20px;
+  background: var(--orange);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.check-item .ck-crit {
+  background: #d94040;
+}
+.check-item span { line-height: 1.45; }
+.check-item strong { display: block; font-weight: 600; font-size: 13px; color: var(--blue); }
+.check-item em { font-style: normal; font-size: 12px; color: var(--muted); }
+
+/* ─── Pricing ─── */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  align-items: start;
+}
+.pricing-card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 2rem;
+  transition: box-shadow .2s;
+}
+.pricing-card:hover { box-shadow: var(--shadow); }
+.pricing-card.popular {
+  border-color: var(--orange);
+  position: relative;
+}
+.popular-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--orange);
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.pricing-tier {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--orange);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: .5rem;
+}
+.pricing-price {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--blue);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: .25rem;
+}
+.pricing-price sup { font-size: 1.2rem; vertical-align: super; }
+.pricing-price span { font-size: 1rem; font-weight: 400; color: var(--muted); }
+.pricing-desc {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+.pricing-features {
+  list-style: none;
+  margin-bottom: 1.75rem;
+}
+.pricing-features li {
+  font-size: 13px;
+  color: var(--body);
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.4;
+}
+.pricing-features li:last-child { border-bottom: none; }
+.pricing-features li::before {
+  content: '✓';
+  color: var(--orange);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.pricing-features li.no::before { content: '–'; color: var(--muted); }
+.pricing-note {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* ─── Viral loop callout ─── */
+.viral-box {
+  background: var(--blue);
+  border-radius: var(--r-lg);
+  padding: 2rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+.viral-icon {
+  width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.viral-box h3 { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: .3rem; }
+.viral-box p { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.6; }
+
+/* ─── FAQ ─── */
+.faq-list { max-width: 720px; }
+.faq-item {
+  border-bottom: 1px solid var(--border);
+  padding: 1.25rem 0;
+}
+.faq-item:first-child { border-top: 1px solid var(--border); }
+.faq-q {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--blue);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  user-select: none;
+}
+.faq-arrow {
+  width: 20px;
+  height: 20px;
+  background: var(--blue-tint);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform .2s, background .15s;
+  font-size: 12px;
+  color: var(--blue);
+}
+.faq-item.open .faq-arrow { transform: rotate(180deg); background: var(--orange); color: var(--white); }
+.faq-a {
+  display: none;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  padding-top: .75rem;
+}
+.faq-item.open .faq-a { display: block; }
+
+/* ─── Final CTA ─── */
+.cta-section {
+  background: var(--orange);
+  padding: 5rem 2rem;
+  text-align: center;
+}
+.cta-inner { max-width: 640px; margin: 0 auto; }
+.cta-section h2 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+.cta-section p {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+.cta-note {
+  margin-top: 1rem;
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+}
+
+/* ─── Footer ─── */
+footer {
+  background: var(--blue-d);
+  padding: 2.5rem 2rem;
+  color: rgba(255,255,255,0.6);
+  font-size: 13px;
+}
+.footer-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--white);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+.footer-logo span { color: var(--orange); }
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  flex-wrap: wrap;
+}
+.footer-links a {
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  font-size: 13px;
+  transition: color .15s;
+}
+.footer-links a:hover { color: var(--white); }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,0.35); }
+
+/* ─── Responsive ─── */
+@media (max-width: 700px) {
+  nav { padding: 0 1.25rem; }
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .nav-toggle { display: block; }
+  .proof-divider { display: none; }
+  .proof-inner { gap: 1.5rem; }
+  .proof-strip { padding: 1rem 1.25rem; }
+  .proof-strip .proof-grid { grid-template-columns: repeat(2,minmax(0,1fr)) !important; }
+  .viral-box { flex-direction: column; gap: .75rem; padding: 1.5rem; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .footer-inner > div:last-child { align-items: flex-start !important; width: 100%; }
+  .footer-links { justify-content: flex-start !important; gap: 1rem 1.5rem; }
+  .split-layout { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+
+  .hero { padding: 3rem 1.25rem 3rem; }
+  .section { padding: 3rem 1.25rem; }
+  .cta-section { padding: 3rem 1.25rem; }
+  footer { padding: 2rem 1.25rem; }
+
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-actions .btn { width: 100%; }
+
+  /* Prevent long monospace snippets and long words from forcing horizontal scroll */
+  code, .step-detail, p, span, div { overflow-wrap: break-word; word-break: break-word; }
+}
+
+/* ─── Utility ─── */
+.text-center { text-align: center; }
+.mt-sm { margin-top: .75rem; }
+.mt-md { margin-top: 1.5rem; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="sendcleared-logo.png" alt="SendCleared" style="height:41px;width:auto;display:block">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#how-it-works">How it works</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#pricing" class="btn btn-outline">Log in</a>
+      <a href="#pricing" class="btn btn-primary">Start free</a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#how-it-works" onclick="closeMobileMenu()">How it works</a>
+    <a href="#features" onclick="closeMobileMenu()">Features</a>
+    <a href="#pricing" onclick="closeMobileMenu()">Pricing</a>
+    <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
+    <a href="#pricing" class="btn btn-outline" onclick="closeMobileMenu()" style="margin-top:1rem">Log in</a>
+    <a href="#pricing" class="btn btn-primary" onclick="closeMobileMenu()">Start free</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" fill="rgba(242,102,0,0.2)"/><path d="M3.5 6l1.5 1.5 3.5-3" stroke="#f26600" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      AI-powered email QA &amp; client approval
+    </div>
+    <h1>Stop sending emails<br>with <em>mistakes</em> in them</h1>
+    <p class="hero-sub">Join freelancers and agencies who've stopped sending emails with broken links, missing merge tags, and spelling mistakes — and started getting clients to approve in one click.</p>
+    <div class="hero-actions">
+      <a href="#pricing" class="btn btn-primary btn-lg">Start free — no credit card</a>
+      <a href="#how-it-works" class="btn btn-lg" style="background:transparent;color:var(--blue);border:1.5px solid rgba(19,78,142,0.25)">See how it works →</a>
+    </div>
+    <p class="hero-note"><strong>Free tier available.</strong> Freelancer from $19/mo · Agency from $49/mo</p>
+  </div>
+</section>
+
+<!-- PROOF STRIP -->
+<div class="proof-strip">
+  <div class="proof-grid" style="max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:rgba(255,255,255,0.1);border-radius:10px;overflow:hidden">
+    <div style="background:rgba(255,255,255,0.07);padding:1.25rem 1.5rem;text-align:center">
+      <p style="font-size:2rem;font-weight:800;color:#fff;letter-spacing:-0.03em;margin:0 0 4px;line-height:1">96%</p>
+      <p style="font-size:12px;color:rgba(255,255,255,0.65);margin:0;line-height:1.4">of emails contain at least one error before sending</p>
+      <p style="font-size:10px;color:rgba(255,255,255,0.35);margin:5px 0 0;font-weight:500;text-transform:uppercase;letter-spacing:.05em">Litmus</p>
+    </div>
+    <div style="background:rgba(255,255,255,0.07);padding:1.25rem 1.5rem;text-align:center">
+      <p style="font-size:2rem;font-weight:800;color:#fff;letter-spacing:-0.03em;margin:0 0 4px;line-height:1">$16k</p>
+      <p style="font-size:12px;color:rgba(255,255,255,0.65);margin:0;line-height:1.4">average revenue lost from a single email mistake</p>
+      <p style="font-size:10px;color:rgba(255,255,255,0.35);margin:5px 0 0;font-weight:500;text-transform:uppercase;letter-spacing:.05em">Email on Acid</p>
+    </div>
+    <div style="background:rgba(255,255,255,0.07);padding:1.25rem 1.5rem;text-align:center">
+      <p style="font-size:2rem;font-weight:800;color:#fff;letter-spacing:-0.03em;margin:0 0 4px;line-height:1">10s</p>
+      <p style="font-size:12px;color:rgba(255,255,255,0.65);margin:0;line-height:1.4">from test send to full QA report in your dashboard</p>
+      <p style="font-size:10px;color:rgba(255,255,255,0.35);margin:5px 0 0;font-weight:500;text-transform:uppercase;letter-spacing:.05em">SendCleared</p>
+    </div>
+    <div style="background:rgba(255,255,255,0.07);padding:1.25rem 1.5rem;text-align:center">
+      <p style="font-size:2rem;font-weight:800;color:#fff;letter-spacing:-0.03em;margin:0 0 4px;line-height:1">14</p>
+      <p style="font-size:12px;color:rgba(255,255,255,0.65);margin:0;line-height:1.4">automated checks run on every email, every time</p>
+      <p style="font-size:10px;color:rgba(255,255,255,0.35);margin:5px 0 0;font-weight:500;text-transform:uppercase;letter-spacing:.05em">SendCleared</p>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS + SAMPLE REPORT -->
+<section class="section" id="how-it-works">
+  <div class="section-inner">
+    <p class="section-label">How it works</p>
+    <h2 class="section-title">From test send to approved — in minutes</h2>
+    <p class="section-sub" style="margin-bottom:2rem">No new tools. No workflow changes. Just add your SendCleared address to your ESP test list once and you're set up forever.</p>
+
+    <div class="split-layout" style="display:grid;grid-template-columns:1fr 1.4fr;gap:2.5rem;align-items:start">
+
+      <!-- Left: steps -->
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="background:#fff;border:1px solid rgba(0,0,0,0.09);border-radius:10px;padding:1rem 1.25rem;display:flex;gap:14px;align-items:flex-start">
+          <div style="width:32px;height:32px;background:var(--orange);color:#fff;font-size:13px;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px">1</div>
+          <div>
+            <p style="font-size:14px;font-weight:600;color:var(--blue);margin:0 0 4px">Send your test email</p>
+            <p style="font-size:13px;color:var(--muted);margin:0;line-height:1.55">In Klaviyo, Mailchimp, or any ESP — hit "send test" and address it to your SendCleared inbox.</p>
+            <p style="font-size:12px;color:var(--orange);font-family:'SF Mono',monospace;margin:6px 0 0">yourname@sendcleared.com</p>
+          </div>
+        </div>
+        <div style="background:#fff;border:1px solid rgba(0,0,0,0.09);border-radius:10px;padding:1rem 1.25rem;display:flex;gap:14px;align-items:flex-start">
+          <div style="width:32px;height:32px;background:var(--orange);color:#fff;font-size:13px;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px">2</div>
+          <div>
+            <p style="font-size:14px;font-weight:600;color:var(--blue);margin:0 0 4px">Get your QA report</p>
+            <p style="font-size:13px;color:var(--muted);margin:0;line-height:1.55">14 automated checks run in ~10 seconds. Every issue flagged as critical, warning, or pass — with a plain-English summary.</p>
+          </div>
+        </div>
+        <div style="background:#fff;border:1px solid rgba(0,0,0,0.09);border-radius:10px;padding:1rem 1.25rem;display:flex;gap:14px;align-items:flex-start">
+          <div style="width:32px;height:32px;background:var(--orange);color:#fff;font-size:13px;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px">3</div>
+          <div>
+            <p style="font-size:14px;font-weight:600;color:var(--blue);margin:0 0 4px">Fix and re-run</p>
+            <p style="font-size:13px;color:var(--muted);margin:0;line-height:1.55">Fix issues in your ESP, re-send the test, re-run. Full version history saved for every campaign.</p>
+          </div>
+        </div>
+        <div style="background:#fff;border:1px solid rgba(0,0,0,0.09);border-radius:10px;padding:1rem 1.25rem;display:flex;gap:14px;align-items:flex-start">
+          <div style="width:32px;height:32px;background:var(--orange);color:#fff;font-size:13px;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px">4</div>
+          <div>
+            <p style="font-size:14px;font-weight:600;color:var(--blue);margin:0 0 4px">Send the approval link</p>
+            <p style="font-size:13px;color:var(--muted);margin:0;line-height:1.55">One click generates a unique magic link. Your client views the email and approves in one tap — no login required.</p>
+            <p style="font-size:12px;color:var(--orange);font-family:'SF Mono',monospace;margin:6px 0 0">sendcleared.com/r/xyz789</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: sample report -->
+      <div style="background:#f5f4f0;border-radius:12px;padding:1rem;border:1px solid rgba(0,0,0,0.09)">
+
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px">
+          <div>
+            <p style="font-size:13px;font-weight:600;color:#0f1117;margin:0 0 2px">"Welcome to Bright Spark Energy"</p>
+            <p style="font-size:11px;color:#9a9891;margin:0">2 critical · 1 warning · 7 passed</p>
+          </div>
+          <div style="width:44px;height:44px;border-radius:50%;border:2.5px solid #b06d10;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;background:#fff">
+            <span style="font-size:16px;font-weight:600;color:#0f1117;line-height:1">76</span>
+            <span style="font-size:9px;color:#9a9891">/100</span>
+          </div>
+        </div>
+
+        <div style="background:#f8f8f8;border:0.5px solid rgba(0,0,0,0.12);border-radius:6px;padding:8px 10px;margin-bottom:8px">
+          <div style="display:flex;align-items:baseline;gap:6px;overflow:hidden">
+            <span style="font-size:11px;font-weight:700;color:#1a1a1a;width:90px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Bright Spark ⚡</span>
+            <span style="font-size:11px;font-weight:500;color:#1a1a1a;white-space:nowrap">Welcome to Bright Spark Energy</span>
+            <span style="font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1"> · Your account is ready...</span>
+          </div>
+        </div>
+
+        <div style="background:#fff;border-left:2px solid #5a9020;border-radius:0 5px 5px 0;padding:8px 10px;margin-bottom:8px;font-size:12px;color:#0f1117;line-height:1.5">
+          Almost ready. Fix the two critical issues — unresolved merge tag and missing UTM tracking — before sending.
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:8px">
+
+          <div style="background:#fff;border-radius:7px;padding:.75rem;border:0.5px solid rgba(0,0,0,0.09)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+              <span style="font-size:12px;font-weight:500;color:#0f1117">Content &amp; copy</span>
+              <span style="font-size:11px;color:#9a9891">90/100</span>
+            </div>
+            <div style="height:2px;background:#f0efe9;border-radius:2px;overflow:hidden;margin-bottom:8px"><div style="width:90%;height:100%;background:#5a9020"></div></div>
+            <div style="display:flex;gap:7px;align-items:flex-start;padding:5px 0;border-bottom:0.5px solid rgba(0,0,0,0.07);font-size:12px;color:#0f1117">
+              <span style="background:#eaf3de;color:#27500a;font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;white-space:nowrap;margin-top:1px">✓ PASS</span>
+              <span>Spelling and grammar correct throughout</span>
+            </div>
+            <div style="display:flex;gap:7px;align-items:flex-start;padding:5px 0;border-bottom:0.5px solid rgba(0,0,0,0.07);font-size:12px;color:#0f1117">
+              <span style="background:#eaf3de;color:#27500a;font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;white-space:nowrap;margin-top:1px">✓ PASS</span>
+              <span>CTA "Start saving today" is clear and action-oriented</span>
+            </div>
+            <div style="display:flex;gap:7px;align-items:flex-start;padding:5px 0;font-size:12px;color:#0f1117">
+              <span style="background:#fcebeb;color:#791f1f;font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;white-space:nowrap;margin-top:1px">✕ CRITICAL</span>
+              <span>Unresolved merge tag in footer — will show as raw code to recipients</span>
+            </div>
+          </div>
+
+          <div style="background:#fff;border-radius:7px;padding:.75rem;border:0.5px solid rgba(0,0,0,0.09)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+              <span style="font-size:12px;font-weight:500;color:#0f1117">Links &amp; tracking</span>
+              <span style="font-size:11px;color:#9a9891">60/100</span>
+            </div>
+            <div style="height:2px;background:#f0efe9;border-radius:2px;overflow:hidden;margin-bottom:8px"><div style="width:60%;height:100%;background:#d94040"></div></div>
+            <div style="display:flex;gap:7px;align-items:flex-start;padding:5px 0;border-bottom:0.5px solid rgba(0,0,0,0.07);font-size:12px;color:#0f1117">
+              <span style="background:#eaf3de;color:#27500a;font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;white-space:nowrap;margin-top:1px">✓ PASS</span>
+              <span>All 7 links verified live — no broken URLs</span>
+            </div>
+            <div style="display:flex;gap:7px;align-items:flex-start;padding:5px 0;font-size:12px;color:#0f1117">
+              <span style="background:#fcebeb;color:#791f1f;font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;white-space:nowrap;margin-top:1px">✕ CRITICAL</span>
+              <span>No UTM parameters on any links — campaign unmeasurable</span>
+            </div>
+          </div>
+
+          <div style="background:#fff;border-radius:7px;padding:.75rem;border:0.5px solid rgba(0,0,0,0.09)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+              <span style="font-size:12px;font-weight:500;color:#0f1117">Spam signals</span>
+              <span style="font-size:11px;color:#9a9891">95/100</span>
+            </div>
+            <div style="height:2px;background:#f0efe9;border-radius:2px;overflow:hidden;margin-bottom:8px"><div style="width:95%;height:100%;background:#5a9020"></div></div>
+            <div style="display:flex;gap:7px;align-items:flex-start;padding:5px 0;border-bottom:0.5px solid rgba(0,0,0,0.07);font-size:12px;color:#0f1117">
+              <span style="background:#eaf3de;color:#27500a;font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;white-space:nowrap;margin-top:1px">✓ PASS</span>
+              <span>No spam trigger words detected</span>
+            </div>
+            <div style="display:flex;gap:7px;align-items:flex-start;padding:5px 0;font-size:12px;color:#0f1117">
+              <span style="background:#eaf3de;color:#27500a;font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;white-space:nowrap;margin-top:1px">✓ PASS</span>
+              <span>Image-to-text ratio balanced — good deliverability</span>
+            </div>
+          </div>
+
+          <div style="background:#fff;border-radius:7px;padding:.75rem;border:0.5px solid rgba(0,0,0,0.09)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+              <span style="font-size:12px;font-weight:500;color:#0f1117">Rendering readiness</span>
+              <span style="font-size:11px;color:#9a9891">88/100</span>
+            </div>
+            <div style="height:2px;background:#f0efe9;border-radius:2px;overflow:hidden;margin-bottom:8px"><div style="width:88%;height:100%;background:#5a9020"></div></div>
+            <div style="display:flex;gap:7px;align-items:flex-start;padding:5px 0;font-size:12px;color:#0f1117">
+              <span style="background:#eaf3de;color:#27500a;font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;white-space:nowrap;margin-top:1px">✓ PASS</span>
+              <span>Unsubscribe present · DKIM auth · plain text included</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="background:#fcebeb;border:0.5px solid #d94040;border-radius:5px;padding:8px 10px;font-size:12px;color:#791f1f;margin-bottom:10px">
+          ⚠ 2 critical issues need fixing before sending.
+        </div>
+
+        <div style="display:flex;gap:6px" id="lp-action-btns">
+          <button onclick="lpApprove()" style="flex:1;padding:9px;border-radius:6px;font-size:12px;font-weight:500;background:#eaf3de;color:#27500a;border:0.5px solid #5a9020;cursor:pointer;font-family:inherit">✓ Approve to send</button>
+          <button onclick="lpChanges()" style="flex:1;padding:9px;border-radius:6px;font-size:12px;font-weight:500;background:#fff;color:#0f1117;border:0.5px solid rgba(0,0,0,0.14);cursor:pointer;font-family:inherit">↩ Request changes</button>
+        </div>
+
+        <div id="lp-approved" style="display:none;background:#eaf3de;border:0.5px solid #5a9020;border-radius:8px;padding:1rem;text-align:center;margin-top:8px">
+          <svg width="32" height="32" viewBox="0 0 40 40" fill="none" style="margin:0 auto 8px" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="#5a9020"/><path d="M10 20l7 7 13-13" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <p style="font-size:13px;font-weight:600;color:#27500a;margin:0 0 3px">Email approved</p>
+          <p style="font-size:12px;color:#27500a;margin:0">Sarah Johnson · 23 Jun 2026 at 11:04 BST</p>
+        </div>
+
+        <div id="lp-changes" style="display:none;background:#fff;border:0.5px solid rgba(0,0,0,0.09);border-radius:8px;padding:.875rem;margin-top:8px">
+          <p style="font-size:12px;font-weight:500;color:#0f1117;margin-bottom:6px">What needs changing?</p>
+          <textarea placeholder="e.g. Please fix the broken variable in the footer..." style="width:100%;height:70px;font-size:12px;padding:7px;border-radius:5px;border:0.5px solid rgba(0,0,0,0.14);background:#f0efe9;color:#0f1117;resize:vertical;font-family:inherit;box-sizing:border-box"></textarea>
+          <div style="display:flex;gap:6px;margin-top:6px">
+            <button onclick="lpSendChanges()" style="flex:1;padding:8px;font-size:12px;font-weight:500;background:#faeeda;color:#5c3308;border:0.5px solid #b06d10;border-radius:5px;cursor:pointer;font-family:inherit">Send feedback</button>
+            <button onclick="lpCancelChanges()" style="padding:8px 12px;font-size:12px;border-radius:5px;cursor:pointer;font-family:inherit;background:#fff;border:0.5px solid rgba(0,0,0,0.14);color:#0f1117">Cancel</button>
+          </div>
+        </div>
+
+        <div id="lp-feedback-sent" style="display:none;background:#faeeda;border:0.5px solid #b06d10;border-radius:5px;padding:8px 10px;font-size:12px;color:#5c3308;margin-top:8px">
+          ↩ Feedback sent — agency will send an updated version to review.
+        </div>
+
+        <p style="font-size:10px;color:#9a9891;text-align:center;margin-top:10px">🔒 Secured by SendCleared · Unique link · Expires 23 Jul 2026</p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- FEATURES -->
+<section class="section section-alt" id="features">
+  <div class="section-inner">
+    <p class="section-label">Features</p>
+    <h2 class="section-title">Everything before the send button</h2>
+    <p class="section-sub">Built for freelancers and small agencies who send emails on behalf of clients and can't afford to get it wrong.</p>
+    <div class="features-grid">
+
+      <div class="feature-card highlight">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M4 11l5 5 9-9" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>14-point automated QA</h3>
+        <p>Spelling and grammar, broken links, merge tags, UTM parameters, subject line quality, preheader text, unsubscribe link, alt text, plain text version, DKIM, and more — checked in seconds.</p>
+        <span class="feature-tag">Catches what humans miss</span>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="3" y="4" width="16" height="14" rx="2" stroke="#134e8e" stroke-width="1.5"/><path d="M3 8h16" stroke="#134e8e" stroke-width="1.5"/><circle cx="7" cy="6" r="1" fill="#134e8e"/><circle cx="11" cy="6" r="1" fill="#134e8e"/></svg>
+        </div>
+        <h3>Inbox preview mock</h3>
+        <p>See exactly how your subject line, preheader text, and from name appear in a Gmail inbox row — before anyone opens the email. The most missed check in pre-send QA.</p>
+        <span class="feature-tag">Not available in Litmus or Email on Acid</span>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="3" y="3" width="7" height="16" rx="1.5" stroke="#134e8e" stroke-width="1.5"/><rect x="12" y="3" width="7" height="16" rx="1.5" stroke="#134e8e" stroke-width="1.5"/></svg>
+        </div>
+        <h3>Desktop &amp; mobile preview</h3>
+        <p>The client approval page shows the email at full desktop width and inside a realistic mobile frame. Clients can toggle between the two — no more "how does it look on my phone?"</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M18 10V6l-4-3H6a2 2 0 00-2 2v12a2 2 0 002 2h7" stroke="#134e8e" stroke-width="1.5" stroke-linecap="round"/><path d="M14 3v5h5M15 19l2 2 4-4" stroke="#134e8e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Magic link client approval</h3>
+        <p>Generate a passwordless approval link in one click. Your client views the email, reads the QA summary, and taps Approve or Request Changes — no account, no friction, no email chains.</p>
+        <span class="feature-tag">Replaces back-and-forth email chains</span>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="8" stroke="#134e8e" stroke-width="1.5"/><path d="M11 7v4l3 2" stroke="#134e8e" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Timestamped audit trail</h3>
+        <p>Every approval is logged with name, timestamp, and campaign version. Exportable as a PDF certificate. If a client ever disputes what was agreed, you have proof.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M4 4h14a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" stroke="#134e8e" stroke-width="1.5"/><path d="M2 8l9 5 9-5" stroke="#134e8e" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Works with any ESP</h3>
+        <p>Klaviyo, Mailchimp, Campaign Monitor, Brevo, HubSpot, ActiveCampaign — anything that has a "send test email" button. Add your SendCleared address once, it works on every campaign.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section class="section section-blue">
+  <div class="section-inner">
+    <p class="section-label">The checklist</p>
+    <h2 class="section-title">14 checks. Every email. Every time.</h2>
+    <p class="section-sub">The things that get missed when you're rushing to hit send. SendCleared catches all of them automatically.</p>
+    <div class="checklist-grid">
+      <div class="check-item">
+        <div class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span><strong>Spelling &amp; grammar</strong><em>AI-powered copy check throughout</em></span>
+      </div>
+      <div class="check-item">
+        <div class="ck ck-crit"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span><strong>Merge tags resolved</strong><em>No more &#x7B;&#x7B;first_name&#x7D;&#x7D; in the wild</em></span>
+      </div>
+      <div class="check-item">
+        <div class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span><strong>All links working</strong><em>Every href fetched and verified live</em></span>
+      </div>
+      <div class="check-item">
+        <div class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span><strong>UTM parameters</strong><em>Every link tagged for analytics</em></span>
+      </div>
+      <div class="check-item">
+        <div class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span><strong>Subject line quality</strong><em>Length, spam words, strength score</em></span>
+      </div>
+      <div class="check-item">
+        <div class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span><strong>Preheader text</strong><em>Set, meaningful, right length</em></span>
+      </div>
+      <div class="check-item">
+        <div class="ck ck-crit"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span><strong>Unsubscribe link</strong><em>Present, working, and not buried</em></span>
+      </div>
+      <div class="check-item">
+        <div class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span><strong>Physical address</strong><em>CAN-SPAM and GDPR requirement</em></span>
+      </div>
+      <div class="check-item">
+        <div class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span><strong>Image alt text</strong><em>For when images are blocked</em></span>
+      </div>
+      <div class="check-item">
+        <div class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span><strong>Plain text version</strong><em>Required by spam filters</em></span>
+      </div>
+      <div class="check-item">
+        <div class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span><strong>From name &amp; reply-to</strong><em>Correct sender details verified</em></span>
+      </div>
+      <div class="check-item">
+        <div class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span><strong>DKIM authenticated</strong><em>Email headers checked</em></span>
+      </div>
+      <div class="check-item">
+        <div class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span><strong>CTA clarity</strong><em>Button text clear and action-oriented</em></span>
+      </div>
+      <div class="check-item">
+        <div class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span><strong>Spam signals</strong><em>Image ratio, trigger words, structure</em></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="section-inner">
+    <p class="section-label">Pricing</p>
+    <h2 class="section-title">Simple pricing, no surprises</h2>
+    <p class="section-sub">Start free. Upgrade when you need more. No annual lock-in, no per-seat surprises.</p>
+    <div class="pricing-grid">
+
+      <div class="pricing-card">
+        <p class="pricing-tier">Free</p>
+        <p class="pricing-price"><sup>$</sup>0<span>/mo</span></p>
+        <p class="pricing-desc">Get started, no credit card. See if SendCleared fits your workflow.</p>
+        <ul class="pricing-features">
+          <li>3 approval links per month</li>
+          <li>Full 14-point QA report</li>
+          <li>Inbox preview mock</li>
+          <li>Desktop + mobile toggle</li>
+          <li class="no">Remove SendCleared branding</li>
+          <li class="no">White-label approval page</li>
+          <li class="no">Approval audit trail PDF</li>
+        </ul>
+        <a href="#" class="btn btn-outline" style="width:100%;justify-content:center">Get started free</a>
+        <p class="pricing-note">No credit card required</p>
+      </div>
+
+      <div class="pricing-card popular">
+        <div class="popular-badge">Most popular</div>
+        <p class="pricing-tier">Freelancer</p>
+        <p class="pricing-price"><sup>$</sup>19<span>/mo</span></p>
+        <p class="pricing-desc">For freelancers sending campaigns on behalf of clients.</p>
+        <ul class="pricing-features">
+          <li>Unlimited approval links</li>
+          <li>Up to 5 client inboxes</li>
+          <li>Full 14-point QA report</li>
+          <li>Inbox preview mock</li>
+          <li>Desktop + mobile toggle</li>
+          <li class="no">Remove SendCleared branding</li>
+          <li class="no">White-label approval page</li>
+          <li class="no">Approval audit trail PDF</li>
+        </ul>
+        <a href="#" class="btn btn-primary" style="width:100%;justify-content:center">Start Freelancer plan</a>
+        <p class="pricing-note">14-day free trial included</p>
+      </div>
+
+      <div class="pricing-card">
+        <p class="pricing-tier">Agency</p>
+        <p class="pricing-price"><sup>$</sup>49<span>/mo</span></p>
+        <p class="pricing-desc">For agencies managing multiple clients and needing a professional sign-off workflow.</p>
+        <ul class="pricing-features">
+          <li>Unlimited approval links</li>
+          <li>Up to 20 client inboxes</li>
+          <li>Full 14-point QA report</li>
+          <li>Inbox preview mock</li>
+          <li>Desktop + mobile toggle</li>
+          <li>Remove SendCleared branding</li>
+          <li>White-label approval page</li>
+          <li>Approval audit trail PDF</li>
+          <li>3 team seats included</li>
+        </ul>
+        <a href="#" class="btn btn-blue" style="width:100%;justify-content:center">Start Agency plan</a>
+        <p class="pricing-note">14-day free trial included</p>
+      </div>
+
+      <div class="pricing-card">
+        <p class="pricing-tier">Studio</p>
+        <p class="pricing-price"><sup>$</sup>99<span>/mo</span></p>
+        <p class="pricing-desc">For larger studios and multi-brand agencies with high send volume and full team access.</p>
+        <ul class="pricing-features">
+          <li>Unlimited approval links</li>
+          <li>Unlimited client inboxes</li>
+          <li>Full 14-point QA report</li>
+          <li>Inbox preview mock</li>
+          <li>Desktop + mobile toggle</li>
+          <li>Remove SendCleared branding</li>
+          <li>White-label approval page</li>
+          <li>Approval audit trail PDF</li>
+          <li>Unlimited team seats</li>
+          <li>API access</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#" class="btn btn-blue" style="width:100%;justify-content:center">Start Studio plan</a>
+        <p class="pricing-note">14-day free trial included</p>
+      </div>
+
+    </div>
+
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section-alt" id="faq">
+  <div class="section-inner">
+    <p class="section-label">FAQ</p>
+    <h2 class="section-title">Common questions</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Does my client need to create an account?
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-a">No — that's the whole point. The approval link is passwordless. Your client clicks the link, views the email, and taps Approve or Request Changes. Nothing to sign up for, no app to download.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Which ESPs does SendCleared work with?
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-a">Any ESP that has a "send test email" feature — which is all of them. Klaviyo, Mailchimp, Campaign Monitor, Brevo, HubSpot, ActiveCampaign, Salesforce Marketing Cloud, and more. You add your SendCleared address to the test recipients list once. It works on every campaign from then on.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          What's a client inbox address?
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-a">Each of your clients gets a unique email address — something like <strong>brightspark@yourname.sendcleared.com</strong>. When you add that address to your ESP test list and hit "send test", SendCleared intercepts the email, runs the QA checks, and makes it available in your dashboard. One address per client, set up once, works forever.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          How is SendCleared different from Litmus or Email on Acid?
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-a">Litmus and Email on Acid are self-serve platforms built around rendering screenshots across 90+ email clients. They're powerful but expensive ($500+/mo for Litmus after its 2025 price hike) and built for large in-house teams. SendCleared is built for freelancers and small agencies who need a quick, affordable pre-send check and a professional client approval workflow — not a full-time testing platform.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Is my email content stored?
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-a">Yes — SendCleared stores the email content and QA report so you have a full history per client and campaign. Approval records are stored for your audit trail. You can delete campaign data at any time from your dashboard. We never share your content with third parties.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Can I white-label the approval page?
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-a">Yes, on the Agency plan. You can add your own agency logo to the approval page header so clients see your branding, not SendCleared's. The footer "Powered by SendCleared" line is also removable on Solo and above.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2>Send with confidence.<br>Every single time.</h2>
+    <p>Your first 3 approval links are free. No credit card required. Set up in 2 minutes — just add your SendCleared address to your ESP test list and you're ready to go.</p>
+    <a href="#pricing" class="btn btn-white btn-lg">Start for free — no credit card</a>
+    <p class="cta-note">Setup takes 2 minutes · Works with your existing ESP · Cancel any time</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div style="display:flex;flex-direction:column;gap:1rem;flex:1">
+      <a href="/" class="footer-logo">
+        <img src="sendcleared-logo.png" alt="SendCleared" style="height:31px;width:auto;display:block">
+      </a>
+      <p style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.7);margin:0 0 2px">Engaging Enterprises Ltd</p>
+      <p style="font-size:11px;color:rgba(255,255,255,0.4);line-height:1.7;margin:0">
+        Monomark House, 27 Old Gloucester Street<br>
+        London, England, WC1N 3AX<br>
+        Company No: 14111995
+      </p>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;gap:1rem">
+      <ul class="footer-links" style="justify-content:flex-end">
+        <li><a href="#how-it-works">How it works</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="privacy.html">Privacy policy</a></li>
+        <li><a href="terms.html">Terms</a></li>
+      </ul>
+      <span class="footer-copy">© 2026 SendCleared.com · All rights reserved</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function lpApprove(){
+  document.getElementById('lp-action-btns').style.display='none';
+  document.getElementById('lp-approved').style.display='block';
+}
+function lpChanges(){
+  document.getElementById('lp-changes').style.display='block';
+}
+function lpCancelChanges(){
+  document.getElementById('lp-changes').style.display='none';
+}
+function lpSendChanges(){
+  document.getElementById('lp-changes').style.display='none';
+  document.getElementById('lp-action-btns').style.display='none';
+  document.getElementById('lp-feedback-sent').style.display='block';
+}
+
+function toggleMobileMenu() {
+  document.getElementById('nav-toggle').classList.toggle('open');
+  document.getElementById('mobile-menu').classList.toggle('open');
+  const isOpen = document.getElementById('mobile-menu').classList.contains('open');
+  document.getElementById('nav-toggle').setAttribute('aria-expanded', isOpen);
+}
+function closeMobileMenu() {
+  document.getElementById('nav-toggle').classList.remove('open');
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.getElementById('nav-toggle').setAttribute('aria-expanded', 'false');
+}
+
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// Smooth nav highlight on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.getAttribute('id');
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--orange)' : '';
+  });
+}, { passive: true });
+</script>
+
+</body>
+</html>
