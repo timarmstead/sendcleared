@@ -10,7 +10,6 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 img { max-width: 100%; display: block; }
-body { overflow-x: hidden; }
 
 /* ─── Tokens ─── */
 :root {
@@ -98,43 +97,6 @@ nav {
   gap: 10px;
   flex-shrink: 0;
 }
-.nav-toggle {
-  display: none;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 6px;
-  flex-shrink: 0;
-}
-.nav-toggle span {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: var(--white);
-  border-radius: 2px;
-  margin: 5px 0;
-  transition: transform .2s, opacity .2s;
-}
-.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.nav-toggle.open span:nth-child(2) { opacity: 0; }
-.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-.mobile-menu {
-  display: none;
-  flex-direction: column;
-  background: var(--orange-d);
-  padding: .5rem 1.25rem 1.25rem;
-}
-.mobile-menu.open { display: flex; }
-.mobile-menu a {
-  color: rgba(255,255,255,0.9);
-  text-decoration: none;
-  font-size: 15px;
-  font-weight: 500;
-  padding: .75rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.12);
-}
-.mobile-menu a:last-of-type { border-bottom: none; }
-.mobile-menu .btn { margin-top: .75rem; width: 100%; }
 .btn {
   display: inline-flex;
   align-items: center;
@@ -670,30 +632,14 @@ footer {
 
 /* ─── Responsive ─── */
 @media (max-width: 700px) {
-  nav { padding: 0 1.25rem; }
   .nav-links { display: none; }
-  .nav-cta { display: none; }
-  .nav-toggle { display: block; }
+  .nav-cta .btn-outline { display: none; }
   .proof-divider { display: none; }
   .proof-inner { gap: 1.5rem; }
-  .proof-strip { padding: 1rem 1.25rem; }
   .proof-strip .proof-grid { grid-template-columns: repeat(2,minmax(0,1fr)) !important; }
-  .viral-box { flex-direction: column; gap: .75rem; padding: 1.5rem; }
+  .viral-box { flex-direction: column; gap: .75rem; }
   .footer-inner { flex-direction: column; align-items: flex-start; }
-  .footer-inner > div:last-child { align-items: flex-start !important; width: 100%; }
-  .footer-links { justify-content: flex-start !important; gap: 1rem 1.5rem; }
-  .split-layout { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
-
-  .hero { padding: 3rem 1.25rem 3rem; }
-  .section { padding: 3rem 1.25rem; }
-  .cta-section { padding: 3rem 1.25rem; }
-  footer { padding: 2rem 1.25rem; }
-
-  .hero-actions { flex-direction: column; align-items: stretch; }
-  .hero-actions .btn { width: 100%; }
-
-  /* Prevent long monospace snippets and long words from forcing horizontal scroll */
-  code, .step-detail, p, span, div { overflow-wrap: break-word; word-break: break-word; }
+  .split-layout { grid-template-columns: 1fr !important; }
 }
 
 /* ─── Utility ─── */
@@ -720,17 +666,6 @@ footer {
       <a href="#pricing" class="btn btn-outline">Log in</a>
       <a href="#pricing" class="btn btn-primary">Start free</a>
     </div>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMobileMenu()">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-  <div class="mobile-menu" id="mobile-menu">
-    <a href="#how-it-works" onclick="closeMobileMenu()">How it works</a>
-    <a href="#features" onclick="closeMobileMenu()">Features</a>
-    <a href="#pricing" onclick="closeMobileMenu()">Pricing</a>
-    <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
-    <a href="#pricing" class="btn btn-outline" onclick="closeMobileMenu()" style="margin-top:1rem">Log in</a>
-    <a href="#pricing" class="btn btn-primary" onclick="closeMobileMenu()">Start free</a>
   </div>
 </nav>
 
@@ -753,7 +688,7 @@ footer {
 
 <!-- PROOF STRIP -->
 <div class="proof-strip">
-  <div class="proof-grid" style="max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:rgba(255,255,255,0.1);border-radius:10px;overflow:hidden">
+  <div style="max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:rgba(255,255,255,0.1);border-radius:10px;overflow:hidden">
     <div style="background:rgba(255,255,255,0.07);padding:1.25rem 1.5rem;text-align:center">
       <p style="font-size:2rem;font-weight:800;color:#fff;letter-spacing:-0.03em;margin:0 0 4px;line-height:1">96%</p>
       <p style="font-size:12px;color:rgba(255,255,255,0.65);margin:0;line-height:1.4">of emails contain at least one error before sending</p>
@@ -784,7 +719,7 @@ footer {
     <h2 class="section-title">From test send to approved — in minutes</h2>
     <p class="section-sub" style="margin-bottom:2rem">No new tools. No workflow changes. Just add your SendCleared address to your ESP test list once and you're set up forever.</p>
 
-    <div class="split-layout" style="display:grid;grid-template-columns:1fr 1.4fr;gap:2.5rem;align-items:start">
+    <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:2.5rem;align-items:start">
 
       <!-- Left: steps -->
       <div style="display:flex;flex-direction:column;gap:10px">
@@ -1275,18 +1210,6 @@ function lpSendChanges(){
   document.getElementById('lp-changes').style.display='none';
   document.getElementById('lp-action-btns').style.display='none';
   document.getElementById('lp-feedback-sent').style.display='block';
-}
-
-function toggleMobileMenu() {
-  document.getElementById('nav-toggle').classList.toggle('open');
-  document.getElementById('mobile-menu').classList.toggle('open');
-  const isOpen = document.getElementById('mobile-menu').classList.contains('open');
-  document.getElementById('nav-toggle').setAttribute('aria-expanded', isOpen);
-}
-function closeMobileMenu() {
-  document.getElementById('nav-toggle').classList.remove('open');
-  document.getElementById('mobile-menu').classList.remove('open');
-  document.getElementById('nav-toggle').setAttribute('aria-expanded', 'false');
 }
 
 function toggleFaq(el) {
