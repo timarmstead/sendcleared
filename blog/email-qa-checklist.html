@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email QA Checklist for Agencies & Freelancers (2026) | SendCleared</title>
+<meta name="description" content="A complete pre-send email QA checklist for agencies and freelancers — merge tags, broken links, spam triggers, and deliverability, all in one place.">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --orange:   #f26600;
+  --orange-d: #d45500;
+  --blue:     #134e8e;
+  --blue-d:   #0d3a6b;
+  --white:    #ffffff;
+  --blue-tint:#e8f0f8;
+  --muted:    #5a5a56;
+  --bg:       #f7f7f5;
+}
+body{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: #1a1a1a;
+  line-height: 1.5;
+}
+a{color:var(--orange);text-decoration:none}
+a:hover{color:var(--orange-d)}
+
+nav{background:var(--orange);padding:0 2rem;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:1180px;margin:0 auto;height:72px;display:flex;align-items:center;justify-content:space-between;gap:2rem}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,0.85);font-size:14px;font-weight:500}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.btn{display:inline-flex;align-items:center;padding:9px 18px;border-radius:8px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;border:none}
+.btn-outline{background:transparent;border:1.5px solid rgba(255,255,255,0.5);color:var(--white)}
+.btn-outline:hover{border-color:var(--white);background:rgba(255,255,255,0.1)}
+.btn-primary{background:var(--white);color:var(--orange)}
+.btn-primary:hover{background:rgba(255,255,255,0.9)}
+
+.nav-toggle{display:none;background:transparent;border:none;cursor:pointer;padding:6px;flex-shrink:0}
+.nav-toggle span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;margin:5px 0;transition:transform .2s,opacity .2s}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;flex-direction:column;background:var(--orange-d);padding:.5rem 1.25rem 1.25rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:rgba(255,255,255,0.9);text-decoration:none;font-size:15px;font-weight:500;padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,0.12)}
+.mobile-menu a:last-of-type{border-bottom:none}
+.mobile-menu .btn{margin-top:.75rem;width:100%}
+
+@media (max-width:700px){
+  nav{padding:0 1.25rem}
+  .nav-links{display:none}
+  .nav-cta{display:none}
+  .nav-toggle{display:block}
+}
+
+article{max-width:720px;margin:0 auto;padding:3rem 2rem 4rem}
+.byline{font-size:13px;color:var(--muted);margin-bottom:1.75rem}
+article h1{font-size:clamp(1.75rem,4vw,2.4rem);font-weight:800;color:var(--blue);letter-spacing:-0.02em;line-height:1.25;margin-bottom:.75rem}
+.hero-image{background:linear-gradient(135deg,var(--blue) 0%,var(--blue-d) 100%);border-radius:14px;height:260px;display:flex;align-items:center;justify-content:center;margin-bottom:2rem;overflow:hidden}
+article p{font-size:15px;color:#2a2a2a;line-height:1.75;margin-bottom:1.25rem}
+article h2{font-size:1.35rem;font-weight:800;color:var(--blue);letter-spacing:-0.01em;margin:2.25rem 0 1rem}
+article strong{color:#1a1a1a;font-weight:700}
+blockquote{border-left:3px solid var(--orange);background:var(--blue-tint);border-radius:0 10px 10px 0;padding:1.1rem 1.4rem;margin:1.75rem 0;font-size:15px;font-style:italic;color:var(--blue-d);line-height:1.6}
+
+.bullet-list{list-style:none;margin:1rem 0 1.75rem}
+.bullet-list li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:15px;color:#2a2a2a;line-height:1.6}
+.bullet-list li:last-child{border-bottom:none}
+.bullet-list li::before{content:'';flex-shrink:0;width:7px;height:7px;border-radius:50%;background:var(--orange);margin-top:8px}
+
+.step-list{list-style:none;margin:1.25rem 0 1.75rem;counter-reset:step}
+.step-list li{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid rgba(0,0,0,0.07)}
+.step-list li:last-child{border-bottom:none}
+.step-num{counter-increment:step;flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--orange);color:var(--white);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.step-num::before{content:counter(step)}
+.step-text{font-size:15px;color:#2a2a2a;line-height:1.6}
+
+.related{background:var(--blue-tint);border-radius:10px;padding:1.25rem 1.5rem;margin:2.25rem 0;font-size:14px;color:var(--blue-d)}
+.related p{color:var(--blue-d);margin-bottom:.4rem;font-size:14px}
+.related p:last-child{margin-bottom:0}
+.related em{font-style:italic;color:var(--blue-d);opacity:.85}
+
+.cta-box{background:var(--blue);border-radius:14px;padding:2rem;text-align:center;margin-top:2.5rem}
+.cta-box p{color:rgba(255,255,255,0.75);font-size:14px;margin-bottom:1.1rem}
+.cta-box .btn-cta{background:var(--orange);color:var(--white);padding:12px 24px;border-radius:10px;font-size:15px;font-weight:700;display:inline-block}
+.cta-box .btn-cta:hover{background:var(--orange-d);color:var(--white)}
+.cta-note{font-size:12px;color:rgba(255,255,255,0.5);margin-top:10px}
+
+footer{background:#12172a;padding:3rem 2rem}
+.footer-inner{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+.footer-links a{color:rgba(255,255,255,0.6);font-size:13px}
+.footer-links a:hover{color:var(--white)}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.35)}
+
+@media (max-width:700px){
+  footer{padding:2rem 1.25rem}
+  .footer-inner{flex-direction:column;align-items:flex-start}
+  .footer-inner > div:last-child{align-items:flex-start !important;width:100%}
+  .footer-links{justify-content:flex-start !important;gap:1rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="/sendcleared-logo.png" alt="SendCleared" style="height:41px;width:auto;display:block">
+    </a>
+    <ul class="nav-links">
+      <li><a href="/#how-it-works">How it works</a></li>
+      <li><a href="/#features">Features</a></li>
+      <li><a href="/#pricing">Pricing</a></li>
+      <li><a href="/#faq">FAQ</a></li>
+      <li><a href="/blog/">Blog</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="https://app.sendcleared.com/login" class="btn btn-outline">Log in</a>
+      <a href="https://app.sendcleared.com/signup" class="btn btn-primary">Start free</a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/#how-it-works" onclick="closeMobileMenu()">How it works</a>
+    <a href="/#features" onclick="closeMobileMenu()">Features</a>
+    <a href="/#pricing" onclick="closeMobileMenu()">Pricing</a>
+    <a href="/#faq" onclick="closeMobileMenu()">FAQ</a>
+    <a href="/blog/" onclick="closeMobileMenu()">Blog</a>
+    <a href="https://app.sendcleared.com/login" class="btn btn-outline" onclick="closeMobileMenu()" style="margin-top:1rem">Log in</a>
+    <a href="https://app.sendcleared.com/signup" class="btn btn-primary" onclick="closeMobileMenu()">Start free</a>
+  </div>
+</nav>
+
+<article>
+  <p class="byline">Updated: September 2026</p>
+  <h1>The Email QA Checklist for Agencies and Freelancers</h1>
+
+  <div class="hero-image">
+    <svg width="100" height="100" viewBox="0 0 24 24" fill="none" style="opacity:.3">
+      <rect x="3" y="3" width="18" height="18" rx="2" stroke="#fff" stroke-width="1.2" fill="none" transform="scale(2) translate(2,2)"/>
+      <path d="M8 12l3 3 6-6" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" transform="scale(2) translate(2,2)"/>
+    </svg>
+  </div>
+
+  <p>96% of emails contain at least one error before they're sent. Most of those errors are small — a broken merge tag, a dead link, a typo in the subject line — and most of them are completely avoidable with one proper check before you hit send.</p>
+
+  <p>The problem isn't that agencies and freelancers don't know they should QA their emails. It's that "QA" usually means eyeballing the preview pane for thirty seconds under deadline pressure, which catches almost nothing. A real QA process needs to be a checklist, not a vibe.</p>
+
+  <p>This is that checklist. Run through it before every client send — or better, automate it, which we'll get to at the end.</p>
+
+  <h2>Before you build: campaign details</h2>
+  <p>Get these right before you even open the email builder. They're easy to fix here and expensive to fix after a client's already seen a broken version.</p>
+
+  <ul class="bullet-list">
+    <li><span><strong>Sender name and email address</strong> — matches what the client expects to see, and won't get flagged as unfamiliar by inbox providers</span></li>
+    <li><span><strong>Subject line</strong> — under ~50 characters for full visibility on mobile, no ALL CAPS, no excessive punctuation (!!!) that trips spam filters</span></li>
+    <li><span><strong>Preview text</strong> — written deliberately, not left to default to "view this email in your browser" or the first line of a footer</span></li>
+    <li><span><strong>Send time and time zone</strong> — confirmed against the client's actual audience, not just your own local time</span></li>
+  </ul>
+
+  <h2>Content and personalization</h2>
+  <p>This is where most of that 96% error rate actually comes from — not big mistakes, small unresolved ones.</p>
+
+  <ul class="bullet-list">
+    <li><span><strong>Every merge tag resolves correctly</strong> — send a test to at least two different sample contacts and check that first names, dates, and any dynamic content render as real values, not raw code like <code>{{first_name}}</code> or <code>*|FNAME|*</code></span></li>
+    <li><span><strong>Fallback values are set</strong> for any merge tag where a contact might have missing data (a blank first name reading "Hi ," is a very visible, very avoidable mistake)</span></li>
+    <li><span><strong>Spelling and grammar</strong> — run it through a proper checker, not just your own read-through; you already know the copy, which makes it easy to read past errors</span></li>
+    <li><span><strong>Dynamic content blocks</strong> (if used) show the correct version for each segment — check at least one example per segment, not just the default</span></li>
+  </ul>
+
+  <h2>Links and tracking</h2>
+  <p>A broken link is invisible until someone clicks it — which means it's usually a subscriber who finds it, not you.</p>
+
+  <ul class="bullet-list">
+    <li><span><strong>Every link works</strong> — click each one individually; don't assume that because one link in a repeated block works, they all do</span></li>
+    <li><span><strong>UTM parameters are present and correct</strong> on every tracked link, so campaign performance is actually measurable in analytics afterward</span></li>
+    <li><span><strong>CTAs point where they're supposed to</strong> — especially after last-minute copy changes, when a CTA button's destination is often forgotten during a text edit</span></li>
+    <li><span><strong>Unsubscribe link is present and functional</strong> — a legal requirement in most jurisdictions, and one of the first things inbox providers check</span></li>
+  </ul>
+
+  <h2>Deliverability and compliance</h2>
+  <p>These checks don't affect how the email looks — they affect whether it arrives at all.</p>
+
+  <ul class="bullet-list">
+    <li><span><strong>Physical mailing address</strong> is in the footer (required under CAN-SPAM and similar regulations)</span></li>
+    <li><span><strong>No spam-trigger language</strong> in the subject line or body — words like "free," "act now," or excessive urgency language, especially stacked together</span></li>
+    <li><span><strong>SPF, DKIM, and DMARC are authenticated</strong> on the sending domain — if you're not sure, this is worth checking once at setup rather than per campaign, but it's worth a periodic re-check</span></li>
+    <li><span><strong>Image-to-text ratio</strong> isn't overwhelmingly image-heavy — an email that's a single large image with no real text behind it reads as spammy to filters and is invisible to anyone with images blocked</span></li>
+  </ul>
+
+  <h2>Rendering and accessibility</h2>
+
+  <ul class="bullet-list">
+    <li><span><strong>Alt text on every image</strong> — for subscribers with images blocked, and for accessibility</span></li>
+    <li><span><strong>Mobile rendering check</strong> — a large share of opens happen on mobile; confirm the layout doesn't break on a narrow screen</span></li>
+    <li><span><strong>Plain text version exists</strong> and isn't just a broken auto-generated stub</span></li>
+  </ul>
+
+  <h2>The final send checklist</h2>
+  <p>Right before you actually hit send:</p>
+
+  <ul class="step-list">
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text">Test send goes to yourself <strong>and</strong> at least one other real inbox (ideally a different provider — Gmail and Outlook render differently)</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text">Every item above has been checked on the <strong>actual final version</strong>, not an earlier draft</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text">The list/segment is confirmed correct — sending the right campaign to the right (and only the right) audience</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text">Someone other than the person who built the email has looked at it, if that's workable — a second pair of eyes catches what familiarity makes invisible</span>
+    </li>
+  </ul>
+
+  <h2>Why this list exists</h2>
+  <p>None of this is complicated. That's exactly the problem — every item on this checklist is something anyone could catch, which is why it's so easy to assume someone will, right up until a Friday-afternoon deadline means nobody actually does.</p>
+
+  <p>That's the gap SendCleared is built to close. Instead of manually working through a list like this on every single send, SendCleared runs an automated check across merge tags, links, alt text, spam triggers, and more in about 10 seconds — the moment between your test send and your client's approval. It doesn't replace judgment on tone or strategy, but it never skips a step because it's under deadline pressure.</p>
+
+  <div class="cta-box">
+    <p>Try it free — no credit card required, 3 approval links a month on the free plan.</p>
+    <a href="https://app.sendcleared.com/signup" class="btn-cta">Start free →</a>
+    <p class="cta-note">No credit card required</p>
+  </div>
+
+  <div class="related">
+    <p><strong>Related reading</strong></p>
+    <p><em>The £47 Email Mistake No One Talks About</em> · <em>How to Send a Test Email Your Client Can Actually Review</em> · <em>Why Emails Land in Spam: A Pre-Send Deliverability Checklist</em></p>
+  </div>
+</article>
+
+<footer>
+  <div class="footer-inner">
+    <div style="display:flex;flex-direction:column;gap:1rem;flex:1">
+      <a href="/" class="footer-logo">
+        <img src="/sendcleared-logo.png" alt="SendCleared" style="height:31px;width:auto;display:block">
+      </a>
+      <p style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.7);margin:0 0 2px">Engaging Enterprises Ltd</p>
+      <p style="font-size:11px;color:rgba(255,255,255,0.4);line-height:1.7;margin:0">
+        Monomark House, 27 Old Gloucester Street<br>
+        London, England, WC1N 3AX<br>
+        Company No: 14111995
+      </p>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;gap:1rem">
+      <ul class="footer-links" style="justify-content:flex-end">
+        <li><a href="/#how-it-works">How it works</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/faq.html">FAQ</a></li>
+        <li><a href="/privacy.html">Privacy policy</a></li>
+        <li><a href="/terms.html">Terms</a></li>
+      </ul>
+      <span class="footer-copy">© 2026 SendCleared.com · All rights reserved</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMobileMenu() {
+  document.getElementById('nav-toggle').classList.toggle('open');
+  document.getElementById('mobile-menu').classList.toggle('open');
+  const isOpen = document.getElementById('mobile-menu').classList.contains('open');
+  document.getElementById('nav-toggle').setAttribute('aria-expanded', isOpen);
+}
+function closeMobileMenu() {
+  document.getElementById('nav-toggle').classList.remove('open');
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.getElementById('nav-toggle').setAttribute('aria-expanded', 'false');
+}
+</script>
+
+</body>
+</html>
