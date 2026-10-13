@@ -711,6 +711,7 @@ footer {
 .lp-renders{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem;align-items:start}
 .lp-caption{font-size:11px;font-weight:700;color:#ffb27a;text-transform:uppercase;letter-spacing:.1em;margin:0 0 .35rem}
 .lp-caption-sub{font-size:14px;color:rgba(255,255,255,0.8);margin:0 0 .9rem;line-height:1.5}
+.lp-renders > div, .lp-steps > div{min-width:0}
 .lp-panel{background:#f5f4f0;border-radius:12px;padding:1rem;border:1px solid rgba(0,0,0,0.09);overflow:hidden;max-width:100%}
 .lp-card{background:#fff;border-radius:8px;border:1px solid rgba(0,0,0,0.09);padding:.75rem .9rem;margin-bottom:6px}
 .lp-sec-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;font-size:12px;font-weight:600;color:#0f1117}
@@ -730,10 +731,10 @@ footer {
 }
 @media (max-width:900px){
   .lp-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .lp-renders{grid-template-columns:1fr}
+  .lp-renders{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:520px){
-  .lp-steps{grid-template-columns:1fr}
+  .lp-steps{grid-template-columns:minmax(0,1fr)}
 }
 
 /* ─── Utility ─── */
