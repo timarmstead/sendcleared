@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Send a Test Email to a Client for Approval | SendCleared</title>
+<meta name="description" content="Sending a raw test email to a client breaks merge tags and gets vague feedback. Here's a better way to get a clean, provable review and sign-off.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Send a Test Email Your Client Can Actually Review",
+  "description": "Sending a raw test email to a client breaks merge tags and gets vague feedback. Here's a better way to get a clean, provable review and sign-off.",
+  "datePublished": "2026-10-13",
+  "author": { "@type": "Organization", "name": "SendCleared" },
+  "publisher": { "@type": "Organization", "name": "Engaging Enterprises Ltd" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to send a test email your client can review",
+  "step": [
+    { "@type": "HowToStep", "name": "Run your own QA first", "text": "Work through a proper checklist before anything goes to the client — merge tags, links, alt text, spam triggers and the footer essentials." },
+    { "@type": "HowToStep", "name": "Send a test to yourself with realistic data", "text": "Check it on desktop and on your phone, looking specifically at personalization and fallback values." },
+    { "@type": "HowToStep", "name": "Freeze the version", "text": "Stop editing once it passes your own checks. Treat any further change as a new version." },
+    { "@type": "HowToStep", "name": "Give the client a single review link", "text": "Send one link to the exact version, viewed the way a subscriber would see it on desktop and mobile." },
+    { "@type": "HowToStep", "name": "Tell them exactly what to check", "text": "State what you need from them and what's already settled, plus a deadline." },
+    { "@type": "HowToStep", "name": "Collect feedback in one place and re-version", "text": "Make requested changes, then send a new link for the new version." },
+    { "@type": "HowToStep", "name": "Get an explicit, recorded approval", "text": "Use a specific action that clearly means yes, with a name and a timestamp attached." }
+  ]
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --orange:   #f26600;
+  --orange-d: #d45500;
+  --blue:     #134e8e;
+  --blue-d:   #0d3a6b;
+  --white:    #ffffff;
+  --blue-tint:#e8f0f8;
+  --muted:    #5a5a56;
+  --bg:       #f7f7f5;
+}
+body{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: #1a1a1a;
+  line-height: 1.5;
+}
+a{color:var(--orange);text-decoration:none}
+a:hover{color:var(--orange-d)}
+
+nav{background:var(--orange);padding:0 2rem;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:1180px;margin:0 auto;height:72px;display:flex;align-items:center;justify-content:space-between;gap:2rem}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,0.85);font-size:14px;font-weight:500}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.btn{display:inline-flex;align-items:center;padding:9px 18px;border-radius:8px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;border:none}
+.btn-outline{background:transparent;border:1.5px solid rgba(255,255,255,0.5);color:var(--white)}
+.btn-outline:hover{border-color:var(--white);background:rgba(255,255,255,0.1)}
+.btn-primary{background:var(--white);color:var(--orange)}
+.btn-primary:hover{background:rgba(255,255,255,0.9)}
+
+.nav-toggle{display:none;background:transparent;border:none;cursor:pointer;padding:6px;flex-shrink:0}
+.nav-toggle span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;margin:5px 0;transition:transform .2s,opacity .2s}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;flex-direction:column;background:var(--orange-d);padding:.5rem 1.25rem 1.25rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:rgba(255,255,255,0.9);text-decoration:none;font-size:15px;font-weight:500;padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,0.12)}
+.mobile-menu a:last-of-type{border-bottom:none}
+.mobile-menu .btn{margin-top:.75rem;width:100%}
+
+@media (max-width:700px){
+  nav{padding:0 1.25rem}
+  .nav-links{display:none}
+  .nav-cta{display:none}
+  .nav-toggle{display:block}
+}
+
+article{max-width:720px;margin:0 auto;padding:3rem 2rem 4rem}
+.byline{font-size:13px;color:var(--muted);margin-bottom:1.75rem}
+article h1{font-size:clamp(1.75rem,4vw,2.4rem);font-weight:800;color:var(--blue);letter-spacing:-0.02em;line-height:1.25;margin-bottom:.75rem}
+.hero-image{background:linear-gradient(135deg,var(--blue) 0%,var(--blue-d) 100%);border-radius:14px;height:260px;display:flex;align-items:center;justify-content:center;margin-bottom:2rem;overflow:hidden}
+article p{font-size:15px;color:#2a2a2a;line-height:1.75;margin-bottom:1.25rem}
+article h2{font-size:1.35rem;font-weight:800;color:var(--blue);letter-spacing:-0.01em;margin:2.25rem 0 1rem}
+article strong{color:#1a1a1a;font-weight:700}
+blockquote{border-left:3px solid var(--orange);background:var(--blue-tint);border-radius:0 10px 10px 0;padding:1.1rem 1.4rem;margin:1.75rem 0;font-size:15px;font-style:italic;color:var(--blue-d);line-height:1.6}
+blockquote p{color:var(--blue-d);margin-bottom:.9rem;font-size:15px}
+blockquote p:last-child{margin-bottom:0}
+
+.bullet-list{list-style:none;margin:1rem 0 1.75rem}
+.bullet-list li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:15px;color:#2a2a2a;line-height:1.6}
+.bullet-list li:last-child{border-bottom:none}
+.bullet-list li::before{content:'';flex-shrink:0;width:7px;height:7px;border-radius:50%;background:var(--orange);margin-top:8px}
+
+.step-list{list-style:none;margin:1.25rem 0 1.75rem;counter-reset:step}
+.step-list li{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid rgba(0,0,0,0.07)}
+.step-list li:last-child{border-bottom:none}
+.step-num{counter-increment:step;flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--orange);color:var(--white);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.step-num::before{content:counter(step)}
+.step-text{font-size:15px;color:#2a2a2a;line-height:1.6}
+
+.faq-item{margin-bottom:1.5rem}
+.faq-item p:first-child{font-weight:700;color:#1a1a1a;margin-bottom:.35rem}
+
+.related{background:var(--blue-tint);border-radius:10px;padding:1.25rem 1.5rem;margin:2.25rem 0;font-size:14px;color:var(--blue-d)}
+.related p{color:var(--blue-d);margin-bottom:.4rem;font-size:14px}
+.related p:last-child{margin-bottom:0}
+.related a{color:var(--blue-d);text-decoration:underline}
+.related a:hover{color:var(--orange-d)}
+
+.cta-box{background:var(--blue);border-radius:14px;padding:2rem;text-align:center;margin-top:2.5rem}
+.cta-box p{color:rgba(255,255,255,0.75);font-size:14px;margin-bottom:1.1rem}
+.cta-box .btn-cta{background:var(--orange);color:var(--white);padding:12px 24px;border-radius:10px;font-size:15px;font-weight:700;display:inline-block}
+.cta-box .btn-cta:hover{background:var(--orange-d);color:var(--white)}
+.cta-note{font-size:12px;color:rgba(255,255,255,0.5);margin-top:10px}
+
+footer{background:#12172a;padding:3rem 2rem}
+.footer-inner{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+.footer-links a{color:rgba(255,255,255,0.6);font-size:13px}
+.footer-links a:hover{color:var(--white)}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.35)}
+
+@media (max-width:700px){
+  footer{padding:2rem 1.25rem}
+  .footer-inner{flex-direction:column;align-items:flex-start}
+  .footer-inner > div:last-child{align-items:flex-start !important;width:100%}
+  .footer-links{justify-content:flex-start !important;gap:1rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="/sendcleared-logo.png" alt="SendCleared" style="height:41px;width:auto;display:block">
+    </a>
+    <ul class="nav-links">
+      <li><a href="/#how-it-works">How it works</a></li>
+      <li><a href="/#features">Features</a></li>
+      <li><a href="/#pricing">Pricing</a></li>
+      <li><a href="/#faq">FAQ</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="/compare/">Compare</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="https://app.sendcleared.com/login" class="btn btn-outline">Log in</a>
+      <a href="https://app.sendcleared.com/signup" class="btn btn-primary">Start free</a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/#how-it-works" onclick="closeMobileMenu()">How it works</a>
+    <a href="/#features" onclick="closeMobileMenu()">Features</a>
+    <a href="/#pricing" onclick="closeMobileMenu()">Pricing</a>
+    <a href="/#faq" onclick="closeMobileMenu()">FAQ</a>
+    <a href="/blog/" onclick="closeMobileMenu()">Blog</a>
+    <a href="/compare/" onclick="closeMobileMenu()">Compare</a>
+    <a href="https://app.sendcleared.com/login" class="btn btn-outline" onclick="closeMobileMenu()" style="margin-top:1rem">Log in</a>
+    <a href="https://app.sendcleared.com/signup" class="btn btn-primary" onclick="closeMobileMenu()">Start free</a>
+  </div>
+</nav>
+
+<article>
+  <p class="byline">Published: October 2026</p>
+  <h1>How to Send a Test Email Your Client Can Actually Review</h1>
+
+  <div class="hero-image">
+    <svg width="100" height="100" viewBox="0 0 24 24" fill="none" style="opacity:.3">
+      <path d="M4 4h16v16H4z M4 4l8 8 8-8" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" transform="scale(2) translate(2,2)"/>
+    </svg>
+  </div>
+
+  <p>You've built the campaign. It's ready for the client to look at. So you hit "send test," type in their email address, and wait.</p>
+
+  <p>Three days later you get a reply: "Can we change the second paragraph? Also the button looks odd. Actually, Sarah wants to see it too."</p>
+
+  <p>Sending a standard ESP test email to a client is the default workflow for most freelancers and agencies, and it's quietly one of the weakest steps in the whole process. This guide covers why it goes wrong, what a reviewable test email actually needs, and a step-by-step way to get a clear yes from your client without the back-and-forth.</p>
+
+  <h2>Why a standard test email is the wrong thing to send a client</h2>
+  <p>A test email is designed for <em>you</em>, the person building the campaign. It isn't designed for someone who has to review and approve it. That mismatch causes most of the problems:</p>
+
+  <ul class="bullet-list">
+    <li><span><strong>It often doesn't show what subscribers will see.</strong> Test sends commonly use placeholder or sample data rather than a real contact's details, so merge tags and dynamic content may not render the way they will for real recipients. A client who sees a blank first name or a placeholder value will, reasonably, ask whether it's broken.</span></li>
+    <li><span><strong>It doesn't look like the real thing.</strong> Many ESPs label test sends, and a test can land in spam or a promotions tab, which is the opposite of what you want a nervous client to see.</span></li>
+    <li><span><strong>Feedback arrives in the worst possible format.</strong> It comes as a reply thread, a forwarded copy with comments, or a message in Slack. Nobody can tell which version the feedback refers to, and the same point gets made three different ways.</span></li>
+    <li><span><strong>There's no record.</strong> When a client replies "looks good," it's not clear what they approved, whether they saw the final version, or who else signed off. Three weeks later, when someone says "I never approved that," you're scrolling through a thread.</span></li>
+    <li><span><strong>Giving clients ESP access isn't a real alternative.</strong> It's a security and permissions headache, and most clients don't want a login to a tool they'll never otherwise use.</span></li>
+  </ul>
+
+  <h2>What a reviewable test email actually needs</h2>
+  <p>Whatever tool you use, a version your client can properly review has five things:</p>
+
+  <ul class="bullet-list">
+    <li><span><strong>The exact final version.</strong> Frozen, so the feedback and the approval both refer to the same thing.</span></li>
+    <li><span><strong>Realistic data.</strong> You've checked that merge tags and dynamic blocks resolve correctly before the client sees it.</span></li>
+    <li><span><strong>A clear ask.</strong> What they're reviewing, what they're not, and by when.</span></li>
+    <li><span><strong>One place for feedback.</strong> Not a thread, not three channels.</span></li>
+    <li><span><strong>A record.</strong> A name, a timestamp, and which version was approved.</span></li>
+  </ul>
+
+  <h2>How to send a test email your client can review: step by step</h2>
+
+  <ul class="step-list">
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Run your own QA first.</strong> Never let a client be the first person to find a broken link or an unresolved merge tag. Work through a proper checklist before anything goes to them — our <a href="/blog/email-qa-checklist.html">Email QA Checklist</a> covers merge tags, links, alt text, spam triggers and the footer essentials.</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Send a test to yourself with realistic data.</strong> Check it on desktop and on your phone. Look specifically at personalization: first name, dates, product blocks, and anything that changes by segment. If you use fallback values, confirm they read naturally ("Hi there," rather than "Hi ,").</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Freeze the version.</strong> Once it passes your own checks, stop editing. If you change anything after the client has seen it, treat it as a new version and make that explicit.</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Give the client a single review link.</strong> Don't forward the test email, don't paste a screenshot, and don't attach a PDF. A single link to the exact version, viewed the way a subscriber would see it on desktop and mobile, removes the "which version?" problem and keeps the review in one place.</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Tell them exactly what to check.</strong> A short brief gets you better feedback than an open invitation to comment. Say what you need from them (copy accuracy, offer details, links, brand voice) and what's already settled (layout and design, if they signed those off earlier). It also helps to give a deadline.</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Collect feedback in one place and re-version.</strong> If they ask for changes, make them, then send a new link for the new version. Never ask a client to approve "the one from Tuesday, with the changes we discussed."</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Get an explicit, recorded approval.</strong> "Looks good" in a busy thread isn't an approval. You want a specific action that clearly means yes, with a name and a timestamp attached.</span>
+    </li>
+  </ul>
+
+  <h2>A review request you can copy</h2>
+  <blockquote>
+    <p>Hi [Name],</p>
+    <p>The [campaign name] email is ready for your review: [link]</p>
+    <p>Please check: the copy and offer details, the links, and the subject line and preview text. The layout was approved earlier, so no need to revisit that unless something looks wrong.</p>
+    <p>It's scheduled to send [date/time], so I'll need your sign-off by [deadline]. If you'd like changes, just flag them on the page and I'll send an updated version.</p>
+    <p>Thanks!</p>
+  </blockquote>
+
+  <h2>Doing this with SendCleared</h2>
+  <p>SendCleared is built around exactly this workflow, and it works with any ESP that can send a test email.</p>
+
+  <ul class="step-list">
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Add your client and get a unique test address.</strong> One persistent address per client, added to your ESP's test list once.</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Send your test as normal.</strong> From Klaviyo, Mailchimp, ActiveCampaign or wherever you build, send the test to that address.</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Review the QA report.</strong> Automated checks run in about ten seconds across merge tags, links, alt text, spam triggers and the unsubscribe and address essentials. Fix anything flagged and re-send.</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Share the approval link.</strong> Your client gets a branded link where they can see the email at desktop and mobile widths and approve it or request changes.</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Get a record.</strong> The approval is logged with a name and timestamp, so it holds up later.</span>
+    </li>
+  </ul>
+
+  <blockquote>
+    <p>One honest note: the approval page shows the email at desktop and mobile widths. It isn't a multi-inbox rendering test (checking how it displays in Outlook, Gmail, and so on). If that's your main need, a rendering tool is the right complement. For the step between "I've finished building this" and "my client has approved it," SendCleared does the job.</p>
+  </blockquote>
+
+  <h2>Common questions</h2>
+
+  <div class="faq-item">
+    <p>Can I just send my client the ESP's test email?</p>
+    <p>You can, and plenty of people do. The trade-offs are the ones above: placeholder data, vague feedback, and no record of what was approved.</p>
+  </div>
+  <div class="faq-item">
+    <p>Does my client need an account?</p>
+    <p>No. They open the link, review, and approve.</p>
+  </div>
+  <div class="faq-item">
+    <p>What if the client wants changes after approving?</p>
+    <p>Treat it as a new version. Make the change, generate a new link, and get a fresh approval. The earlier approval stays on record for the version it covered.</p>
+  </div>
+  <div class="faq-item">
+    <p>What about the ESP's built-in preview link or shareable preview?</p>
+    <p>Some ESPs offer one, and it can work for a quick look. It typically doesn't give you a structured approval or a record of who approved which version.</p>
+  </div>
+
+  <div class="cta-box">
+    <p>SendCleared checks your email before your client ever sees it, then gives them a clean way to review and sign off.</p>
+    <a href="https://app.sendcleared.com/signup" class="btn-cta">Start free →</a>
+    <p class="cta-note">3 approval links a month, no credit card required</p>
+  </div>
+
+  <div class="related">
+    <p><strong>Related reading</strong></p>
+    <p><a href="/blog/email-qa-checklist.html">The Email QA Checklist for Agencies and Freelancers</a> · <a href="/blog/5-email-mistakes-even-experienced-marketers-miss.html">5 Email Mistakes Even Experienced Marketers Miss</a> · <a href="/compare/litmus.html">SendCleared vs Litmus</a></p>
+  </div>
+</article>
+
+<footer>
+  <div class="footer-inner">
+    <div style="display:flex;flex-direction:column;gap:1rem;flex:1">
+      <a href="/" class="footer-logo">
+        <img src="/sendcleared-logo.png" alt="SendCleared" style="height:31px;width:auto;display:block">
+      </a>
+      <p style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.7);margin:0 0 2px">Engaging Enterprises Ltd</p>
+      <p style="font-size:11px;color:rgba(255,255,255,0.4);line-height:1.7;margin:0">
+        Monomark House, 27 Old Gloucester Street<br>
+        London, England, WC1N 3AX<br>
+        Company No: 14111995
+      </p>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;gap:1rem">
+      <ul class="footer-links" style="justify-content:flex-end">
+        <li><a href="/#how-it-works">How it works</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/compare/">Compare</a></li>
+        <li><a href="/#faq">FAQ</a></li>
+        <li><a href="/privacy.html">Privacy policy</a></li>
+        <li><a href="/terms.html">Terms</a></li>
+      </ul>
+      <span class="footer-copy">© 2026 SendCleared.com · All rights reserved</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMobileMenu() {
+  document.getElementById('nav-toggle').classList.toggle('open');
+  document.getElementById('mobile-menu').classList.toggle('open');
+  const isOpen = document.getElementById('mobile-menu').classList.contains('open');
+  document.getElementById('nav-toggle').setAttribute('aria-expanded', isOpen);
+}
+function closeMobileMenu() {
+  document.getElementById('nav-toggle').classList.remove('open');
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.getElementById('nav-toggle').setAttribute('aria-expanded', 'false');
+}
+</script>
+
+</body>
+</html>
