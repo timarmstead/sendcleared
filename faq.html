@@ -5,6 +5,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FAQ — SendCleared</title>
+<meta name="description" content="Answers to common questions about SendCleared: client approval links, supported ESPs, pricing, free trial, white-labelling and how it compares with Litmus and Email on Acid.">
+<link rel="canonical" href="https://www.sendcleared.com/faq.html">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -50,6 +52,118 @@ footer{background:var(--blue-d);padding:2rem;margin-top:4rem}
   gtag("config", "G-DM2FNKGX61");
 </script>
 <script src="/js/ga-events.js" defer></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does my client need to create an account?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No — that's the whole point. The approval link is passwordless. Your client clicks the link, views the email, and taps Approve or Request Changes. Nothing to sign up for, no app to download."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which ESPs does SendCleared work with?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Any ESP that has a \"send test email\" feature — which is all of them. Klaviyo, Mailchimp, Campaign Monitor, Brevo, HubSpot, ActiveCampaign, Salesforce Marketing Cloud, and more. You add your SendCleared address to the test recipients list once. It works on every campaign from then on."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a client inbox address?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Each of your clients gets a unique email address — something like brightspark@yourname.sendcleared.com. When you add that address to your ESP test list and hit \"send test\", SendCleared intercepts the email, runs the QA checks, and makes it available in your dashboard. One address per client, set up once, works forever."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is SendCleared different from Litmus or Email on Acid?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Litmus and Email on Acid (now moving to Mailgun Inspect) are platforms built around rendering previews across 100+ email clients. They're powerful, but packaged and priced for larger in-house teams, so check each vendor for current pricing. SendCleared is built for freelancers and small agencies who need a quick, affordable pre-send check and a professional client approval workflow, not a full-time testing platform. SendCleared doesn't currently render inbox previews, so some teams use both."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is SendCleared different from sendcheck.io?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "sendcheck.io is a solid QA tool — it catches errors in your email before you send. SendCleared does that too, but adds the full client approval workflow on top: a passwordless magic link, desktop/mobile preview, timestamped sign-off, and a full audit trail. It's the difference between a tool for the sender and a tool for the agency-client relationship."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What do the critical, warning and info items in my report mean?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Critical items should be fixed before your client sees the email, warnings are worth fixing, and info items are heads-ups that don't need action. Every check is explained, with what to do about it, in our QA report guide."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my email content stored?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — SendCleared stores the email content and QA report so you have a full history per client and campaign. Approval records are stored for your audit trail. You can delete campaign data at any time from your dashboard. We never share your content with third parties. See our Privacy Policy for full details."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I white-label the approval page?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, on the Agency plan and above. You can add your own agency logo to the approval page header so clients see your branding, not SendCleared's. The \"Powered by SendCleared\" footer is removable on Agency and Studio plans."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens when a client clicks \"Request changes\"?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The client sees a text field where they can describe what needs fixing. That feedback is saved directly to your SendCleared dashboard alongside the campaign — no email chain, no lost messages. You'll also get an email notification. Once you've made the changes, you re-send the test, re-run the QA, and generate a new approval link for the client."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does the approval link stay active?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Approval links expire after 30 days by default. If you generate a new version of the campaign (by re-sending the test email), a new link is created. Old links are marked as superseded so clients can't accidentally approve an outdated version."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I cancel my subscription at any time?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — cancel any time from your account settings. You'll keep access until the end of your current billing period. We don't do lock-in contracts or cancellation fees."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer a free trial?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The Free tier lets you run 3 approval links per month with no credit card required — use it as long as you like. Paid plans (Freelancer, Agency, Studio) all include a 14-day free trial."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "I have a question not answered here — how do I get in touch?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Email us at hello@sendcleared.com — we aim to respond within one business day."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -81,12 +195,17 @@ footer{background:var(--blue-d);padding:2rem;margin-top:4rem}
 
   <div class="faq-item">
     <div class="faq-q" onclick="toggleFaq(this)">How is SendCleared different from Litmus or Email on Acid?<span class="faq-arrow">▾</span></div>
-    <div class="faq-a">Litmus and Email on Acid are self-serve platforms built around rendering screenshots across 90+ email clients. They're powerful but expensive ($500+/mo for Litmus after its 2025 price hike) and built for large in-house teams. SendCleared is built for freelancers and small agencies who need a quick, affordable pre-send check and a professional client approval workflow — not a full-time testing platform.</div>
+    <div class="faq-a">Litmus and Email on Acid (now moving to Mailgun Inspect) are platforms built around rendering previews across 100+ email clients. They're powerful, but packaged and priced for larger in-house teams, so check each vendor for current pricing. SendCleared is built for freelancers and small agencies who need a quick, affordable pre-send check and a professional client approval workflow, not a full-time testing platform. SendCleared doesn't currently render inbox previews, so some teams use both.</div>
   </div>
 
   <div class="faq-item">
     <div class="faq-q" onclick="toggleFaq(this)">How is SendCleared different from sendcheck.io?<span class="faq-arrow">▾</span></div>
     <div class="faq-a">sendcheck.io is a solid QA tool — it catches errors in your email before you send. SendCleared does that too, but adds the full client approval workflow on top: a passwordless magic link, desktop/mobile preview, timestamped sign-off, and a full audit trail. It's the difference between a tool for the sender and a tool for the agency-client relationship.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">What do the critical, warning and info items in my report mean?<span class="faq-arrow">▾</span></div>
+    <div class="faq-a">Critical items should be fixed before your client sees the email, warnings are worth fixing, and info items are heads-ups that don't need action. Every check is explained, with what to do about it, in our <a href="/help/report-guide.html">QA report guide</a>.</div>
   </div>
 
   <div class="faq-item">
