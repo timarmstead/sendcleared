@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Read Your SendCleared QA Report: Every Check Explained | SendCleared</title>
+<meta name="description" content="What every item in a SendCleared email QA report means, how scores work, and what to do about critical issues, warnings and info items before you send.">
+<link rel="canonical" href="https://www.sendcleared.com/help/report-guide.html">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --orange:   #f26600;
+  --orange-d: #d45500;
+  --orange-tint: #fff3ea;
+  --blue:     #134e8e;
+  --blue-d:   #0d3a6b;
+  --white:    #ffffff;
+  --blue-tint:#e8f0f8;
+  --muted:    #5a5a56;
+  --bg:       #f7f7f5;
+}
+body{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: #1a1a1a;
+  line-height: 1.5;
+}
+a{color:var(--orange);text-decoration:none}
+a:hover{color:var(--orange-d)}
+
+nav{background:var(--orange);padding:0 2rem;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:1180px;margin:0 auto;height:72px;display:flex;align-items:center;justify-content:space-between;gap:2rem}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,0.85);font-size:14px;font-weight:500}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.btn{display:inline-flex;align-items:center;padding:9px 18px;border-radius:8px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;border:none}
+.btn-outline{background:transparent;border:1.5px solid rgba(255,255,255,0.5);color:var(--white)}
+.btn-outline:hover{border-color:var(--white);background:rgba(255,255,255,0.1)}
+.btn-primary{background:var(--white);color:var(--orange)}
+.btn-primary:hover{background:rgba(255,255,255,0.9)}
+
+.nav-toggle{display:none;background:transparent;border:none;cursor:pointer;padding:6px;flex-shrink:0}
+.nav-toggle span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;margin:5px 0;transition:transform .2s,opacity .2s}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;flex-direction:column;background:var(--orange-d);padding:.5rem 1.25rem 1.25rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:rgba(255,255,255,0.9);text-decoration:none;font-size:15px;font-weight:500;padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,0.12)}
+.mobile-menu a:last-of-type{border-bottom:none}
+.mobile-menu .btn{margin-top:.75rem;width:100%}
+
+@media (max-width:700px){
+  nav{padding:0 1.25rem}
+  .nav-links{display:none}
+  .nav-cta{display:none}
+  .nav-toggle{display:block}
+}
+
+article{max-width:760px;margin:0 auto;padding:3rem 2rem 4rem}
+article h1{font-size:clamp(1.75rem,4vw,2.4rem);font-weight:800;color:var(--blue);letter-spacing:-0.02em;line-height:1.25;margin-bottom:1.25rem}
+article p{font-size:15px;color:#2a2a2a;line-height:1.75;margin-bottom:1.25rem}
+article h2{font-size:1.35rem;font-weight:800;color:var(--blue);letter-spacing:-0.01em;margin:2.25rem 0 1rem}
+article strong{color:#1a1a1a;font-weight:700}
+
+/* Comparison table */
+.compare-table-wrap{overflow-x:auto;margin:1.5rem 0 2rem;border-radius:12px;border:1px solid rgba(0,0,0,0.08)}
+.compare-table{width:100%;border-collapse:collapse;background:var(--white);font-size:14px}
+.compare-table th{background:var(--blue);color:var(--white);text-align:left;padding:12px 16px;font-weight:700;white-space:nowrap}
+.compare-table th:first-child{border-radius:12px 0 0 0}
+.compare-table th:last-child{border-radius:0 12px 0 0;background:var(--orange)}
+.compare-table td{padding:12px 16px;border-bottom:1px solid rgba(0,0,0,0.06);vertical-align:top;color:#2a2a2a}
+.compare-table tr:last-child td{border-bottom:none}
+.compare-table td:first-child{font-weight:700;color:var(--blue);white-space:nowrap}
+.compare-table td:last-child{background:var(--orange-tint)}
+
+/* Decision cards */
+.decision-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin:1.5rem 0 2rem}
+.decision-card{background:var(--white);border-radius:14px;border:1px solid rgba(0,0,0,0.08);padding:1.5rem}
+.decision-card.highlight{border-color:var(--orange);background:var(--orange-tint)}
+.decision-card.wide{grid-column:1 / -1}
+.decision-card h3{font-size:1rem;font-weight:800;color:var(--blue);margin-bottom:.6rem}
+.decision-card p{font-size:14px;color:#2a2a2a;line-height:1.6;margin-bottom:0}
+@media (max-width:640px){.decision-grid{grid-template-columns:1fr}.decision-card.wide{grid-column:auto}}
+
+.cta-box{background:var(--blue);border-radius:14px;padding:2rem;text-align:center;margin-top:2.5rem}
+.cta-box p{color:rgba(255,255,255,0.75);font-size:14px;margin-bottom:1.1rem}
+.cta-box .btn-cta{background:var(--orange);color:var(--white);padding:12px 24px;border-radius:10px;font-size:15px;font-weight:700;display:inline-block}
+.cta-box .btn-cta:hover{background:var(--orange-d);color:var(--white)}
+.cta-note{font-size:12px;color:rgba(255,255,255,0.5);margin-top:10px}
+
+footer{background:#12172a;padding:3rem 2rem}
+.footer-inner{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+.footer-links a{color:rgba(255,255,255,0.6);font-size:13px}
+.footer-links a:hover{color:var(--white)}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.35)}
+
+@media (max-width:700px){
+  footer{padding:2rem 1.25rem}
+  .footer-inner{flex-direction:column;align-items:flex-start}
+  .footer-inner > div:last-child{align-items:flex-start !important;width:100%}
+  .footer-links{justify-content:flex-start !important;gap:1rem 1.5rem}
+}
+
+article h3{font-size:1.05rem;font-weight:800;color:var(--blue);margin:0 0 .5rem}
+article ul,article ol{margin:0 0 1.25rem 1.25rem;font-size:15px;line-height:1.7;color:#2a2a2a}
+article li{margin-bottom:.4rem}
+article p a,article li a,article dd a{text-decoration:underline}
+article h2{scroll-margin-top:90px}
+.meta{font-size:13px;color:var(--muted);margin-top:-.5rem}
+.toc{background:var(--white);border:1px solid rgba(0,0,0,0.08);border-radius:12px;padding:1.1rem 1.4rem;margin:1.5rem 0 2rem}
+.toc strong{display:block;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.5rem}
+.toc ul{list-style:none;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.2rem 1.5rem}
+.toc li{margin:0;font-size:14px}
+@media (max-width:560px){.toc ul{grid-template-columns:minmax(0,1fr)}}
+.badge{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:99px;margin-right:4px;vertical-align:middle}
+.b-crit{background:#fde8e6;color:#a32418}
+.b-warn{background:#fff1d1;color:#8a5a00}
+.b-info{background:var(--blue-tint);color:var(--blue-d)}
+.b-pass{background:#e2f4e6;color:#1d6b32}
+.sev-table-wrap{overflow-x:auto;margin:1.25rem 0 2rem;border-radius:12px;border:1px solid rgba(0,0,0,0.08)}
+.sev-table{width:100%;min-width:560px;border-collapse:collapse;background:var(--white);font-size:14px}
+.sev-table th{background:var(--blue);color:#fff;text-align:left;padding:10px 14px;font-size:13px}
+.sev-table td{padding:12px 14px;border-bottom:1px solid rgba(0,0,0,0.06);vertical-align:top;color:#2a2a2a}
+.sev-table tr:last-child td{border-bottom:none}
+.check{background:var(--white);border:1px solid rgba(0,0,0,0.08);border-radius:14px;padding:1.25rem 1.4rem;margin-bottom:1rem;scroll-margin-top:90px}
+.check:target{border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-tint)}
+.check .sev{margin-bottom:.55rem}
+.check dl{display:grid;grid-template-columns:104px minmax(0,1fr);gap:.45rem 1rem;font-size:14px;line-height:1.6;margin:0}
+.check dt{font-weight:700;color:var(--muted);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;padding-top:2px}
+.check dd{margin:0;color:#2a2a2a;min-width:0}
+@media (max-width:560px){.check dl{grid-template-columns:minmax(0,1fr);gap:.1rem}.check dt{margin-top:.5rem}}
+.sec-intro{font-size:14.5px}
+.faq-item{background:var(--white);border:1px solid rgba(0,0,0,0.08);border-radius:12px;padding:1.1rem 1.3rem;margin-bottom:.9rem}
+.faq-item h3{margin:0 0 .4rem}
+.faq-item p{margin:0;font-size:14.5px}
+.callout{background:var(--blue-tint);border-radius:12px;padding:1rem 1.2rem;font-size:14.5px;line-height:1.65;margin:1.25rem 0;color:#1a1a1a}
+.related{font-size:13.5px;color:var(--muted);border-top:1px solid rgba(0,0,0,0.1);margin-top:2.5rem;padding-top:1.1rem;line-height:1.9}
+.related a{text-decoration:underline;color:var(--blue)}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DM2FNKGX61"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "G-DM2FNKGX61");
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Read Your SendCleared QA Report: Every Check Explained",
+  "description": "What every item in a SendCleared email QA report means, how scores work, and what to do about critical issues, warnings and info items before you send.",
+  "datePublished": "2026-10-17",
+  "dateModified": "2026-10-17",
+  "mainEntityOfPage": "https://www.sendcleared.com/help/report-guide.html",
+  "author": {
+    "@type": "Organization",
+    "name": "SendCleared"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "SendCleared",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.sendcleared.com/sendcleared-logo.png"
+    }
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I send an email that has warnings?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Warnings are things worth fixing, not blockers. A critical is something you should fix before the client sees it. Info items never need action."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How are the scores worked out?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Each of the six sections starts at 100. A critical takes off 30, a warning takes off 12, and info and pass take off nothing. The overall score is the average of the six sections."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does my deliverability result look different from my ESP’s dashboard?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The deliverability checks read the headers of the test email SendCleared received. Test sends can take a different route from live sends, and not every ESP includes every result, so use these as a strong indication rather than the final word."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does SendCleared show how my email looks in Outlook or Gmail?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The client approval page shows the email at desktop and mobile widths. SendCleared checks content, links, accessibility and authentication, not inbox rendering."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the proofreading done by AI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Spelling, grammar and wording checks use an AI proofreading pass. The other checks are fixed rules, so they give the same result every time for the same email."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I re-run the checks after fixing something?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Fix the issue in your ESP, then send a fresh test to your SendCleared test address. Each new test is checked again."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="/sendcleared-logo.png" alt="SendCleared" style="height:41px;width:auto;display:block">
+    </a>
+    <ul class="nav-links">
+      <li><a href="/#how-it-works">How it works</a></li>
+      <li><a href="/#features">Features</a></li>
+      <li><a href="/#pricing">Pricing</a></li>
+      <li><a href="/#faq">FAQ</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="/compare/">Compare</a></li>
+      <li><a href="/help/">Help</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="https://app.sendcleared.com/login" class="btn btn-outline">Log in</a>
+      <a href="https://app.sendcleared.com/signup" class="btn btn-primary">Start free</a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/#how-it-works" onclick="closeMobileMenu()">How it works</a>
+    <a href="/#features" onclick="closeMobileMenu()">Features</a>
+    <a href="/#pricing" onclick="closeMobileMenu()">Pricing</a>
+    <a href="/#faq" onclick="closeMobileMenu()">FAQ</a>
+    <a href="/blog/" onclick="closeMobileMenu()">Blog</a>
+    <a href="/compare/" onclick="closeMobileMenu()">Compare</a>
+    <a href="/help/" onclick="closeMobileMenu()">Help</a>
+    <a href="https://app.sendcleared.com/login" class="btn btn-outline" onclick="closeMobileMenu()" style="margin-top:1rem">Log in</a>
+    <a href="https://app.sendcleared.com/signup" class="btn btn-primary" onclick="closeMobileMenu()">Start free</a>
+  </div>
+</nav>
+
+<article>
+  <h1>How to Read Your SendCleared QA Report</h1>
+  <p class="meta">Updated October 2026</p>
+  <p>Every SendCleared test ends in a report: an overall score, six sections, and a list of findings. This page explains what each finding means, why it matters and what to do about it, so you can decide quickly whether an email is ready to go to your client.</p>
+
+  <div class="toc" role="navigation" aria-label="Contents"><strong>On this page</strong><ul>
+    <li><a href="#scoring">How scoring works</a></li><li><a href="#severity">Critical, warning, info and pass</a></li><li><a href="#content">Content &amp; copy</a></li><li><a href="#links">Links &amp; tracking</a></li><li><a href="#accessibility">Accessibility</a></li><li><a href="#spam">Spam signals</a></li><li><a href="#deliverability">Deliverability</a></li><li><a href="#rendering">Rendering readiness</a></li><li><a href="#faq">Common questions</a></li>
+  </ul></div>
+
+  <h2 id="scoring">How scoring works</h2>
+  <p>The report groups its checks into six sections: Content &amp; copy, Links &amp; tracking, Accessibility, Spam signals, Deliverability and Rendering readiness. Each section starts at 100 and loses points for each problem found: <strong>30 for a critical, 12 for a warning</strong>, and nothing for info or pass. The overall score is the average of the six sections.</p>
+  <p>The status label follows the findings. <strong>Needs work</strong> means at least one critical issue. <strong>Almost ready</strong> means no criticals but at least one warning. <strong>Send-ready</strong> means neither.</p>
+  <p>Most checks are fixed rules, so the same email gets the same result every time. The exception is proofreading, which uses AI.</p>
+
+  <h2 id="severity">Critical, warning, info and pass</h2>
+  <div class="sev-table-wrap"><table class="sev-table">
+    <thead><tr><th>Status</th><th>What it means</th><th>What to do</th></tr></thead>
+    <tbody>
+      <tr><td><span class="badge b-crit">Critical</span></td><td>Something wrong that a recipient or filter is likely to notice, or that breaks a legal basic.</td><td>Fix before you share the approval link with your client.</td></tr>
+      <tr><td><span class="badge b-warn">Warning</span></td><td>A real issue that is worth fixing, but not necessarily a blocker.</td><td>Fix it if you can. If you choose to send as it is, do it knowingly.</td></tr>
+      <tr><td><span class="badge b-info">Info</span></td><td>A heads-up, a reminder, or a result the test send couldn’t confirm. It is not a problem by itself.</td><td>Read it. Action is optional.</td></tr>
+      <tr><td><span class="badge b-pass">Pass</span></td><td>Checked and fine.</td><td>Nothing.</td></tr>
+    </tbody></table></div>
+  <p class="callout"><strong>Info often means “we couldn’t tell”.</strong> For example, “DMARC result wasn’t reported” means the test email didn’t carry that result, not that your DMARC is broken. SendCleared says what it couldn’t see rather than guessing.</p>
+
+  <h2 id="content">Content &amp; copy</h2>
+  <p class="sec-intro">Checks the words in the email: placeholders that never resolved, repeated words, and typos.</p>
+  <div class="check" id="merge-tags">
+    <div class="sev"><span class="badge b-crit">Critical</span><span class="badge b-pass">Pass</span></div>
+    <h3>Unresolved merge tags</h3>
+    <dl>
+      <dt>What we found</dt><dd>A placeholder such as <code>{{ first_name }}</code> or <code>${name}</code> still showing in the email instead of real content.</dd>
+      <dt>Why it matters</dt><dd>Recipients see the raw tag. It looks careless and can break personalisation, offers or links.</dd>
+      <dt>What to do</dt><dd>Check the tag syntax matches your ESP, add a fallback value for contacts missing that data, and send the test to a contact that has it. If the tag is valid but only shows raw in the test, preview as a real contact in your ESP, then send a fresh test.</dd>
+      <dt>Who fixes it</dt><dd>You, in the email or your ESP</dd>
+    </dl>
+  </div>
+  <div class="check" id="duplicate-words">
+    <div class="sev"><span class="badge b-crit">Critical</span><span class="badge b-pass">Pass</span></div>
+    <h3>Duplicated consecutive words</h3>
+    <dl>
+      <dt>What we found</dt><dd>The same word twice in a row, such as “the the” or “to to”.</dd>
+      <dt>Why it matters</dt><dd>It is nearly always a typo, and it is one of the most visible mistakes in a client’s inbox.</dd>
+      <dt>What to do</dt><dd>Reread the sentence and delete the extra word. Very occasionally a repeat is correct (“had had”). If so, you can send knowing the flag is a false alarm.</dd>
+      <dt>Who fixes it</dt><dd>You, in the email or your ESP</dd>
+    </dl>
+  </div>
+  <div class="check" id="proofreading">
+    <div class="sev"><span class="badge b-crit">Critical</span><span class="badge b-warn">Warning</span><span class="badge b-info">Info</span></div>
+    <h3>Typos, spelling and grammar</h3>
+    <dl>
+      <dt>What we found</dt><dd>Spelling mistakes, missing words and grammar errors, found by an AI proofreading pass over the email text.</dd>
+      <dt>Why it matters</dt><dd>Copy errors are the most common thing a client spots, and the most embarrassing to find after sending.</dd>
+      <dt>What to do</dt><dd>Fix the quoted error. The AI occasionally trips on brand names, product names or intentional styling, so treat these as strong suggestions and use your judgement.</dd>
+      <dt>Who fixes it</dt><dd>You, in the email or your ESP</dd>
+    </dl>
+  </div>
+
+  <h2 id="links">Links &amp; tracking</h2>
+  <p class="sec-intro">Checks that links exist, are trackable, and that clickable images are really linked.</p>
+  <div class="check" id="link-tracking">
+    <div class="sev"><span class="badge b-pass">Pass</span><span class="badge b-warn">Warning</span><span class="badge b-info">Info</span></div>
+    <h3>Link tracking and UTM parameters</h3>
+    <dl>
+      <dt>What we found</dt><dd>Whether your links are tracked. SendCleared recognises the tracking domains of most major ESPs. If it sees one, it confirms tracking is in place. If it doesn’t, it checks each link for <code>utm_</code> parameters.</dd>
+      <dt>Why it matters</dt><dd>Without tracking you can’t attribute clicks and revenue to the campaign in analytics.</dd>
+      <dt>What to do</dt><dd>Turn on your ESP’s automatic UTM option, or add UTM parameters to each link. Note that for ESP-tracked links SendCleared confirms tracking exists, not the exact UTM values, so check those yourself in the link list.</dd>
+      <dt>Who fixes it</dt><dd>You, in the email or your ESP</dd>
+    </dl>
+  </div>
+  <div class="check" id="links-found">
+    <div class="sev"><span class="badge b-pass">Pass</span><span class="badge b-warn">Warning</span></div>
+    <h3>Links detected</h3>
+    <dl>
+      <dt>What we found</dt><dd>The number of links found in the email. The report also lists each one with its final destination.</dd>
+      <dt>Why it matters</dt><dd>An email with no links can’t drive any action, and “no links” usually means a template or export problem.</dd>
+      <dt>What to do</dt><dd>If you see a warning, check the email wasn’t sent without its content blocks. Scan the link list to confirm every button goes where you expect.</dd>
+      <dt>Who fixes it</dt><dd>You, in the email or your ESP</dd>
+    </dl>
+  </div>
+  <div class="check" id="unlinked-tile">
+    <div class="sev"><span class="badge b-info">Info</span></div>
+    <h3>Image that looks like it is missing a link</h3>
+    <dl>
+      <dt>What we found</dt><dd>An image with no link that is the same width as a group of linked images, for example one unlinked tile in a grid of linked collection tiles.</dd>
+      <dt>Why it matters</dt><dd>A tile that looks clickable but isn’t is a common mistake when a block is duplicated in the editor.</dd>
+      <dt>What to do</dt><dd>Check whether the tile should link somewhere. It is a pattern-based hint, so it can be wrong when the image is deliberately unlinked.</dd>
+      <dt>Who fixes it</dt><dd>You, in the email or your ESP</dd>
+    </dl>
+  </div>
+
+  <h2 id="accessibility">Accessibility</h2>
+  <p class="sec-intro">Checks the email works for people using screen readers and for anyone with images switched off.</p>
+  <div class="check" id="alt-missing">
+    <div class="sev"><span class="badge b-warn">Warning</span><span class="badge b-pass">Pass</span></div>
+    <h3>Images missing alt text</h3>
+    <dl>
+      <dt>What we found</dt><dd>Images that have no <code>alt</code> attribute at all. Tracking pixels are excluded.</dd>
+      <dt>Why it matters</dt><dd>Screen readers can’t describe the image, and when images are blocked the recipient sees nothing in its place.</dd>
+      <dt>What to do</dt><dd>Add short, descriptive alt text to each content image in your ESP’s image settings.</dd>
+      <dt>Who fixes it</dt><dd>You, in the email or your ESP</dd>
+    </dl>
+  </div>
+  <div class="check" id="alt-linked-empty">
+    <div class="sev"><span class="badge b-warn">Warning</span></div>
+    <h3>Clickable images with empty alt text</h3>
+    <dl>
+      <dt>What we found</dt><dd>Images that are the only content of a link and have empty alt text (<code>alt=""</code>).</dd>
+      <dt>Why it matters</dt><dd>Empty alt is right for purely decorative images, but a clickable image with no alt and no other link text has no name. Screen readers fall back to reading out the link’s web address.</dd>
+      <dt>What to do</dt><dd>Describe where the link goes, for example “Shop e-liquid”. You only need this when the image is the whole link. If the link also has text next to the image, empty alt is fine.</dd>
+      <dt>Who fixes it</dt><dd>You, in the email or your ESP</dd>
+    </dl>
+  </div>
+  <div class="check" id="contrast">
+    <div class="sev"><span class="badge b-info">Info</span></div>
+    <h3>Button colour contrast</h3>
+    <dl>
+      <dt>What we found</dt><dd>A reminder to check that button and text colours meet the WCAG 4.5:1 contrast ratio.</dd>
+      <dt>Why it matters</dt><dd>Low-contrast buttons are hard to read for many people, particularly on mobile in sunlight.</dd>
+      <dt>What to do</dt><dd>SendCleared does not measure contrast, so this is only a prompt. Check your button colours in any free contrast checker.</dd>
+      <dt>Who fixes it</dt><dd>You, in the email or your ESP</dd>
+    </dl>
+  </div>
+
+  <h2 id="spam">Spam signals</h2>
+  <p class="sec-intro">Checks for the legal basics and the patterns that make filters, and people, suspicious.</p>
+  <div class="check" id="unsubscribe">
+    <div class="sev"><span class="badge b-crit">Critical</span><span class="badge b-pass">Pass</span></div>
+    <h3>Unsubscribe link</h3>
+    <dl>
+      <dt>What we found</dt><dd>Whether the email contains an unsubscribe link.</dd>
+      <dt>Why it matters</dt><dd>Marketing email needs a working way to opt out. Without one you risk complaints and blocks, and breaking the law in many countries.</dd>
+      <dt>What to do</dt><dd>Add your ESP’s unsubscribe merge tag or link to the footer. A missing link in a test usually means it was removed from the template.</dd>
+      <dt>Who fixes it</dt><dd>You, in the email or your ESP</dd>
+    </dl>
+  </div>
+  <div class="check" id="physical-address">
+    <div class="sev"><span class="badge b-crit">Critical</span><span class="badge b-pass">Pass</span></div>
+    <h3>Physical address</h3>
+    <dl>
+      <dt>What we found</dt><dd>Whether the footer contains a postal address, found by looking for an address pattern such as a street number or a UK postcode.</dd>
+      <dt>Why it matters</dt><dd>Laws such as CAN-SPAM require a postal address in commercial email, and UK and EU rules expect clear sender identity. This is a practical check, not legal advice.</dd>
+      <dt>What to do</dt><dd>Add the company’s postal address to the footer. Detection is pattern-based, so an unusually formatted address can be missed. Reformat it with a clear street and postcode.</dd>
+      <dt>Who fixes it</dt><dd>You, in the email or your ESP</dd>
+    </dl>
+  </div>
+  <div class="check" id="subject-line">
+    <div class="sev"><span class="badge b-warn">Warning</span><span class="badge b-info">Info</span><span class="badge b-pass">Pass</span></div>
+    <h3>Subject line patterns</h3>
+    <dl>
+      <dt>What we found</dt><dd>A warning for an empty subject, a mostly-capitals subject, excessive punctuation (such as “!!!”), or a fake “Re:” or “Fwd:” prefix. Info for a subject over 80 characters (cut off on mobile), under 10 characters, or one carrying an ESP test prefix such as “[Test]”.</dd>
+      <dt>Why it matters</dt><dd>These patterns are classic spam signals, and long subjects get truncated on phones.</dd>
+      <dt>What to do</dt><dd>Reword the subject. A “[Test]” prefix is expected on test sends and is not a problem for live sends.</dd>
+      <dt>Who fixes it</dt><dd>You, in the email or your ESP</dd>
+    </dl>
+  </div>
+  <div class="check" id="spam-phrases">
+    <div class="sev"><span class="badge b-warn">Warning</span><span class="badge b-info">Info</span><span class="badge b-pass">Pass</span></div>
+    <h3>Spam-trigger phrases</h3>
+    <dl>
+      <dt>What we found</dt><dd>Phrases that are strong spam signals and rare in genuine marketing copy, such as “act now” or “click here”. The list is deliberately conservative: everyday phrases like “free shipping” or “sale” are not flagged.</dd>
+      <dt>Why it matters</dt><dd>Filters and readers both treat these phrases as a warning sign.</dd>
+      <dt>What to do</dt><dd>Reword the flagged phrase. One phrase in the body is info. A phrase in the subject, or three or more, is a warning.</dd>
+      <dt>Who fixes it</dt><dd>You, in the email or your ESP</dd>
+    </dl>
+  </div>
+  <div class="check" id="text-image">
+    <div class="sev"><span class="badge b-warn">Warning</span><span class="badge b-info">Info</span><span class="badge b-pass">Pass</span></div>
+    <h3>Text-to-image balance</h3>
+    <dl>
+      <dt>What we found</dt><dd>How much real text there is compared to images. Warning if there are 3 or more images and fewer than 50 words. Info for image-heavy emails with very little copy per image.</dd>
+      <dt>Why it matters</dt><dd>Image-led emails look blank when images are blocked and are a common spam trigger.</dd>
+      <dt>What to do</dt><dd>Add live text (the headline, the offer and the button) so the message still works with images off.</dd>
+      <dt>Who fixes it</dt><dd>You, in the email or your ESP</dd>
+    </dl>
+  </div>
+
+  <h2 id="deliverability">Deliverability</h2>
+  <p class="sec-intro">Reads the authentication results in the test email’s headers. These show whether receiving servers can trust where the email came from.</p>
+  <div class="check" id="headers-not-captured">
+    <div class="sev"><span class="badge b-info">Info</span></div>
+    <h3>Headers not captured</h3>
+    <dl>
+      <dt>What we found</dt><dd>The test send arrived without usable headers, so the authentication and unsubscribe-header checks were skipped.</dd>
+      <dt>Why it matters</dt><dd>Without headers SendCleared can’t say anything about SPF, DKIM or DMARC. It does not guess.</dd>
+      <dt>What to do</dt><dd>Send the test again. If it keeps happening, tell us which ESP you’re using.</dd>
+      <dt>Who fixes it</dt><dd>You, by re-sending the test</dd>
+    </dl>
+  </div>
+  <div class="check" id="spf">
+    <div class="sev"><span class="badge b-pass">Pass</span><span class="badge b-warn">Warning</span><span class="badge b-info">Info</span></div>
+    <h3>SPF</h3>
+    <dl>
+      <dt>What we found</dt><dd><strong>Pass:</strong> the sending server is authorised by the domain’s SPF record. <strong>Softfail or fail:</strong> it is not. <strong>None:</strong> no SPF record was found. <strong>Permerror:</strong> the record is invalid, often because it needs too many DNS lookups.</dd>
+      <dt>Why it matters</dt><dd>SPF is one of the signals mailbox providers use to decide whether to trust your email. A failure can send mail to spam.</dd>
+      <dt>What to do</dt><dd>Add your ESP’s required <code>include</code> to the sending domain’s SPF record, following your ESP’s own setup guide, and keep the record under the 10-lookup limit. Test sends can travel through different servers than live sends, so confirm on a live or staged send before making big DNS changes.</dd>
+      <dt>Who fixes it</dt><dd>Whoever manages the sending domain’s DNS (often you, sometimes the client’s IT)</dd>
+    </dl>
+  </div>
+  <div class="check" id="dkim">
+    <div class="sev"><span class="badge b-pass">Pass</span><span class="badge b-warn">Warning</span><span class="badge b-info">Info</span></div>
+    <h3>DKIM</h3>
+    <dl>
+      <dt>What we found</dt><dd><strong>Pass:</strong> the signature was verified, and it is aligned when signed by your own From domain. <strong>Signed by another domain:</strong> usually your ESP’s own domain. <strong>Fail:</strong> the signature didn’t validate. <strong>None:</strong> no signature. <strong>Present but not verified:</strong> a signature exists but the test didn’t report a result.</dd>
+      <dt>Why it matters</dt><dd>DKIM proves the email wasn’t altered and ties it to a sending domain. DMARC needs the signing domain to match your From domain, so a pass from your ESP’s domain isn’t always enough.</dd>
+      <dt>What to do</dt><dd>Set up branded (custom-domain) DKIM in your ESP so the signature uses your own domain. “Present but not verified” is information only. It means the test didn’t include a result, not that something is wrong.</dd>
+      <dt>Who fixes it</dt><dd>Whoever manages the sending domain’s DNS (often you, sometimes the client’s IT)</dd>
+    </dl>
+  </div>
+  <div class="check" id="dmarc">
+    <div class="sev"><span class="badge b-pass">Pass</span><span class="badge b-warn">Warning</span><span class="badge b-info">Info</span></div>
+    <h3>DMARC</h3>
+    <dl>
+      <dt>What we found</dt><dd><strong>Pass:</strong> the email passed DMARC. <strong>Fail:</strong> it failed. If no result was reported, the report says so as info rather than guessing.</dd>
+      <dt>Why it matters</dt><dd>DMARC tells receivers what to do with email that fails authentication, and Gmail and Yahoo expect it from bulk senders.</dd>
+      <dt>What to do</dt><dd>If it failed, check SPF and DKIM alignment with your From domain first. If DMARC “wasn’t reported”, nothing is wrong. The test send simply didn’t carry that result.</dd>
+      <dt>Who fixes it</dt><dd>Whoever manages the sending domain’s DNS (often you, sometimes the client’s IT)</dd>
+    </dl>
+  </div>
+  <div class="check" id="list-unsubscribe">
+    <div class="sev"><span class="badge b-pass">Pass</span><span class="badge b-warn">Warning</span></div>
+    <h3>List-Unsubscribe and one-click unsubscribe</h3>
+    <dl>
+      <dt>What we found</dt><dd>Whether the email carries a <code>List-Unsubscribe</code> header and one-click unsubscribe (RFC 8058) with an https link.</dd>
+      <dt>Why it matters</dt><dd>Gmail and Yahoo require both from bulk senders. It also lets inboxes show their own unsubscribe button.</dd>
+      <dt>What to do</dt><dd>Enable one-click unsubscribe in your ESP if it’s optional. Some ESPs only add these headers on live sends, so a warning on a test send is not always a real problem.</dd>
+      <dt>Who fixes it</dt><dd>You, in the email or your ESP</dd>
+    </dl>
+  </div>
+
+  <h2 id="rendering">Rendering readiness</h2>
+  <p class="sec-intro">Checks the email has the pieces most clients need to display it well. SendCleared does not render the email in Outlook, Gmail or Apple Mail.</p>
+  <div class="check" id="plain-text">
+    <div class="sev"><span class="badge b-warn">Warning</span><span class="badge b-pass">Pass</span></div>
+    <h3>Plain-text version</h3>
+    <dl>
+      <dt>What we found</dt><dd>Whether the email includes a plain-text alternative.</dd>
+      <dt>Why it matters</dt><dd>Some inboxes and filters use it, and a missing one is a small spam signal.</dd>
+      <dt>What to do</dt><dd>Turn on the plain-text option in your ESP, or paste a short text version.</dd>
+      <dt>Who fixes it</dt><dd>You, in the email or your ESP</dd>
+    </dl>
+  </div>
+  <div class="check" id="preview-text">
+    <div class="sev"><span class="badge b-warn">Warning</span><span class="badge b-pass">Pass</span><span class="badge b-info">Info</span></div>
+    <h3>Preview text</h3>
+    <dl>
+      <dt>What we found</dt><dd>Whether preview text (the line after the subject in the inbox) is set. Info if it is very short.</dd>
+      <dt>Why it matters</dt><dd>If it isn’t set, inboxes pull in the first text they find, often “View in browser”.</dd>
+      <dt>What to do</dt><dd>Set the preview text field in your ESP. Roughly 85 to 140 characters fills most inbox previews.</dd>
+      <dt>Who fixes it</dt><dd>You, in the email or your ESP</dd>
+    </dl>
+  </div>
+  <div class="check" id="repeated-blocks">
+    <div class="sev"><span class="badge b-info">Info</span></div>
+    <h3>Repeated content blocks</h3>
+    <dl>
+      <dt>What we found</dt><dd>Blocks of copy that appear twice, which is normal when a template has separate desktop and mobile versions.</dd>
+      <dt>Why it matters</dt><dd>It explains why some text or links appear more than once in the report.</dd>
+      <dt>What to do</dt><dd>Nothing, unless you didn’t intend a duplicate.</dd>
+      <dt>Who fixes it</dt><dd>Nobody</dd>
+    </dl>
+  </div>
+  <div class="check" id="mso">
+    <div class="sev"><span class="badge b-pass">Pass</span><span class="badge b-info">Info</span></div>
+    <h3>Outlook (MSO) code</h3>
+    <dl>
+      <dt>What we found</dt><dd>Whether the code contains the special comments Outlook needs.</dd>
+      <dt>Why it matters</dt><dd>Their presence suggests the template was built with Outlook in mind.</dd>
+      <dt>What to do</dt><dd>This only detects the code. It does not show how the email looks in Outlook. If rendering matters for a custom template, test it in a dedicated rendering tool.</dd>
+      <dt>Who fixes it</dt><dd>Template builder</dd>
+    </dl>
+  </div>
+
+  <h2 id="faq">Common questions</h2>
+  <div class="faq-item"><h3>Can I send an email that has warnings?</h3><p>Yes. Warnings are things worth fixing, not blockers. A critical is something you should fix before the client sees it. Info items never need action.</p></div>
+  <div class="faq-item"><h3>How are the scores worked out?</h3><p>Each of the six sections starts at 100. A critical takes off 30, a warning takes off 12, and info and pass take off nothing. The overall score is the average of the six sections.</p></div>
+  <div class="faq-item"><h3>Why does my deliverability result look different from my ESP’s dashboard?</h3><p>The deliverability checks read the headers of the test email SendCleared received. Test sends can take a different route from live sends, and not every ESP includes every result, so use these as a strong indication rather than the final word.</p></div>
+  <div class="faq-item"><h3>Does SendCleared show how my email looks in Outlook or Gmail?</h3><p>No. The client approval page shows the email at desktop and mobile widths. SendCleared checks content, links, accessibility and authentication, not inbox rendering.</p></div>
+  <div class="faq-item"><h3>Is the proofreading done by AI?</h3><p>Yes. Spelling, grammar and wording checks use an AI proofreading pass. The other checks are fixed rules, so they give the same result every time for the same email.</p></div>
+  <div class="faq-item"><h3>How do I re-run the checks after fixing something?</h3><p>Fix the issue in your ESP, then send a fresh test to your SendCleared test address. Each new test is checked again.</p></div>
+
+  <div class="cta-box">
+    <p>SendCleared runs these checks on every campaign test, then gives your client a branded link to review and approve.</p>
+    <a href="https://app.sendcleared.com/signup" class="btn-cta">Start free →</a>
+    <p class="cta-note">3 approval links a month, no credit card required</p>
+  </div>
+
+  <p class="related"><strong>Related reading:</strong><br>
+    <a href="/blog/email-qa-checklist.html">The Email QA Checklist for Agencies and Freelancers</a> · <a href="/blog/send-test-email-client-review.html">How to Send a Test Email Your Client Can Actually Review</a> · <a href="/compare/best-client-approval-tool-email-marketers.html">The Best Client Approval Tool for Email Marketers</a></p>
+</article>
+
+<footer>
+  <div class="footer-inner">
+    <div style="display:flex;flex-direction:column;gap:1rem;flex:1">
+      <a href="/" class="footer-logo">
+        <img src="/sendcleared-logo.png" alt="SendCleared" style="height:31px;width:auto;display:block">
+      </a>
+      <p style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.7);margin:0 0 2px">Engaging Enterprises Ltd</p>
+      <p style="font-size:11px;color:rgba(255,255,255,0.4);line-height:1.7;margin:0">
+        Monomark House, 27 Old Gloucester Street<br>
+        London, England, WC1N 3AX<br>
+        Company No: 14111995
+      </p>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;gap:1rem">
+      <ul class="footer-links" style="justify-content:flex-end">
+        <li><a href="/#how-it-works">How it works</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/compare/">Compare</a></li>
+        <li><a href="/help/">Help</a></li>
+      <li><a href="/help/">Help</a></li>
+        <li><a href="/#faq">FAQ</a></li>
+        <li><a href="/privacy.html">Privacy policy</a></li>
+        <li><a href="/terms.html">Terms</a></li>
+      </ul>
+      <span class="footer-copy">© 2026 SendCleared.com · All rights reserved</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMobileMenu() {
+  document.getElementById('nav-toggle').classList.toggle('open');
+  document.getElementById('mobile-menu').classList.toggle('open');
+  const isOpen = document.getElementById('mobile-menu').classList.contains('open');
+  document.getElementById('nav-toggle').setAttribute('aria-expanded', isOpen);
+}
+function closeMobileMenu() {
+  document.getElementById('nav-toggle').classList.remove('open');
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.getElementById('nav-toggle').setAttribute('aria-expanded', 'false');
+}
+</script>
+
+</body>
+</html>
