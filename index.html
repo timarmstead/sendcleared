@@ -603,6 +603,11 @@ nav {
   padding-top: .75rem;
 }
 .faq-item.open .faq-a { display: block; }
+.faq-a a { color: var(--orange); text-decoration: none; }
+.faq-a a:hover { text-decoration: underline; }
+.faq-more { margin-top: 1.5rem; font-size: 14px; font-weight: 700; }
+.faq-more a { color: var(--orange); text-decoration: none; }
+.faq-more a:hover { color: var(--orange-d); text-decoration: underline; }
 
 /* ─── Final CTA ─── */
 .cta-section {
@@ -1282,23 +1287,31 @@ footer {
           How is SendCleared different from Litmus or Email on Acid?
           <span class="faq-arrow">▾</span>
         </div>
-        <div class="faq-a">Litmus and Email on Acid are self-serve platforms built around rendering screenshots across 90+ email clients. They're powerful but expensive ($500+/mo for Litmus after its 2025 price hike) and built for large in-house teams. SendCleared is built for freelancers and small agencies who need a quick, affordable pre-send check and a professional client approval workflow — not a full-time testing platform.</div>
+        <div class="faq-a">Litmus and Email on Acid (now moving to Mailgun Inspect) are platforms built around rendering previews across 100+ email clients. They're powerful, but packaged and priced for larger in-house teams, so check each vendor for current pricing. SendCleared is built for freelancers and small agencies who need a quick, affordable pre-send check and a professional client approval workflow, not a full-time testing platform. SendCleared doesn't currently render inbox previews, so some teams use both.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
           Is my email content stored?
           <span class="faq-arrow">▾</span>
         </div>
-        <div class="faq-a">Yes — SendCleared stores the email content and QA report so you have a full history per client and campaign. Approval records are stored for your audit trail. You can delete campaign data at any time from your dashboard. We never share your content with third parties.</div>
+        <div class="faq-a">Yes — SendCleared stores the email content and QA report so you have a full history per client and campaign. Approval records are stored for your audit trail. You can delete campaign data at any time from your dashboard. We never sell your content or use it to train AI models. It's only processed by the services needed to run SendCleared, which are listed in our <a href="/privacy.html">Privacy Policy</a>.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
           Can I white-label the approval page?
           <span class="faq-arrow">▾</span>
         </div>
-        <div class="faq-a">Yes, on the Agency plan. You can add your own agency logo to the approval page header so clients see your branding, not SendCleared's. The footer "Powered by SendCleared" line is also removable on Solo and above.</div>
+        <div class="faq-a">Yes, on the Agency plan and above. You can add your own agency logo to the approval page header so clients see your branding, not SendCleared's. The "Powered by SendCleared" footer is removable on Agency and Studio plans.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Do you offer a free trial?
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-a">Yes. The Free tier lets you run 3 approval links per month with no credit card required, and you can use it as long as you like. Paid plans (Freelancer, Agency, Studio) all include a 14-day free trial.</div>
       </div>
     </div>
+    <p class="faq-more"><a href="/faq.html">See all questions →</a></p>
   </div>
 </section>
 
