@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Get Client Sign-Off on Email Campaigns | SendCleared</title>
+<meta name="description" content="A practical client approval workflow for email campaigns: clear roles, one review link, version control and a record of who approved what. With a template.">
+<link rel="canonical" href="https://www.sendcleared.com/blog/client-signoff-email-campaigns.html">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Get Client Sign-Off on Email Campaigns | SendCleared">
+<meta property="og:description" content="A practical client approval workflow for email campaigns: clear roles, one review link, version control and a record of who approved what. With a template.">
+<meta property="og:url" content="https://www.sendcleared.com/blog/client-signoff-email-campaigns.html">
+<meta property="og:image" content="https://www.sendcleared.com/images/client-signoff-approval-workflow.webp">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Get Client Sign-Off on Email Campaigns (Without the Slack Chaos)",
+  "description": "A practical client approval workflow for email campaigns: clear roles, one review link, version control and a record of who approved what. With a template.",
+  "datePublished": "2026-10-20",
+  "image": "https://www.sendcleared.com/images/client-signoff-approval-workflow.webp",
+  "mainEntityOfPage": "https://www.sendcleared.com/blog/client-signoff-email-campaigns.html",
+  "author": {
+    "@type": "Organization",
+    "name": "SendCleared"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Engaging Enterprises Ltd"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Who should approve an email campaign?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The person with authority over the campaign's message and offers, agreed with the client in advance. If more than one person must sign off, agree the order and who has the final say."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long should a client have to review?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Long enough to read and respond properly, short enough to protect your send date. Agree a number at onboarding, and build it into your schedule."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is a \"looks good\" reply enough?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It's better than nothing, but it's ambiguous about which version it covers and who gave it. A specific action tied to a version, a name and a timestamp is much stronger."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if a client approves, then asks for a change?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Treat it as a new version. Make the change, generate a new link and get a fresh approval. The earlier approval remains on record for the version it covered."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need software for this?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, but without it you're keeping versions, feedback and records together manually. Software helps most when you manage several clients or campaigns at once."
+      }
+    }
+  ]
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --orange:   #f26600;
+  --orange-d: #d45500;
+  --blue:     #134e8e;
+  --blue-d:   #0d3a6b;
+  --white:    #ffffff;
+  --blue-tint:#e8f0f8;
+  --muted:    #5a5a56;
+  --bg:       #f7f7f5;
+}
+body{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: #1a1a1a;
+  line-height: 1.5;
+}
+a{color:var(--orange);text-decoration:none}
+a:hover{color:var(--orange-d)}
+
+nav{background:var(--orange);padding:0 2rem;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:1180px;margin:0 auto;height:72px;display:flex;align-items:center;justify-content:space-between;gap:2rem}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,0.85);font-size:14px;font-weight:500}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.btn{display:inline-flex;align-items:center;padding:9px 18px;border-radius:8px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;border:none}
+.btn-outline{background:transparent;border:1.5px solid rgba(255,255,255,0.5);color:var(--white)}
+.btn-outline:hover{border-color:var(--white);background:rgba(255,255,255,0.1)}
+.btn-primary{background:var(--white);color:var(--orange)}
+.btn-primary:hover{background:rgba(255,255,255,0.9)}
+
+.nav-toggle{display:none;background:transparent;border:none;cursor:pointer;padding:6px;flex-shrink:0}
+.nav-toggle span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;margin:5px 0;transition:transform .2s,opacity .2s}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;flex-direction:column;background:var(--orange-d);padding:.5rem 1.25rem 1.25rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:rgba(255,255,255,0.9);text-decoration:none;font-size:15px;font-weight:500;padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,0.12)}
+.mobile-menu a:last-of-type{border-bottom:none}
+.mobile-menu .btn{margin-top:.75rem;width:100%}
+
+@media (max-width:700px){
+  nav{padding:0 1.25rem}
+  .nav-links{display:none}
+  .nav-cta{display:none}
+  .nav-toggle{display:block}
+}
+
+article{max-width:720px;margin:0 auto;padding:3rem 2rem 4rem}
+.byline{font-size:13px;color:var(--muted);margin-bottom:1.75rem}
+article h1{font-size:clamp(1.75rem,4vw,2.4rem);font-weight:800;color:var(--blue);letter-spacing:-0.02em;line-height:1.25;margin-bottom:.75rem}
+.hero-image{background:linear-gradient(135deg,var(--blue) 0%,var(--blue-d) 100%);border-radius:14px;height:260px;display:flex;align-items:center;justify-content:center;margin-bottom:2rem;overflow:hidden}
+article p{font-size:15px;color:#2a2a2a;line-height:1.75;margin-bottom:1.25rem}
+article h2{font-size:1.35rem;font-weight:800;color:var(--blue);letter-spacing:-0.01em;margin:2.25rem 0 1rem}
+article strong{color:#1a1a1a;font-weight:700}
+blockquote{border-left:3px solid var(--orange);background:var(--blue-tint);border-radius:0 10px 10px 0;padding:1.1rem 1.4rem;margin:1.75rem 0;font-size:15px;font-style:italic;color:var(--blue-d);line-height:1.6}
+blockquote p{color:var(--blue-d);margin-bottom:.9rem;font-size:15px}
+blockquote p:last-child{margin-bottom:0}
+
+.bullet-list{list-style:none;margin:1rem 0 1.75rem}
+.bullet-list li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:15px;color:#2a2a2a;line-height:1.6}
+.bullet-list li:last-child{border-bottom:none}
+.bullet-list li::before{content:'';flex-shrink:0;width:7px;height:7px;border-radius:50%;background:var(--orange);margin-top:8px}
+
+.step-list{list-style:none;margin:1.25rem 0 1.75rem;counter-reset:step}
+.step-list li{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid rgba(0,0,0,0.07)}
+.step-list li:last-child{border-bottom:none}
+.step-num{counter-increment:step;flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--orange);color:var(--white);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.step-num::before{content:counter(step)}
+.step-text{font-size:15px;color:#2a2a2a;line-height:1.6}
+
+.faq-item{margin-bottom:1.5rem}
+.faq-item p:first-child{font-weight:700;color:#1a1a1a;margin-bottom:.35rem}
+
+.related{background:var(--blue-tint);border-radius:10px;padding:1.25rem 1.5rem;margin:2.25rem 0;font-size:14px;color:var(--blue-d)}
+.related p{color:var(--blue-d);margin-bottom:.4rem;font-size:14px}
+.related p:last-child{margin-bottom:0}
+.related a{color:var(--blue-d);text-decoration:underline}
+.related a:hover{color:var(--orange-d)}
+
+.cta-box{background:var(--blue);border-radius:14px;padding:2rem;text-align:center;margin-top:2.5rem}
+.cta-box p{color:rgba(255,255,255,0.75);font-size:14px;margin-bottom:1.1rem}
+.cta-box .btn-cta{background:var(--orange);color:var(--white);padding:12px 24px;border-radius:10px;font-size:15px;font-weight:700;display:inline-block}
+.cta-box .btn-cta:hover{background:var(--orange-d);color:var(--white)}
+.cta-note{font-size:12px;color:rgba(255,255,255,0.5);margin-top:10px}
+
+footer{background:#12172a;padding:3rem 2rem}
+.footer-inner{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+.footer-links a{color:rgba(255,255,255,0.6);font-size:13px}
+.footer-links a:hover{color:var(--white)}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.35)}
+
+@media (max-width:700px){
+  footer{padding:2rem 1.25rem}
+  .footer-inner{flex-direction:column;align-items:flex-start}
+  .footer-inner > div:last-child{align-items:flex-start !important;width:100%}
+  .footer-links{justify-content:flex-start !important;gap:1rem 1.5rem}
+}
+.parts{list-style:none;margin:1.25rem 0 1.75rem;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;counter-reset:part}
+.parts li{counter-increment:part;background:#fff;border:1px solid rgba(0,0,0,.09);border-radius:12px;padding:14px 16px;font-size:14px;line-height:1.55;color:#2a2a2a}
+.parts li::before{content:counter(part);display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:700;margin-right:8px;vertical-align:1px}
+.parts li strong{display:block;color:var(--blue);margin-bottom:2px}
+.parts li:last-child{grid-column:1 / -1}
+figure.visual{margin:1.75rem 0 2rem}
+figure.visual img{width:100%;height:auto;display:block;border-radius:14px}
+figure.visual figcaption{font-size:13px;color:var(--muted);margin-top:.6rem;text-align:center}
+.hero-image{background:none;height:auto;display:block;margin-bottom:2rem}
+.hero-image img{width:100%;height:auto;display:block;border-radius:14px}
+@media (max-width:700px){.parts{grid-template-columns:minmax(0,1fr)}.parts li:last-child{grid-column:auto}}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DM2FNKGX61"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DM2FNKGX61');
+</script>
+<script src="/js/ga-events.js" defer></script>
+</head>
+<body>
+
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="/sendcleared-logo.png" alt="SendCleared" style="height:41px;width:auto;display:block">
+    </a>
+    <ul class="nav-links">
+      <li><a href="/#how-it-works">How it works</a></li>
+      <li><a href="/#features">Features</a></li>
+      <li><a href="/#pricing">Pricing</a></li>
+      <li><a href="/#faq">FAQ</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="/compare/">Compare</a></li>
+      <li><a href="/help/">Help</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="https://app.sendcleared.com/login" class="btn btn-outline">Log in</a>
+      <a href="https://app.sendcleared.com/signup" class="btn btn-primary">Start free</a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/#how-it-works" onclick="closeMobileMenu()">How it works</a>
+    <a href="/#features" onclick="closeMobileMenu()">Features</a>
+    <a href="/#pricing" onclick="closeMobileMenu()">Pricing</a>
+    <a href="/#faq" onclick="closeMobileMenu()">FAQ</a>
+    <a href="/blog/" onclick="closeMobileMenu()">Blog</a>
+    <a href="/compare/" onclick="closeMobileMenu()">Compare</a>
+    <a href="/help/" onclick="closeMobileMenu()">Help</a>
+    <a href="https://app.sendcleared.com/login" class="btn btn-outline" onclick="closeMobileMenu()" style="margin-top:1rem">Log in</a>
+    <a href="https://app.sendcleared.com/signup" class="btn btn-primary" onclick="closeMobileMenu()">Start free</a>
+  </div>
+</nav>
+
+<article>
+  <p class="byline">Published: October 2026</p>
+  <h1>How to Get Client Sign-Off on Email Campaigns (Without the Slack Chaos)</h1>
+
+  <div class="hero-image">
+    <img src="/images/client-signoff-approval-workflow.webp" alt="SendCleared client approval: the review page your client sees with Approve to send and Request changes buttons, next to the approved record with a name and timestamp" width="1440" height="810">
+  </div>
+
+  <p>Most agencies and freelancers have a process for building a campaign. Far fewer have a process for getting it approved.</p>
+
+  <p>So approval happens wherever the client happens to reply. A "looks good" in Slack. A thumbs-up on a forwarded test. A reply to a thread that has since been forwarded to two other people. It works right up until it doesn't, and by then the email has already gone out.</p>
+
+  <p>This guide covers how to set up a client approval workflow for email campaigns that's quick for the client, clear for your team, and leaves a record you can point to later.</p>
+
+  <h2>Why informal approval breaks down</h2>
+  <p>The problems are consistent across agencies of every size.</p>
+
+  <ul class="bullet-list">
+  <li><span><strong>Nobody is sure what was approved.</strong> The client saw a test email on Tuesday. You made two changes on Wednesday. On Thursday they replied "great, go ahead." Which version did they mean?</span></li>
+  <li><span><strong>Feedback is scattered.</strong> Some comes by email, some in Slack, some on a call, some as a screenshot with arrows. Someone has to consolidate it, and something always gets missed.</span></li>
+  <li><span><strong>The wrong person approves.</strong> A marketing contact says it looks fine, then their manager or legal team sees it after sending and has changes. Approval without authority isn't approval.</span></li>
+  <li><span><strong>Silence gets treated as a yes.</strong> The deadline passes, nobody replies, and the team sends because the schedule says so. If something's wrong, that's a hard conversation.</span></li>
+  <li><span><strong>There's no record.</strong> When a client says "I never signed off on that," you're searching through channels for evidence instead of pointing to one clear entry.</span></li>
+  </ul>
+
+  <p>None of these are the client's fault. They're what happens when approval is left to chance.</p>
+
+  <h2>What a good client approval workflow needs</h2>
+  <p>Whatever tools you use, a workable process has seven parts.</p>
+
+  <ol class="parts">
+    <li><strong>A named approver</strong>One person (or a defined group) whose approval counts. Agree who it is at onboarding.</li>
+    <li><strong>A frozen version</strong>The client approves a specific, final version, and everyone can tell which one.</li>
+    <li><strong>QA before the client sees it</strong>The client reviews content and offers, not broken links or unresolved merge tags.</li>
+    <li><strong>A single place to review and respond</strong>One link, one place for comments, rather than three channels.</li>
+    <li><strong>A defined review window</strong>A stated deadline, and an agreed rule for what happens if it passes.</li>
+    <li><strong>Version-by-version re-approval</strong>Any change after approval means a new version and a new sign-off.</li>
+    <li><strong>A record</strong>Who approved, which version, and when.</li>
+  </ol>
+
+  <h2>The process, step by step</h2>
+
+  <ul class="step-list">
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Agree how approvals work at onboarding.</strong> Do this before the first campaign. Cover who approves, how long they have to review, and what happens if they don't respond. Put it in writing, in your onboarding document or a short one-page "how approvals work" note. A template is below.</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Run your own QA first.</strong> Check links, merge tags, alt text, personalisation fallbacks, the unsubscribe link and the footer before anything reaches the client. Our <a href="/blog/email-qa-checklist.html">Email QA Checklist</a> covers what to check. A client who finds a typo you should have caught starts doubting everything else.</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Freeze the version.</strong> Once it passes QA, stop editing. If anything changes after the client has seen it, it's a new version. Say so explicitly.</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Send one review link.</strong> Don't forward a test email, paste screenshots or attach a PDF. Send a single link to the exact version, viewable at desktop and mobile width, so the client reviews the same thing you built. We cover why standard test sends fall short in <a href="/blog/send-test-email-client-review.html">How to Send a Test Email Your Client Can Actually Review</a>.</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Say what you need from them.</strong> Tell the client what to check (copy accuracy, offer details, links, subject line) and what's already settled (layout, if signed off earlier), and when you need an answer. A short brief gets sharper feedback than an open "let me know what you think."</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Collect feedback in one place and re-version.</strong> Make the requested changes, then send a new link for the new version. Never ask the client to approve "the one from Tuesday with the changes we discussed."</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Get an explicit approval.</strong> "Looks good" in a busy thread is ambiguous. You want a deliberate action that clearly means yes, with a name and a timestamp attached.</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Keep the record and hand off to the send.</strong> File the approval with the campaign. When scheduling, check that the approved version is the one you're scheduling.</span>
+    </li>
+  </ul>
+
+  <h2>Handling the awkward cases</h2>
+
+  <ul class="bullet-list">
+  <li><span><strong>Multiple approvers.</strong> If legal, brand or a manager must also sign off, agree the order in advance and list them as part of the process. A late-stage reviewer adding changes after the client contact has approved is one of the most common causes of last-minute chaos.</span></li>
+  <li><span><strong>Silence.</strong> Decide what a missed deadline means before it happens. Common options are a reminder, then escalation to a second contact, then a rescheduled send. Avoid treating silence as approval unless it's explicitly agreed in your contract, and be careful with that one.</span></li>
+  <li><span><strong>Urgent sends.</strong> A time-sensitive email still needs approval. Agree a faster route (a shorter window, a named backup approver) so urgency doesn't become the excuse to skip the process.</span></li>
+  <li><span><strong>Changes after approval.</strong> If the client wants a change after signing off, treat it as a new version with a fresh approval. The earlier approval stays on record for the version it covered.</span></li>
+  </ul>
+
+  <h2>Put it in your contract</h2>
+  <p>Your service agreement is a good place to state how approval works: who the authorised approver is, that approval of a specific version is what authorises the send, and what the review window is. If a dispute comes up, a clear process and a clear record are much stronger than a conversation you're trying to reconstruct. Have a lawyer check the wording, since this isn't legal advice.</p>
+
+  <h2>A "how approvals work" note you can adapt</h2>
+  <blockquote>
+    <p><strong>How campaign approvals work</strong></p>
+    <p>1. We'll send you one review link for each campaign. It shows the exact email that will go out, on desktop and mobile.</p>
+    <p>2. Please review the copy, offer details, links and subject line. Layout is already agreed unless we say otherwise.</p>
+    <p>3. Approve it, or request changes on the page. If you request changes, we'll send a new link for the updated version.</p>
+    <p>4. We only send once [Name / role] has approved the latest version.</p>
+    <p>5. Please reply within [X working days]. If we haven't heard by then, we'll [follow up / escalate to Name / move the send date], and we won't send an unapproved email.</p>
+    <p>6. We keep a record of each approval, showing who approved which version and when.</p>
+  </blockquote>
+
+  <h2>Choosing a tool for this</h2>
+  <p>You can run this process with shared documents and discipline, but it takes manual effort to keep versions and records straight. Tools fall into a few groups: general proofing platforms built for many asset types, email testing tools built around rendering and deliverability, and email-specific approval tools. We compare them in <a href="/compare/best-client-approval-tool-email-marketers.html">The Best Client Approval Tool for Email Marketers</a>.</p>
+
+  <h2>Doing this with SendCleared</h2>
+  <p>SendCleared is built around this workflow and works with any ESP that can send a test email.</p>
+
+  <ul class="step-list">
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Add your client</strong> and get a unique test address, added to your ESP's test list once.</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Send your test as normal</strong> from Klaviyo, Mailchimp, ActiveCampaign or wherever you build.</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Review the automated QA report.</strong> Checks run across merge tags, links, alt text, spam triggers and unsubscribe and address essentials. Fix anything flagged.</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Share the approval link.</strong> Your client sees the email at desktop and mobile widths and approves it or requests changes.</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Keep the record.</strong> The approval is logged with a name and timestamp.</span>
+    </li>
+  </ul>
+
+  <figure class="visual">
+    <img src="/images/send-test-email-review-steps.webp" alt="Three steps in SendCleared: review the automated QA report, share the client approval link, and get a named, timestamped approval record" width="1440" height="810" loading="lazy">
+    <figcaption>From QA report to recorded approval in SendCleared. Example email and client shown for illustration.</figcaption>
+  </figure>
+
+  <blockquote>
+    <p>One honest note: the approval page shows desktop and mobile widths, not a multi-inbox rendering test. If you need to check how an email displays across every inbox, a rendering tool is a good companion.</p>
+  </blockquote>
+
+  <h2>Common questions</h2>
+
+  <div class="faq-item">
+    <p>Who should approve an email campaign?</p>
+    <p>The person with authority over the campaign's message and offers, agreed with the client in advance. If more than one person must sign off, agree the order and who has the final say.</p>
+  </div>
+  <div class="faq-item">
+    <p>How long should a client have to review?</p>
+    <p>Long enough to read and respond properly, short enough to protect your send date. Agree a number at onboarding, and build it into your schedule.</p>
+  </div>
+  <div class="faq-item">
+    <p>Is a "looks good" reply enough?</p>
+    <p>It's better than nothing, but it's ambiguous about which version it covers and who gave it. A specific action tied to a version, a name and a timestamp is much stronger.</p>
+  </div>
+  <div class="faq-item">
+    <p>What if a client approves, then asks for a change?</p>
+    <p>Treat it as a new version. Make the change, generate a new link and get a fresh approval. The earlier approval remains on record for the version it covered.</p>
+  </div>
+  <div class="faq-item">
+    <p>Do I need software for this?</p>
+    <p>No, but without it you're keeping versions, feedback and records together manually. Software helps most when you manage several clients or campaigns at once.</p>
+  </div>
+
+  <div class="cta-box">
+    <p>SendCleared checks your email before your client sees it, then gives them a clean way to review and sign off.</p>
+    <a href="https://app.sendcleared.com/signup" class="btn-cta">Start free →</a>
+    <p class="cta-note">3 approval links a month, no credit card required</p>
+  </div>
+
+  <div class="related">
+    <p><strong>Related reading</strong></p>
+    <p><a href="/blog/email-qa-checklist.html">The Email QA Checklist for Agencies and Freelancers</a> · <a href="/blog/send-test-email-client-review.html">How to Send a Test Email Your Client Can Actually Review</a> · <a href="/compare/best-client-approval-tool-email-marketers.html">The Best Client Approval Tool for Email Marketers</a> · <a href="/blog/5-email-mistakes-even-experienced-marketers-miss.html">5 Email Mistakes Even Experienced Marketers Miss</a></p>
+  </div>
+</article>
+
+<footer>
+  <div class="footer-inner">
+    <div style="display:flex;flex-direction:column;gap:1rem;flex:1">
+      <a href="/" class="footer-logo">
+        <img src="/sendcleared-logo.png" alt="SendCleared" style="height:31px;width:auto;display:block">
+      </a>
+      <p style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.7);margin:0 0 2px">Engaging Enterprises Ltd</p>
+      <p style="font-size:11px;color:rgba(255,255,255,0.4);line-height:1.7;margin:0">
+        Monomark House, 27 Old Gloucester Street<br>
+        London, England, WC1N 3AX<br>
+        Company No: 14111995
+      </p>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;gap:1rem">
+      <ul class="footer-links" style="justify-content:flex-end">
+        <li><a href="/#how-it-works">How it works</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/compare/">Compare</a></li>
+        <li><a href="/help/">Help</a></li>
+        <li><a href="/#faq">FAQ</a></li>
+        <li><a href="/privacy.html">Privacy policy</a></li>
+        <li><a href="/terms.html">Terms</a></li>
+      </ul>
+      <span class="footer-copy">© 2026 SendCleared.com · All rights reserved</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMobileMenu() {
+  document.getElementById('nav-toggle').classList.toggle('open');
+  document.getElementById('mobile-menu').classList.toggle('open');
+  const isOpen = document.getElementById('mobile-menu').classList.contains('open');
+  document.getElementById('nav-toggle').setAttribute('aria-expanded', isOpen);
+}
+function closeMobileMenu() {
+  document.getElementById('nav-toggle').classList.remove('open');
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.getElementById('nav-toggle').setAttribute('aria-expanded', 'false');
+}
+</script>
+
+</body>
+</html>
