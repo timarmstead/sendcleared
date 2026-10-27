@@ -227,9 +227,6 @@ article h2{scroll-margin-top:90px}
   ]
 }
 </script>
-<script src="/js/ga-events.js" defer></script>
-<link rel="icon" href="/favicon.png" type="image/png">
-<link rel="apple-touch-icon" href="/favicon.png">
 </head>
 <body>
 
@@ -309,19 +306,19 @@ article h2{scroll-margin-top:90px}
     <div class="sev"><span class="badge b-crit">Critical</span><span class="badge b-pass">Pass</span></div>
     <h3>Duplicated consecutive words</h3>
     <dl>
-      <dt>What we found</dt><dd>The same word twice in a row, such as “the the” or “to to”.</dd>
+      <dt>What we found</dt><dd>The same word twice in a row within the same piece of copy, such as “the the” or “to to”. Repeats across separate blocks, like a button label followed by a product name, are not counted.</dd>
       <dt>Why it matters</dt><dd>It is nearly always a typo, and it is one of the most visible mistakes in a client’s inbox.</dd>
       <dt>What to do</dt><dd>Reread the sentence and delete the extra word. Very occasionally a repeat is correct (“had had”). If so, you can send knowing the flag is a false alarm.</dd>
       <dt>Who fixes it</dt><dd>You, in the email or your ESP</dd>
     </dl>
   </div>
   <div class="check" id="proofreading">
-    <div class="sev"><span class="badge b-crit">Critical</span><span class="badge b-warn">Warning</span><span class="badge b-info">Info</span></div>
+    <div class="sev"><span class="badge b-pass">Pass</span><span class="badge b-warn">Warning</span><span class="badge b-info">Info</span></div>
     <h3>Typos, spelling and grammar</h3>
     <dl>
-      <dt>What we found</dt><dd>Spelling mistakes, missing words and grammar errors, found by an AI proofreading pass over the email text.</dd>
+      <dt>What we found</dt><dd>Spelling mistakes, missing words and grammar errors, found by an AI proofreading pass over the email text. If it finds nothing, the report says “Spelling and grammar proofread: no errors found.” It reads the first 2,000 characters of copy (the report says so when an email is longer) and only the text, not words inside images.</dd>
       <dt>Why it matters</dt><dd>Copy errors are the most common thing a client spots, and the most embarrassing to find after sending.</dd>
-      <dt>What to do</dt><dd>Fix the quoted error. The AI occasionally trips on brand names, product names or intentional styling, so treat these as strong suggestions and use your judgement.</dd>
+      <dt>What to do</dt><dd>Fix the quoted error. The AI occasionally trips on brand names, product names or intentional styling, so its findings are never marked Critical. Treat them as strong suggestions and use your judgement.</dd>
       <dt>Who fixes it</dt><dd>You, in the email or your ESP</dd>
     </dl>
   </div>
@@ -461,9 +458,9 @@ article h2{scroll-margin-top:90px}
     <div class="sev"><span class="badge b-pass">Pass</span><span class="badge b-warn">Warning</span><span class="badge b-info">Info</span></div>
     <h3>SPF</h3>
     <dl>
-      <dt>What we found</dt><dd><strong>Pass:</strong> the sending server is authorised by the domain’s SPF record. <strong>Softfail or fail:</strong> it is not. <strong>None:</strong> no SPF record was found. <strong>Permerror:</strong> the record is invalid, often because it needs too many DNS lookups.</dd>
+      <dt>What we found</dt><dd><strong>Pass:</strong> the sending server is authorised by the domain’s SPF record. <strong>Softfail or fail:</strong> it is not, as seen on this test send. A softfail means the domain’s record says “probably not us, but don’t reject it”; a fail is stricter. <strong>None:</strong> no SPF record was found. <strong>Permerror:</strong> the record is invalid, often because it needs too many DNS lookups.</dd>
       <dt>Why it matters</dt><dd>SPF is one of the signals mailbox providers use to decide whether to trust your email. A failure can send mail to spam.</dd>
-      <dt>What to do</dt><dd>Add your ESP’s required <code>include</code> to the sending domain’s SPF record, following your ESP’s own setup guide, and keep the record under the 10-lookup limit. Test sends can travel through different servers than live sends, so confirm on a live or staged send before making big DNS changes.</dd>
+      <dt>What to do</dt><dd>Add your ESP’s required <code>include</code> to the sending domain’s SPF record, following your ESP’s own setup guide, and keep the record under the 10-lookup limit. Test sends can travel through different servers than live sends, so SendCleared’s result is only a prompt to check. Look at the SPF line in the headers of a live or staged send (in Gmail, “Show original”) before making any DNS changes.</dd>
       <dt>Who fixes it</dt><dd>Whoever manages the sending domain’s DNS (often you, sometimes the client’s IT)</dd>
     </dl>
   </div>
