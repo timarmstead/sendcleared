@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Deliverability Checklist: Pre-Send Checks and Fixes | SendCleared</title>
+<meta name="description" content="A practical email deliverability checklist for agencies and freelancers: the content checks you control before sending, the authentication basics, and what to do when emails start landing in spam.">
+<link rel="canonical" href="https://www.sendcleared.com/blog/email-deliverability-checklist.html">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Email Deliverability Checklist: Pre-Send Checks and Fixes | SendCleared">
+<meta property="og:description" content="A practical email deliverability checklist for agencies and freelancers: the content checks you control before sending, the authentication basics, and what to do when emails start landing in spam.">
+<meta property="og:url" content="https://www.sendcleared.com/blog/email-deliverability-checklist.html">
+<meta property="og:image" content="https://www.sendcleared.com/images/email-deliverability-checklist.webp">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Email Deliverability Checklist: What to Check Before You Send (and What to Do When Emails Hit Spam)",
+  "description": "A practical email deliverability checklist for agencies and freelancers: the content checks you control before sending, the authentication basics, and what to do when emails start landing in spam.",
+  "datePublished": "2026-11-09",
+  "image": "https://www.sendcleared.com/images/email-deliverability-checklist.webp",
+  "mainEntityOfPage": "https://www.sendcleared.com/blog/email-deliverability-checklist.html",
+  "author": {
+    "@type": "Organization",
+    "name": "SendCleared"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Engaging Enterprises Ltd"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why are my emails going to spam?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Usually one of four things: missing or broken authentication, a poor sender reputation caused by complaints or bounces, a list with low engagement, or content that triggers filters. Check them in that order."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do spam trigger words still matter?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Less than they used to. Filters look at the overall picture, including authentication, reputation and engagement. But pushy, spammy copy still raises risk, especially combined with other warning signs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need DMARC if I'm not a big sender?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It's increasingly expected, and bulk senders at Gmail are required to have it. Setting it up is worth doing at any volume, because it protects your domain from being spoofed and gives you reporting."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How low should my spam complaint rate be?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Google's guidance is to keep it below 0.1% and never reach 0.3%. The lower the better."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can a pre-send tool guarantee inbox placement?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No tool can. Inbox placement depends on your reputation and recipient behaviour, which can't be tested from a draft. A pre-send check removes avoidable content mistakes. It can't tell you how mailbox providers will treat your domain."
+      }
+    }
+  ]
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --orange:   #f26600;
+  --orange-d: #d45500;
+  --blue:     #134e8e;
+  --blue-d:   #0d3a6b;
+  --white:    #ffffff;
+  --blue-tint:#e8f0f8;
+  --muted:    #5a5a56;
+  --bg:       #f7f7f5;
+}
+body{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: #1a1a1a;
+  line-height: 1.5;
+}
+a{color:var(--orange);text-decoration:none}
+a:hover{color:var(--orange-d)}
+
+nav{background:var(--orange);padding:0 2rem;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:1180px;margin:0 auto;height:72px;display:flex;align-items:center;justify-content:space-between;gap:2rem}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,0.85);font-size:14px;font-weight:500}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.btn{display:inline-flex;align-items:center;padding:9px 18px;border-radius:8px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;border:none}
+.btn-outline{background:transparent;border:1.5px solid rgba(255,255,255,0.5);color:var(--white)}
+.btn-outline:hover{border-color:var(--white);background:rgba(255,255,255,0.1)}
+.btn-primary{background:var(--white);color:var(--orange)}
+.btn-primary:hover{background:rgba(255,255,255,0.9)}
+
+.nav-toggle{display:none;background:transparent;border:none;cursor:pointer;padding:6px;flex-shrink:0}
+.nav-toggle span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;margin:5px 0;transition:transform .2s,opacity .2s}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;flex-direction:column;background:var(--orange-d);padding:.5rem 1.25rem 1.25rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:rgba(255,255,255,0.9);text-decoration:none;font-size:15px;font-weight:500;padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,0.12)}
+.mobile-menu a:last-of-type{border-bottom:none}
+.mobile-menu .btn{margin-top:.75rem;width:100%}
+
+@media (max-width:700px){
+  nav{padding:0 1.25rem}
+  .nav-links{display:none}
+  .nav-cta{display:none}
+  .nav-toggle{display:block}
+}
+
+article{max-width:720px;margin:0 auto;padding:3rem 2rem 4rem}
+.byline{font-size:13px;color:var(--muted);margin-bottom:1.75rem}
+article h1{font-size:clamp(1.75rem,4vw,2.4rem);font-weight:800;color:var(--blue);letter-spacing:-0.02em;line-height:1.25;margin-bottom:.75rem}
+.hero-image{background:linear-gradient(135deg,var(--blue) 0%,var(--blue-d) 100%);border-radius:14px;height:260px;display:flex;align-items:center;justify-content:center;margin-bottom:2rem;overflow:hidden}
+article p{font-size:15px;color:#2a2a2a;line-height:1.75;margin-bottom:1.25rem}
+article h2{font-size:1.35rem;font-weight:800;color:var(--blue);letter-spacing:-0.01em;margin:2.25rem 0 1rem}
+article strong{color:#1a1a1a;font-weight:700}
+blockquote{border-left:3px solid var(--orange);background:var(--blue-tint);border-radius:0 10px 10px 0;padding:1.1rem 1.4rem;margin:1.75rem 0;font-size:15px;font-style:italic;color:var(--blue-d);line-height:1.6}
+blockquote p{color:var(--blue-d);margin-bottom:.9rem;font-size:15px}
+blockquote p:last-child{margin-bottom:0}
+
+.bullet-list{list-style:none;margin:1rem 0 1.75rem}
+.bullet-list li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:15px;color:#2a2a2a;line-height:1.6}
+.bullet-list li:last-child{border-bottom:none}
+.bullet-list li::before{content:'';flex-shrink:0;width:7px;height:7px;border-radius:50%;background:var(--orange);margin-top:8px}
+
+.step-list{list-style:none;margin:1.25rem 0 1.75rem;counter-reset:step}
+.step-list li{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid rgba(0,0,0,0.07)}
+.step-list li:last-child{border-bottom:none}
+.step-num{counter-increment:step;flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--orange);color:var(--white);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.step-num::before{content:counter(step)}
+.step-text{font-size:15px;color:#2a2a2a;line-height:1.6}
+
+.faq-item{margin-bottom:1.5rem}
+.faq-item p:first-child{font-weight:700;color:#1a1a1a;margin-bottom:.35rem}
+
+.related{background:var(--blue-tint);border-radius:10px;padding:1.25rem 1.5rem;margin:2.25rem 0;font-size:14px;color:var(--blue-d)}
+.related p{color:var(--blue-d);margin-bottom:.4rem;font-size:14px}
+.related p:last-child{margin-bottom:0}
+.related a{color:var(--blue-d);text-decoration:underline}
+.related a:hover{color:var(--orange-d)}
+
+.cta-box{background:var(--blue);border-radius:14px;padding:2rem;text-align:center;margin-top:2.5rem}
+.cta-box p{color:rgba(255,255,255,0.75);font-size:14px;margin-bottom:1.1rem}
+.cta-box .btn-cta{background:var(--orange);color:var(--white);padding:12px 24px;border-radius:10px;font-size:15px;font-weight:700;display:inline-block}
+.cta-box .btn-cta:hover{background:var(--orange-d);color:var(--white)}
+.cta-note{font-size:12px;color:rgba(255,255,255,0.5);margin-top:10px}
+
+footer{background:#12172a;padding:3rem 2rem}
+.footer-inner{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+.footer-links a{color:rgba(255,255,255,0.6);font-size:13px}
+.footer-links a:hover{color:var(--white)}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.35)}
+
+@media (max-width:700px){
+  footer{padding:2rem 1.25rem}
+  .footer-inner{flex-direction:column;align-items:flex-start}
+  .footer-inner > div:last-child{align-items:flex-start !important;width:100%}
+  .footer-links{justify-content:flex-start !important;gap:1rem 1.5rem}
+}
+.parts{list-style:none;margin:1.25rem 0 1.75rem;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;counter-reset:part}
+.parts li{counter-increment:part;background:#fff;border:1px solid rgba(0,0,0,.09);border-radius:12px;padding:14px 16px;font-size:14px;line-height:1.55;color:#2a2a2a}
+.parts li::before{content:counter(part);display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:700;margin-right:8px;vertical-align:1px}
+.parts li strong{display:block;color:var(--blue);margin-bottom:2px}
+.parts li:last-child{grid-column:1 / -1}
+figure.visual{margin:1.75rem 0 2rem}
+figure.visual img{width:100%;height:auto;display:block;border-radius:14px}
+figure.visual figcaption{font-size:13px;color:var(--muted);margin-top:.6rem;text-align:center}
+.hero-image{background:none;height:auto;display:block;margin-bottom:2rem}
+.hero-image img{width:100%;height:auto;display:block;border-radius:14px}
+@media (max-width:700px){.parts{grid-template-columns:minmax(0,1fr)}.parts li:last-child{grid-column:auto}}
+.checklist{list-style:none;margin:.5rem 0 1.5rem}
+.checklist li{position:relative;padding:.35rem 0 .35rem 1.9rem;font-size:15px;line-height:1.55;color:#2a2a2a}
+.checklist li::before{content:"";position:absolute;left:0;top:.5rem;width:16px;height:16px;border:1.5px solid var(--blue);border-radius:4px;background:#fff}
+.cl-group{background:#fff;border:1px solid rgba(0,0,0,.09);border-radius:12px;padding:1rem 1.4rem .6rem;margin:1.1rem 0}
+.cl-group h3{margin:.2rem 0 .3rem}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DM2FNKGX61"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DM2FNKGX61');
+</script>
+<script src="/js/ga-events.js" defer></script>
+</head>
+<body>
+
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="/sendcleared-logo.png" alt="SendCleared" style="height:41px;width:auto;display:block">
+    </a>
+    <ul class="nav-links">
+      <li><a href="/#how-it-works">How it works</a></li>
+      <li><a href="/#features">Features</a></li>
+      <li><a href="/#pricing">Pricing</a></li>
+      <li><a href="/#faq">FAQ</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="/compare/">Compare</a></li>
+      <li><a href="/help/">Help</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="https://app.sendcleared.com/login" class="btn btn-outline">Log in</a>
+      <a href="https://app.sendcleared.com/signup" class="btn btn-primary">Start free</a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/#how-it-works" onclick="closeMobileMenu()">How it works</a>
+    <a href="/#features" onclick="closeMobileMenu()">Features</a>
+    <a href="/#pricing" onclick="closeMobileMenu()">Pricing</a>
+    <a href="/#faq" onclick="closeMobileMenu()">FAQ</a>
+    <a href="/blog/" onclick="closeMobileMenu()">Blog</a>
+    <a href="/compare/" onclick="closeMobileMenu()">Compare</a>
+    <a href="/help/" onclick="closeMobileMenu()">Help</a>
+    <a href="https://app.sendcleared.com/login" class="btn btn-outline" onclick="closeMobileMenu()" style="margin-top:1rem">Log in</a>
+    <a href="https://app.sendcleared.com/signup" class="btn btn-primary" onclick="closeMobileMenu()">Start free</a>
+  </div>
+</nav>
+
+<article>
+  <p class="byline">Published: November 2026</p>
+  <h1>Email Deliverability Checklist: What to Check Before You Send (and What to Do When Emails Hit Spam)</h1>
+
+  <div class="hero-image">
+    <img src="/images/email-deliverability-checklist.webp" alt="SendCleared pre-send QA report showing spam signals, accessibility and deliverability checks passing" width="1440" height="810">
+  </div>
+
+  <p>When a client's email lands in spam, nobody asks whether it was a sender-reputation issue or a content issue. They ask what you did wrong.</p>
+
+  <p>Deliverability can feel like a black box, but a good part of it isn't. Some of it you control before every send, and some of it you set up once and monitor. This guide separates the two, gives you a checklist for each, and covers what to do when things go wrong.</p>
+
+  <h2>What "deliverability" actually covers</h2>
+  <p>Deliverability is whether your email reaches the inbox, rather than the spam folder or being rejected outright. It depends on three things:</p>
+
+  <ul class="step-list">
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Authentication.</strong> Can the receiving server confirm the email really came from you?</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Reputation.</strong> How have recipients and mailbox providers treated your sending domain in the past?</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Content and list quality.</strong> Does this specific email, sent to this specific list, look like something people want?</span>
+    </li>
+  </ul>
+
+  <p>Authentication is set up once. Reputation builds over time. Content and list quality are decided campaign by campaign, which is where most day-to-day mistakes happen, and where a pre-send check pays off.</p>
+
+  <h2>Part 1: Checks you run before every send</h2>
+  <p>These are the content-level checks. They are quick, and most can be automated.</p>
+
+  <h3>Subject line and preheader</h3>
+  <ul class="bullet-list">
+    <li><span>No ALL CAPS, stacked punctuation (!!!) or misleading "Re:" or "Fwd:" prefixes.</span></li>
+    <li><span>The subject matches what's in the email. A subject that promises something the email doesn't deliver gets complaints.</span></li>
+    <li><span>Personalisation in the subject has a fallback, so it never renders as a blank or a raw merge tag.</span></li>
+  </ul>
+
+  <h3>Links</h3>
+  <ul class="bullet-list">
+    <li><span>Every link works and goes to the right page.</span></li>
+    <li><span>No link shorteners from public services, which are widely abused and can look suspicious.</span></li>
+    <li><span>Link text matches the destination. Text that shows one URL and goes to another looks like phishing.</span></li>
+    <li><span>UTM parameters are present and consistent, so you can tell whether the campaign worked.</span></li>
+  </ul>
+
+  <h3>Images and layout</h3>
+  <ul class="bullet-list">
+    <li><span>Not one large image with little or no text. Emails that are mostly image are harder for filters to assess and break completely when images are blocked.</span></li>
+    <li><span>Every image has alt text, which also helps accessibility.</span></li>
+    <li><span>A sensible balance of text to images, and a plain-text version that reads properly.</span></li>
+  </ul>
+
+  <h3>Copy</h3>
+  <ul class="bullet-list">
+    <li><span>No spam-trigger phrasing piled up (excessive "free", "act now", "guaranteed", heavy urgency). One or two words don't sink an email, but a pattern of them can.</span></li>
+    <li><span>The tone matches what the subscriber signed up for.</span></li>
+  </ul>
+
+  <h3>Personalisation</h3>
+  <ul class="bullet-list">
+    <li><span>No unresolved merge tags, such as {{first_name}} showing up in the body or subject.</span></li>
+    <li><span>Every dynamic field has a fallback for contacts with missing data.</span></li>
+  </ul>
+
+  <h3>Compliance essentials</h3>
+  <ul class="bullet-list">
+    <li><span>A working unsubscribe link that is easy to find.</span></li>
+    <li><span>A physical or postal address in the footer where your jurisdiction requires it.</span></li>
+    <li><span>A clear sender name and a From address that recipients recognise.</span></li>
+  </ul>
+
+  <p>For the full list of content checks, see our <a href="/blog/email-qa-checklist.html">Email QA Checklist for Agencies and Freelancers</a>.</p>
+
+  <h2>Part 2: Set up once, then monitor</h2>
+  <p>These don't change campaign to campaign, but they matter more than any content tweak.</p>
+
+  <h3>Authenticate your sending domain</h3>
+  <ul class="bullet-list">
+    <li><span><strong>SPF</strong> lists the servers allowed to send for your domain.</span></li>
+    <li><span><strong>DKIM</strong> adds a signature that proves the message wasn't altered.</span></li>
+    <li><span><strong>DMARC</strong> tells receivers what to do when SPF or DKIM fail, and gives you reporting.</span></li>
+  </ul>
+
+  <p>Authentication should align with the domain shown in your From address. Most ESPs walk you through the DNS records. After adding them, confirm they work with a DNS checker such as <a href="https://mxtoolbox.com/" rel="noopener" target="_blank">MXToolbox</a> and by sending a test and checking the message headers.</p>
+
+  <h3>Meet the major mailbox providers' requirements</h3>
+  <p>Google and Yahoo both tightened their sender requirements. According to Google's guidance, bulk senders (about 5,000 or more messages a day to Gmail accounts) need SPF, DKIM and a DMARC record, plus a one-click unsubscribe in marketing mail, with opt-outs honoured within two days. Their advice is to keep your spam complaint rate below 0.1% and never let it reach 0.3%.</p>
+  <p>You may not be a bulk sender yet, but following the same rules at any volume is sensible, and your clients' lists may be larger than yours. Check <a href="https://support.google.com/a/answer/81126" rel="noopener" target="_blank">Google's sender guidelines</a> for the current detail, since requirements change.</p>
+
+  <h3>Monitor your reputation</h3>
+  <ul class="bullet-list">
+    <li><span><strong><a href="https://postmaster.google.com/" rel="noopener" target="_blank">Google Postmaster Tools</a></strong> shows your spam rate and domain reputation for Gmail recipients. Set it up for every client sending domain.</span></li>
+    <li><span><strong><a href="https://www.spamhaus.org/" rel="noopener" target="_blank">Spamhaus</a></strong> maintains widely used blocklists. If a domain or IP is listed, many receiving servers will reject or filter its mail.</span></li>
+    <li><span>Watch bounce rate and complaint rate in your ESP's reports, not only opens and clicks.</span></li>
+  </ul>
+
+  <h3>Keep the list clean</h3>
+  <ul class="bullet-list">
+    <li><span>Send to people who asked to hear from you.</span></li>
+    <li><span>Remove hard bounces straight away.</span></li>
+    <li><span>Suppress long-term non-engagers rather than mailing them forever. Sending to people who never open can hurt your reputation.</span></li>
+    <li><span>Avoid bought or scraped lists. They carry spam traps and high complaint rates.</span></li>
+  </ul>
+
+  <h2>Part 3: When emails start landing in spam</h2>
+  <p>Work through it in order. Don't change five things at once, or you won't know what fixed it.</p>
+
+  <ul class="step-list">
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Confirm the problem.</strong> Is it all recipients or one provider, such as Gmail? One campaign or every campaign? Seed accounts at the major providers will show you where it lands.</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Check authentication first.</strong> If SPF, DKIM or DMARC have broken (a changed DNS record or a new sending tool), that's often the cause and the easiest fix.</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Check blocklists.</strong> Look up your sending domain and IP on Spamhaus and similar lists.</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Check your complaint and bounce rates.</strong> A spike points to a list or targeting problem rather than a technical one.</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Check Postmaster Tools</strong> for domain reputation and spam rate changes at Gmail.</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Review the campaign itself.</strong> Compare it with campaigns that did reach the inbox: subject line, link domains, image weight, copy.</span>
+    </li>
+    <li>
+      <span class="step-num"></span>
+      <span class="step-text"><strong>Fix the cause, then send less and send better.</strong> Reduce volume to your most engaged subscribers while reputation recovers, rather than blasting the full list.</span>
+    </li>
+  </ul>
+
+  <p>If a blocklist or reputation problem is serious, your ESP's deliverability support can help, and some problems take weeks to recover from.</p>
+
+  <h2>The deliverability checklist</h2>
+
+  <div class="cl-group">
+    <h3>Before every send</h3>
+    <ul class="checklist">
+      <li>Subject line is honest and has no unresolved merge tags</li>
+      <li>All links work, with no public link shorteners</li>
+      <li>Alt text on images, and a healthy text-to-image balance</li>
+      <li>No pile-up of spam-trigger phrases</li>
+      <li>Merge tags resolve, with fallbacks for missing data</li>
+      <li>Unsubscribe link and footer address present</li>
+      <li>Sender name and From address recognisable</li>
+    </ul>
+  </div>
+  <div class="cl-group">
+    <h3>Set up once</h3>
+    <ul class="checklist">
+      <li>SPF, DKIM and DMARC configured and aligned with the From domain</li>
+      <li>One-click unsubscribe enabled for marketing mail</li>
+      <li>Google Postmaster Tools set up for the sending domain</li>
+      <li>A way to check blocklists, such as Spamhaus</li>
+    </ul>
+  </div>
+  <div class="cl-group">
+    <h3>Ongoing</h3>
+    <ul class="checklist">
+      <li>Complaint rate kept below 0.1%</li>
+      <li>Hard bounces removed, non-engagers suppressed</li>
+      <li>List built from people who opted in</li>
+      <li>Review reports after every campaign</li>
+    </ul>
+  </div>
+
+  <h2>Where SendCleared fits</h2>
+  <p>SendCleared automates many of the checks in the first checklist: the content-level checks before a campaign goes to your client. You send your normal test from your ESP, and it flags unresolved merge tags, broken links, missing alt text, spam triggers and unsubscribe and address essentials. It also reads the authentication results (SPF, DKIM and DMARC) and the List-Unsubscribe header recorded on that test email, then gives your client a single link to approve.</p>
+
+  <p>To be clear about what it doesn't do: it doesn't check your DNS records directly, monitor your sender reputation or measure inbox placement. For those, use the tools above alongside it. Think of it as the step that stops avoidable content mistakes reaching your client or your subscribers.</p>
+
+  <h2>Common questions</h2>
+
+  <div class="faq-item">
+    <p>Why are my emails going to spam?</p>
+    <p>Usually one of four things: missing or broken authentication, a poor sender reputation caused by complaints or bounces, a list with low engagement, or content that triggers filters. Check them in that order.</p>
+  </div>
+  <div class="faq-item">
+    <p>Do spam trigger words still matter?</p>
+    <p>Less than they used to. Filters look at the overall picture, including authentication, reputation and engagement. But pushy, spammy copy still raises risk, especially combined with other warning signs.</p>
+  </div>
+  <div class="faq-item">
+    <p>Do I need DMARC if I'm not a big sender?</p>
+    <p>It's increasingly expected, and bulk senders at Gmail are required to have it. Setting it up is worth doing at any volume, because it protects your domain from being spoofed and gives you reporting.</p>
+  </div>
+  <div class="faq-item">
+    <p>How low should my spam complaint rate be?</p>
+    <p>Google's guidance is to keep it below 0.1% and never reach 0.3%. The lower the better.</p>
+  </div>
+  <div class="faq-item">
+    <p>Can a pre-send tool guarantee inbox placement?</p>
+    <p>No tool can. Inbox placement depends on your reputation and recipient behaviour, which can't be tested from a draft. A pre-send check removes avoidable content mistakes. It can't tell you how mailbox providers will treat your domain.</p>
+  </div>
+
+  <div class="cta-box">
+    <p>SendCleared checks your email before your client sees it, then gives them a clean way to review and sign off.</p>
+    <a href="https://app.sendcleared.com/signup" class="btn-cta">Start free →</a>
+    <p class="cta-note">3 approval links a month, no credit card required</p>
+  </div>
+
+  <div class="related">
+    <p><strong>Related reading</strong></p>
+    <p><a href="/blog/email-qa-checklist.html">The Email QA Checklist for Agencies and Freelancers</a> · <a href="/blog/5-email-mistakes-even-experienced-marketers-miss.html">5 Email Mistakes Even Experienced Marketers Miss</a> · <a href="/blog/client-signoff-email-campaigns.html">How to Get Client Sign-Off on Email Campaigns</a></p>
+  </div>
+</article>
+
+<footer>
+  <div class="footer-inner">
+    <div style="display:flex;flex-direction:column;gap:1rem;flex:1">
+      <a href="/" class="footer-logo">
+        <img src="/sendcleared-logo.png" alt="SendCleared" style="height:31px;width:auto;display:block">
+      </a>
+      <p style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.7);margin:0 0 2px">Engaging Enterprises Ltd</p>
+      <p style="font-size:11px;color:rgba(255,255,255,0.4);line-height:1.7;margin:0">
+        Monomark House, 27 Old Gloucester Street<br>
+        London, England, WC1N 3AX<br>
+        Company No: 14111995
+      </p>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;gap:1rem">
+      <ul class="footer-links" style="justify-content:flex-end">
+        <li><a href="/#how-it-works">How it works</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/compare/">Compare</a></li>
+        <li><a href="/help/">Help</a></li>
+        <li><a href="/#faq">FAQ</a></li>
+        <li><a href="/privacy.html">Privacy policy</a></li>
+        <li><a href="/terms.html">Terms</a></li>
+      </ul>
+      <span class="footer-copy">© 2026 SendCleared.com · All rights reserved</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMobileMenu() {
+  document.getElementById('nav-toggle').classList.toggle('open');
+  document.getElementById('mobile-menu').classList.toggle('open');
+  const isOpen = document.getElementById('mobile-menu').classList.contains('open');
+  document.getElementById('nav-toggle').setAttribute('aria-expanded', isOpen);
+}
+function closeMobileMenu() {
+  document.getElementById('nav-toggle').classList.remove('open');
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.getElementById('nav-toggle').setAttribute('aria-expanded', 'false');
+}
+</script>
+
+</body>
+</html>
